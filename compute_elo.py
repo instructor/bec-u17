@@ -124,7 +124,9 @@ def main():
     conn = sqlite3.connect(DB_PATH)
     os.makedirs(OUT_DIR, exist_ok=True)
     try:
-        turnier_lookup = pd.read_sql_query("SELECT turnier_id, name, jahr, kw FROM turnier", conn)
+        turnier_lookup = pd.read_sql_query(
+            "SELECT turnier_id, name, jahr, kw, bec17type FROM turnier", conn
+        )
         player_lookup = pd.read_sql_query(
             "SELECT spieler_id, vorname, name, nation, bec_player_id FROM player", conn
         )
@@ -163,6 +165,42 @@ def main():
         strength_path = os.path.join(OUT_DIR, "turnier_staerke.csv")
         strength_df.to_csv(strength_path, index=False, encoding="utf-8-sig", sep=";")
         print(f"-> {strength_path} ({len(strength_df)} Zeilen)")
+
+        # Gesamt/gemittelt je Turnier: unbenutzt gewichteter Mittelwert ueber die Disziplinen, in
+        # denen das Turnier ueberhaupt Daten hat (nicht jedes Turnier hat alle 5 Disziplinen --
+        # z.B. European Youth Olympic Festival 2025 nur MS/WS/XD, siehe CLAUDE.md).
+        gesamt_df = (
+            strength_df.groupby("turnier_id")
+            .agg(
+                avg_elo_gesamt=("avg_elo", "mean"),
+                teilnehmer_gesamt=("teilnehmer", "sum"),
+                n_disziplinen=("disziplin", "nunique"),
+            )
+            .reset_index()
+        )
+        gesamt_df["avg_elo_gesamt"] = gesamt_df["avg_elo_gesamt"].round(1)
+        gesamt_df = gesamt_df.merge(turnier_lookup, on="turnier_id", how="left")
+        gesamt_df["rang"] = gesamt_df["avg_elo_gesamt"].rank(ascending=False, method="dense").astype(int)
+        gesamt_df = gesamt_df.sort_values("rang")
+        gesamt_path = os.path.join(OUT_DIR, "turnier_staerke_gesamt.csv")
+        gesamt_df.to_csv(gesamt_path, index=False, encoding="utf-8-sig", sep=";")
+        print(f"-> {gesamt_path} ({len(gesamt_df)} Zeilen)")
+
+        # Kombiniertes JSON fuer die Web-Visualisierung (je Disziplin + Gesamt, inkl. Tier)
+        json_path = os.path.join(OUT_DIR, "turnier_staerke.json")
+        payload = {
+            "je_disziplin": strength_df[
+                ["disziplin", "turnier_id", "name", "jahr", "kw", "bec17type", "teilnehmer", "avg_elo", "rang"]
+            ].to_dict(orient="records"),
+            "gesamt": gesamt_df[
+                ["turnier_id", "name", "jahr", "kw", "bec17type", "teilnehmer_gesamt", "n_disziplinen",
+                 "avg_elo_gesamt", "rang"]
+            ].to_dict(orient="records"),
+        }
+        import json
+        with open(json_path, "w", encoding="utf-8") as f:
+            json.dump(payload, f, ensure_ascii=False, indent=2)
+        print(f"-> {json_path}")
     finally:
         conn.close()
 
