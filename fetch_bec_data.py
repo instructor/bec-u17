@@ -54,13 +54,14 @@ def import_match(conn, turnier_id, match_json):
     conn.execute(
         """
         INSERT INTO matches (
-            bec_match_id, turnier_id, disziplin, runde,
+            bec_match_id, turnier_id, disziplin, runde, spieldatum,
             heim_spieler1_id, heim_spieler2_id, gast_spieler1_id, gast_spieler2_id,
             ergebnis, winner_seite
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(bec_match_id) DO UPDATE SET
             disziplin = excluded.disziplin,
             runde = excluded.runde,
+            spieldatum = excluded.spieldatum,
             heim_spieler1_id = excluded.heim_spieler1_id,
             heim_spieler2_id = excluded.heim_spieler2_id,
             gast_spieler1_id = excluded.gast_spieler1_id,
@@ -69,7 +70,7 @@ def import_match(conn, turnier_id, match_json):
             winner_seite = excluded.winner_seite
         """,
         (
-            match_json["id"], turnier_id, disziplin, match_json.get("roundName"),
+            match_json["id"], turnier_id, disziplin, match_json.get("roundName"), match_json.get("startDate"),
             heim1, heim2, gast1, gast2, ergebnis, winner_seite,
         ),
     )

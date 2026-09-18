@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS matches (
     turnier_id          INTEGER NOT NULL,
     disziplin           VARCHAR(2) NOT NULL,
     runde                VARCHAR(16),
+    spieldatum            TEXT,   -- match.startDate (ISO yyyy-mm-dd) aus der BEC-API, fuer chronologische Elo-Berechnung (Phase 4)
     heim_spieler1_id     INTEGER,
     heim_spieler2_id     INTEGER,   -- NULL bei Einzel, Doppelpartner bei BD/GD/XD
     gast_spieler1_id     INTEGER,

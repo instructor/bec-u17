@@ -14,6 +14,7 @@ SCHEMA_PATH = "schema.sql"
 # (Tabelle, Spalte, SQL-Typ) -- wird nur ergaenzt, falls die Spalte noch fehlt.
 EXTRA_COLUMNS = [
     ("turnier", "entries_scraped_at", "TEXT"),
+    ("matches", "spieldatum", "TEXT"),
 ]
 
 
