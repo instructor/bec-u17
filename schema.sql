@@ -20,37 +20,28 @@ CREATE TABLE IF NOT EXISTS turnier (
     UNIQUE(tournament_id)
 );
 
+-- Spieler-Identitaet kommt direkt aus der BEC-API (bec_player_id, stabil und eindeutig ueber
+-- alle Turniere hinweg) -- anders als beim U15-Vorbild braucht es deshalb KEIN Fuzzy-Name-
+-- Matching/memory_manager-Interaktion und keine "names"-Variantentabelle (siehe CLAUDE.md,
+-- "BEC-Datenhub-API"-Abschnitt).
 CREATE TABLE IF NOT EXISTS player (
     spieler_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    bec_player_id         INTEGER UNIQUE,   -- BEC-eigene playerId, Quelle der Wahrheit
+    bec_member_id          VARCHAR(16),      -- BEC-eigene memberId (Verbands-Mitgliedsnummer)
     german_spieler_id    VARCHAR(16),   -- Link zur DBV-SpielerID (BRAIN-Projekt) für deutsche Teilnehmer
     name                  VARCHAR(64),
     vorname               VARCHAR(64),
     geburtsjahr           INTEGER,
     gender                VARCHAR(1),
-    club                  VARCHAR(64),
     nation                VARCHAR(3)
-);
-
-CREATE TABLE IF NOT EXISTS names (
-    names_id     INTEGER PRIMARY KEY AUTOINCREMENT,
-    spieler_id   INTEGER,
-    name         VARCHAR(64),
-    vorname      VARCHAR(64),
-    FOREIGN KEY (spieler_id) REFERENCES player(spieler_id)
-);
-
-CREATE TABLE IF NOT EXISTS clubs (
-    club_id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    club_name      VARCHAR(64),
-    country        VARCHAR(3),
-    abbreviation   VARCHAR(64),
-    year           INTEGER
 );
 
 -- Disziplin-Codes (international, da BEC-Circuit-Turniersoftware englischsprachig ist):
 -- BS=Boys Singles, GS=Girls Singles, BD=Boys Doubles, GD=Girls Doubles, XD=Mixed Doubles
+-- (BEC-API selbst nutzt MS/WS/MD/WD/XD -- Mapping beim Import, siehe CLAUDE.md)
 CREATE TABLE IF NOT EXISTS matches (
     match_id           INTEGER PRIMARY KEY AUTOINCREMENT,
+    bec_match_id         INTEGER UNIQUE,  -- BEC-eigene match.id, fuer idempotenten Import
     turnier_id          INTEGER NOT NULL,
     disziplin           VARCHAR(2) NOT NULL,
     runde                VARCHAR(16),

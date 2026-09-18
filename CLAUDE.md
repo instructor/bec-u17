@@ -56,36 +56,23 @@ BEC-Circuits selbst.
   Turnier-Metadatentabelle brauchen, nicht nur eine Kurz-Abkürzung wie beim U15-Vorbild.
   `matches`/`turnier_ergebnisse` unterstützen Doppelpaare (`*_spieler1_id`/`*_spieler2_id`).
 
-## Übernommene Module (aus `../bec_u15_auswertung`)
+## Modul-Herkunft: von "U15-Module übernehmen" zu eigenständiger API-Pipeline (Stand 2026-09-18)
 
-Unverändert/generisch (kein Bezug zu U15-Schema oder -Disziplinen):
-- `fuzzy_utils.py`, `memory_manager.py`, `player_in_list.py`, `db_utils.py`,
-  `cookie_and_consent_handler.py`
-
-Mit kleiner Anpassung übernommen:
-- `club_manager.py` -- `DB_FILE` auf `u17_int.db` umgestellt, den BFIB-spezifischen
-  Demo-/`__main__`-Block (Einlesen von `inscriptions.xlsx`) entfernt (galt nur fürs U15-Projekt,
-  hier nicht anwendbar).
-- `player_scraper.py` -- unverändert übernommen (gleiche Plattform tournamentsoftware.com).
-- `draw_scraper.py`, `match_scraper.py` -- übernommen, aber mit `TODO`-Kommentar markiert: decken
-  bisher nur Einzel (JE/ME-Pattern bzw. Ein-Spieler-pro-Seite) ab. Müssen in **Phase 2** um
-  Doppel/Mixed erweitert werden (neue Tag-Pattern für BD/GD/XD in `draw_scraper.find_draw_links`;
-  Zwei-Spieler-Namensauflösung je Seite in `match_scraper.py`, passend zum neuen
-  `matches`-Schema).
-
-Bewusst **nicht** übernommen (Phase 2/3-Arbeit, hängt eng am U15-spezifischen Schema/Workflow,
-würde vor echter Anpassung nur totes/irreführendes Code-Gerüst im neuen Projekt hinterlassen):
-`insert_players.py`, `insert_matches.py`, `insert_rank_and_points.py`, `ranking_table.py`,
-`aktualisiere_rangliste.py`, `export_rankings_enhanced.py`, `name_clashes_handler.py`,
-`clear_names_and_spieler_ids.py`, `compute_elo_strength.py`. Deren Kernlogik (siehe
-Session-Notizen) ist als Vorlage weiterhin einsehbar in `../bec_u15_auswertung/`, wird aber erst
-beim jeweiligen Phasen-Start neu geschrieben/angepasst.
+**Der in Phase 0 übernommene Selenium/tournamentsoftware.com-Modulsatz aus `bec_u15_auswertung`
+(`player_scraper.py`, `draw_scraper.py`, `match_scraper.py`, `cookie_handler.py`,
+`cookie_and_consent_handler.py`, `csv_handler.py`, `fuzzy_utils.py`, `memory_manager.py`,
+`player_in_list.py`, `club_manager.py`, `db_utils.py`) wurde wieder ENTFERNT** -- siehe
+"BEC-Datenhub-API" unten für den Grund: die tatsächliche Datenquelle ist seit der
+Cloudflare-Blocker-Recherche eine komplett andere (badmintoneurope.com statt
+tournamentsoftware.com), erreichbar per einfachem `requests`, ohne Browser, ohne Login, ohne
+Fuzzy-Name-Matching. Der U15-Modulsatz bleibt als Vorlage nur in `../bec_u15_auswertung/`
+einsehbar, falls er für eine spätere, andere Datenquelle doch noch gebraucht wird.
 
 ## DB-Schema
 
 Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet). Tabellen:
-`turnier`, `player`, `names`, `clubs`, `matches`, `turnier_ergebnisse`, `punktetabelle`,
-`rangliste`.
+`turnier`, `player`, `matches`, `turnier_ergebnisse`, `punktetabelle`, `rangliste`. (`names`/
+`clubs` aus der ursprünglichen Phase-0-Planung entfernt -- nicht mehr nötig, siehe unten.)
 
 ## Phasenplan
 
@@ -149,14 +136,81 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
   sein, relevant für die offene "Punktetabelle tier-abhängig"-Frage aus Phase-0/CLAUDE.md.
   **Datenqualität insgesamt deutlich besser als ursprünglich für tournamentsoftware.com
   erwartet** (echte Satzergebnisse statt nur Endplatzierung, saubere Doppel-Paar-Struktur ohne
-  Namens-Split-Heuristik nötig). **Architektur-Konsequenz noch mit User zu klären**: eine
-  vollautomatische Batch-Pipeline (wie ursprünglich für tournamentsoftware.com geplant) ist damit
-  nicht ohne Weiteres möglich -- Scraping müsste über Claude-in-Chrome interaktiv/
-  Turnier-für-Turnier laufen, nicht als unbeaufsichtigtes Python-Skript.
+  Namens-Split-Heuristik nötig). Ursprünglich als offene Architekturfrage notiert (Claude-in-Chrome
+  interaktiv vs. Batch) -- **durch den folgenden Fund hinfällig geworden**.
+
+  **DURCHBRUCH (2026-09-18): eigenständige JSON-API `bec-dh-prod.badmintoneurope.com` gefunden,
+  per normalem `requests.get()` erreichbar -- kein Browser, kein Cloudflare-Block, kein Login.**
+  Per `read_network_requests` (Claude-in-Chrome) entdeckt: die React-App auf
+  `badmintoneurope.com` selbst holt ihre Daten von einem separaten Backend-Host, der (anders als
+  die Hauptseite) NICHT hinter Cloudflare Turnstile hängt -- verifiziert per einfachem
+  Python-`requests`-Aufruf ohne jede Browser-Automatisierung, an zwei unabhängigen Turnieren
+  reproduziert (`tools/debug_bec_*` durch die eigentliche Pipeline `fetch_bec_data.py` ersetzt).
+  `robots.txt` von badmintoneurope.com: `Disallow:` (leer, alles erlaubt); die API-Subdomain hat
+  gar keine robots.txt (404 -- reiner JSON-Endpunkt, kein crawlbares Webangebot).
+
+  **Endpunkte** (Basis `https://bec-dh-prod.badmintoneurope.com`, Pfad-Parameter = `tournament_code`
+  = dieselbe GUID wie in unserer `turnier`-Tabelle):
+  - `GET /tournament/{code}` -- Metadaten (`name`, `startDate`, `endDate`, `venueCountry`, ...).
+    `level` ist nur die Altersklasse (`"u17"`), NICHT der Tier (IC/IS/GP) -- Tier steht als
+    Freitext in `extraData.descriptionHtml` (z.B. `"U17 International Challenge"`).
+  - `GET /tournament/{code}/events` -- die 5 Disziplinen dieses Turniers mit BEC-eigenen Codes
+    (`eventLabel` z.B. `"MS U17"`).
+  - `GET /tournament/{code}/matches/{yyyy-mm-dd}` -- **Kernendpunkt**: Liste von
+    Ort/Platz-Blöcken, je mit `matches[]`. Jedes Match: `id` (stabil, fürs idempotente Upsert),
+    `eventLabel`, `roundName`, `matchState` (`"F"` = finished/gespielt, andere Werte = nicht
+    gespielt -- nur `"F"` mit gesetztem `winner` wird importiert), `winner` (1 oder 2),
+    `games[]` (`team1Result`/`team2Result` je Satz), `team1`/`team2` (je `player1`/`player2` --
+    `player2` NULL bei Einzel, gesetzt bei Doppel/Mixed). Jeder `player`-Eintrag hat eine
+    **stabile `playerId`** (BEC-interne Athleten-ID) + `memberId` (Verbands-Mitgliedsnummer) +
+    `firstName`/`lastName`/`countryCode`/`genderId`.
+  - `GET /tournament/{code}/draw/{eventCode}` -- volle Turnierbaum-Struktur (233 KB für ein
+    64er-Feld) inkl. `eliminationDrawColumnDTOS` -- **noch nicht genutzt**, enthält vermutlich
+    Setzliste/Platzierung, relevant für Phase 3 falls `matches` allein nicht reicht.
+  - `GET /tournament/{code}/winners` existiert NICHT als eigener Endpunkt (404) -- die
+    `WINNERS`-Sektion der Webseite (Platz + `POINTS`-Wert) wird vermutlich aus `draw/{eventCode}`
+    abgeleitet, noch nicht nachvollzogen.
+
+  **Größter Architekturgewinn: `playerId` macht die gesamte U15-Fuzzy-Matching-Infrastruktur
+  überflüssig.** Das U15-Projekt musste Namen über verschiedene tournamentsoftware.com-Instanzen
+  hinweg per `fuzzy_utils`/`memory_manager`/interaktiver Konfliktauflösung zusammenführen, weil es
+  keine turnierübergreifende Spieler-ID gab. Die BEC-API liefert dieselbe `playerId` konsistent
+  über alle Turniere -- `spieler.bec_player_id UNIQUE` (siehe `schema.sql`) reicht als
+  Upsert-Schlüssel, keine Namens-Heuristik nötig. Deshalb wurden `fuzzy_utils.py`,
+  `memory_manager.py`, `player_in_list.py`, `club_manager.py`, `db_utils.py` sowie der komplette
+  Selenium/Cookie-Modulsatz wieder entfernt (siehe "Modul-Herkunft"-Abschnitt oben).
+
+  **`fetch_bec_data.py`** (ersetzt die ursprünglich für Phase 2 geplanten Selenium-Skripte):
+  pro `turnier`-Zeile Metadaten abrufen (für den Datumsbereich), dann `/matches/{date}` für jeden
+  Turniertag, Spieler + Matches per `bec_player_id`/`bec_match_id` upserten,
+  `turnier.scraped_at` setzen (resumable via `WHERE scraped_at IS NULL`, `--no-resume` erzwingt
+  Neuabruf). Höflichkeits-Delay `REQUEST_DELAY_SECONDS = 0.4` zwischen Requests, eigener
+  `User-Agent`-Header. Getestet an den ersten 3 Turnieren (`--limit 3`): 719 Matches, 377 Spieler,
+  alle 5 Disziplinen vertreten, Einzel/Doppel korrekt unterschieden (Doppel: 4 distinkte
+  `spieler_id`, Einzel: `*_spieler2_id` NULL) -- siehe Session-Verlauf für Stichprobenwerte.
+
+  **BEC-eventLabel-Präfix ≠ unser Disziplin-Code**: BEC nutzt für U17 die Erwachsenen-Kürzel
+  `MS`/`WS`/`MD`/`WD`/`XD` (Männer/Frauen-Konvention) statt der in Phase 0 für dieses Projekt
+  festgelegten Jugend-Kürzel `BS`/`GS`/`BD`/`GD`/`XD` (Boys/Girls) -- `EVENT_LABEL_TO_DISZIPLIN`
+  in `fetch_bec_data.py` mappt explizit, keine Annahme "Label == Code".
+
+  **Nicht mehr offen: BWF-Login-Blocker und Cloudflare-Blocker sind gegenstandslos** -- die
+  finale Pipeline berührt weder `tournamentsoftware.com` noch die
+  `badmintoneurope.com`-Hauptseite selbst, nur die unabhängige Datenhub-API.
+
+- **Entscheidung (User, 2026-09-18): Turnierstärke wird NICHT aus dem BEC-Tier-Label (IC/IS/GP)
+  oder einer fixen Punktetabelle abgeleitet, sondern empirisch aus der tatsächlichen Stärke der
+  Teilnehmer berechnet -- analog `bec_u15_auswertung/compute_elo_strength.py`.** Die
+  `WINNERS`-`POINTS`-Werte von der Webseite (Platz 1: 640, Platz 2: 535, ...) sind damit **nicht**
+  die Zielgröße für die Turnierstärke, allenfalls späterer Vergleichswert. Das relativiert die
+  ursprüngliche Phase-0-Frage nach einer tier-abhängigen Punktetabelle: die Punkte-Rangliste
+  (Phase 3) bleibt ein separates, einfacheres Modell (flache Punktetabelle wie beim U15-Vorbild),
+  die eigentliche Turnierstärke-Aussage liefert die Elo-Komponente (Phase 4), nicht Phase 3.
 - **Phase 3**: Punkte-Rangliste (Punktetabelle anwenden, Best-of-N je Disziplin aggregieren,
   Export).
 - **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
-  Geschlecht).
+  Geschlecht) -- **das eigentliche Kernziel des Projekts** (siehe Entscheidung oben), nicht nur
+  Nice-to-have neben der Punkte-Rangliste.
 - **Phase 5** (später, optional): tier-abhängige Punktetabelle nachrüsten, Abgleich mit
   DBV-Daten für deutsche Teilnehmer (`player.german_spieler_id`, analog
   `RESULTS_AUSLAENDISCHE_TURNIERE/` im BRAIN-Projekt).
