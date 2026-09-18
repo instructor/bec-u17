@@ -6,8 +6,10 @@ aus der "turnier"-Tabelle von der BEC-Datenhub-API -- Ergaenzung zu fetch_bec_da
 Pro Turnier, pro Disziplin (events-Endpunkt):
   1. GET /tournament/{code}/draw/{eventCode}
   2. Entries: erste Draw-Runde (hoechste "col"-Nummer) -> alle Teilnehmer mit Setzung
-  3. Winners: Final (col=1) -> Platz 1+2; Halbfinale (col=2, falls vorhanden) -> Platz 3 (beide
-     Verlierer, klassische Kampflos-freie Bronze-Regel im BEC-Circuit -- kein Spiel um Platz 3)
+  3. Platzierungen: JEDE Draw-Runde -> Platz 1 (Champion), Platz 2 (Finalist), Platz 3 (beide
+     HF-Verlierer, klassische Kampflos-freie Bronze-Regel im BEC-Circuit -- kein Spiel um Platz 3),
+     Platz 5 (4x VF-Verlierer), Platz 9 (8x R16-Verlierer), Platz 17/33/... usw. -- siehe
+     import_placements() fuer die genaue Tiegroup-Formel.
 
 Nur Turniere mit Einzel-KO-Draw (tournamentEliminationDrawDTO) werden unterstuetzt; Turniere mit
 reinem Gruppensystem (tournamentRoundRobinDrawDTO) werden uebersprungen und geloggt (noch nicht
@@ -43,11 +45,15 @@ def import_entries(conn, turnier_id, disziplin, first_col):
     return n
 
 
-def team_label_ids(conn, team):
-    return upsert_team(conn, team)
-
-
-def import_winners(conn, turnier_id, disziplin, cols_by_col):
+def import_placements(conn, turnier_id, disziplin, cols_by_col):
+    """Platzierung fuer JEDE Draw-Runde, nicht nur Final/Halbfinale: die Verlierer einer Runde
+    mit Spalte "col" (1=Final, 2=Halbfinale, 3=Viertelfinale, ...) bilden eine Platzierungs-
+    Tiegroup ab Platz 2**(col-1)+1 (Final-Verlierer=2, HF-Verlierer=3/4, VF-Verlierer=5-8,
+    R16-Verlierer=9-16, R32-Verlierer=17-32, R64-Verlierer=33-64, ...) -- Standard-KO-Konvention,
+    dieselbe wie beim DBV-RP_KT1-Punktetabellen-Schema im BRAIN-Projekt. Noetig fuer eine
+    Punkte-Rangliste (Phase 3): nur Platz 1-3 zu erfassen (frueherer Stand) haette die grosse
+    Mehrheit der Teilnehmer (alle vor dem Halbfinale ausgeschiedenen) komplett punktelos gelassen.
+    """
     conn.execute("DELETE FROM turnier_ergebnisse WHERE turnier_id = ? AND disziplin = ?", (turnier_id, disziplin))
     n = 0
 
@@ -56,12 +62,13 @@ def import_winners(conn, turnier_id, disziplin, cols_by_col):
         return 0
     final_match = final_col["drawRowsSorted"][0].get("match")
     if not final_match or final_match.get("winner") not in (1, 2):
-        return 0  # Final noch nicht gespielt
+        return 0  # Final noch nicht gespielt (Turnier evtl. noch offen/abgesagt)
 
-    win_team = final_match["team1"] if final_match["winner"] == 1 else final_match["team2"]
-    lose_team = final_match["team2"] if final_match["winner"] == 1 else final_match["team1"]
-    for team, platz in ((win_team, 1), (lose_team, 2)):
-        p1, p2 = team_label_ids(conn, team)
+    def insert(team, platz):
+        nonlocal n
+        if not team or not team.get("player1"):
+            return
+        p1, p2 = upsert_team(conn, team)
         conn.execute(
             "INSERT INTO turnier_ergebnisse (turnier_id, disziplin, spieler1_id, spieler2_id, platzierung) "
             "VALUES (?, ?, ?, ?, ?)",
@@ -69,22 +76,21 @@ def import_winners(conn, turnier_id, disziplin, cols_by_col):
         )
         n += 1
 
-    sf_col = cols_by_col.get(2)
-    if sf_col:
-        for row in sf_col["drawRowsSorted"]:
+    win_team = final_match["team1"] if final_match["winner"] == 1 else final_match["team2"]
+    lose_team = final_match["team2"] if final_match["winner"] == 1 else final_match["team1"]
+    insert(win_team, 1)
+    insert(lose_team, 2)
+
+    for col_num, col in cols_by_col.items():
+        if col_num == 1:
+            continue  # Final bereits oben behandelt (Platz 1+2)
+        platz = 2 ** (col_num - 1) + 1  # Start der Platzierungs-Tiegroup dieser Runde
+        for row in col["drawRowsSorted"]:
             m = row.get("match")
             if not m or m.get("winner") not in (1, 2):
                 continue
             lose_team = m["team2"] if m["winner"] == 1 else m["team1"]
-            if not lose_team or not lose_team.get("player1"):
-                continue
-            p1, p2 = team_label_ids(conn, lose_team)
-            conn.execute(
-                "INSERT INTO turnier_ergebnisse (turnier_id, disziplin, spieler1_id, spieler2_id, platzierung) "
-                "VALUES (?, ?, ?, ?, ?)",
-                (turnier_id, disziplin, p1, p2, 3),
-            )
-            n += 1
+            insert(lose_team, platz)
 
     return n
 
@@ -135,10 +141,10 @@ def fetch_tournament(conn, turnier_id, tournament_code, name):
         first_col = cols_by_col[max(cols_by_col)]
 
         n_entries = import_entries(conn, turnier_id, disziplin, first_col)
-        n_winners = import_winners(conn, turnier_id, disziplin, cols_by_col)
-        print(f"  {disziplin}: {n_entries} Entries, {n_winners} Platzierungen")
+        n_platzierungen = import_placements(conn, turnier_id, disziplin, cols_by_col)
+        print(f"  {disziplin}: {n_entries} Entries, {n_platzierungen} Platzierungen")
         total_entries += n_entries
-        total_winners += n_winners
+        total_winners += n_platzierungen
 
     mark_scraped(conn, turnier_id)
     print(f"  -> {total_entries} Entries, {total_winners} Platzierungen gesamt")
