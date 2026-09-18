@@ -27,8 +27,37 @@ Vorbild/Quelle der übernommenen Module.
   BEC-Datenhub-Eintrag, da ausser-europäisch; sauber erkannt und als erledigt markiert, kein
   Fehler). Top-Nationen nach Spieleranzahl: GER 186, POL 144, ESP 139, FRA 130, DEN 123.
   Schnitt ~189 Matches/Turnier (Spanne 60-290).
-- Noch **nicht** begonnen: Phase 2 (Scraping). Kein einziges Turnier bisher gescraped, `player`/
-  `matches`/`turnier_ergebnisse` sind noch leer.
+- **Phase 2b (`fetch_bec_entries_winners.py`, 2026-09-18, User-Wunsch) erledigt**: Teilnehmerlisten
+  (`entries`-Tabelle) und Platzierungen 1/2/3 (`turnier_ergebnisse`, 3. Platz doppelt besetzt --
+  BEC-Circuit spielt kein Spiel um Platz 3) für alle 48 Turniere geladen. Ergebnis: **8.941
+  Entries, 920 Platzierungen** (230× Platz 1, 230× Platz 2, 460× Platz 3). Dieselben 2 Turniere
+  ohne Daten wie bei den Matches (Indonesien) bzw. mit abweichender Turnierstruktur (European
+  Youth Olympic Festival 2025, s.u.) -- sauber erkannt, kein Fehler/Crash, kein Retry-Loop.
+  `turnier.entries_scraped_at` (neue Spalte, per `create_db.py`-Migration ohne Datenverlust an
+  die schon befuellte DB angehaengt) macht auch diesen Lauf resumable.
+
+  **Bug gefunden und gefixt, bevor der volle Lauf startete**: `/tournament/{code}/events` und
+  `/tournament/{code}/draw/{eventCode}` sind **nicht zuverlässig über `eventCode` verknüpft** --
+  am Testturnier "Spanish U17 Open 2025" behauptete `/events`, `eventCode=1` sei "MS U17", aber
+  `draw/1` lieferte tatsächlich die "XD U17"-Daten (komplett durcheinandergewürfelte Zuordnung,
+  keine feste Verschiebung). Ohne Fix wurden BS/GS/BD/GD/XD-Zeilen mit falschen Disziplinen
+  vertauscht in die DB geschrieben (z.B. Mixed-Paare unter "BS", Einzelspieler unter "XD") --
+  verifiziert falsch, weil das Ergebnis nicht zur bekannten `WINNERS`-Sektion der Turnierseite
+  passte (dort: BS-Sieger Tobias Niemi Ström, in der fehlerhaften DB stand Milan Zeisig).
+  **Fix**: Disziplin wird ausschließlich aus der Draw-Antwort selbst gelesen
+  (`draw['drawData']['eventLabel']`), nie aus der `/events`-Liste übernommen. Die beiden bereits
+  mit der fehlerhaften Zuordnung geladenen Turniere wurden vor dem Fix-Verify komplett geleert
+  und neu geladen; nach dem Fix stimmt BS-Sieger wieder exakt mit der Turnierseite überein.
+  `fetch_bec_data.py` (Matches) ist von diesem Bug **nicht** betroffen -- jedes Match trägt sein
+  `eventLabel` direkt im Match-Objekt, unabhängig von der `/events`-`eventCode`-Zuordnung.
+
+  **Zweiter Fix**: `drawData` kann auch als expliziter `null`-Wert vorkommen (nicht nur als
+  fehlender Key) -- `draw.get("drawData", {})` gibt dann `None` statt des Default-Dicts zurück,
+  `.get("eventLabel")` darauf crasht. Betraf "European Youth Olympic Festival 2025" (2 von 3
+  Events ohne `drawData`, das dritte mit einer Gruppen-/Multi-Sport-Struktur statt des normalen
+  KO-Baums -- `drawTypeId` und `name: "... - Group 1"` deuten auf ein abweichendes Turnierformat
+  hin, nicht weiter verfolgt). Fix: `draw.get("drawData") or {}`, betroffene Events werden mit
+  Log-Hinweis übersprungen statt den ganzen Lauf abzubrechen.
 
 ## Datenbasis
 
@@ -77,9 +106,16 @@ einsehbar, falls er für eine spätere, andere Datenquelle doch noch gebraucht w
 
 ## DB-Schema
 
-Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet). Tabellen:
-`turnier`, `player`, `matches`, `turnier_ergebnisse`, `punktetabelle`, `rangliste`. (`names`/
-`clubs` aus der ursprünglichen Phase-0-Planung entfernt -- nicht mehr nötig, siehe unten.)
+Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet -- neue Tabellen
+per `CREATE TABLE IF NOT EXISTS`, neue Spalten an bestehenden Tabellen per `ensure_columns()`
+ALTER-TABLE-Migration, ohne bereits geladene Daten zu verlieren). Tabellen: `turnier`, `player`,
+`matches`, `entries`, `turnier_ergebnisse`, `punktetabelle`, `rangliste`. (`names`/`clubs` aus der
+ursprünglichen Phase-0-Planung entfernt -- nicht mehr nötig, siehe unten.)
+
+Gemeinsame API-/Upsert-Helfer (Basis-URL, Disziplin-Mapping, `get_json`, `upsert_player`/
+`upsert_team`) liegen in `bec_api.py`, genutzt von `fetch_bec_data.py` (Matches) UND
+`fetch_bec_entries_winners.py` (Entries + Platzierungen) -- keine Code-Duplikation zwischen den
+beiden Fetch-Skripten.
 
 ## Phasenplan
 

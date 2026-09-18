@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS turnier (
     use_in_ranking          BOOLEAN,        -- Herkunfts-Flag aus der BRAIN-Excel, nicht das eigene Ranking-Kriterium
     url                     TEXT,
     quelle_excel            VARCHAR(200),
-    scraped_at               TEXT,
+    scraped_at               TEXT,   -- gesetzt von fetch_bec_data.py (Matches)
+    entries_scraped_at       TEXT,   -- gesetzt von fetch_bec_entries_winners.py (Entries + Winners)
     UNIQUE(tournament_id)
 );
 
@@ -56,6 +57,21 @@ CREATE TABLE IF NOT EXISTS matches (
     FOREIGN KEY (heim_spieler2_id) REFERENCES player(spieler_id),
     FOREIGN KEY (gast_spieler1_id) REFERENCES player(spieler_id),
     FOREIGN KEY (gast_spieler2_id) REFERENCES player(spieler_id)
+);
+
+-- Teilnehmerliste je Turnier/Disziplin, aus der ersten Draw-Runde der BEC-API abgeleitet
+-- (enthaelt damit alle tatsaechlich im Hauptfeld ausgelosten Teilnehmer inkl. Freilose;
+-- eine gesonderte Reserve-/Withdrawn-Liste liefert die API nicht, siehe CLAUDE.md).
+CREATE TABLE IF NOT EXISTS entries (
+    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    turnier_id      INTEGER NOT NULL,
+    disziplin        VARCHAR(2) NOT NULL,
+    spieler1_id      INTEGER NOT NULL,
+    spieler2_id      INTEGER,   -- NULL bei Einzel, Partner bei BD/GD/XD
+    seed              VARCHAR(8),
+    FOREIGN KEY (turnier_id) REFERENCES turnier(turnier_id),
+    FOREIGN KEY (spieler1_id) REFERENCES player(spieler_id),
+    FOREIGN KEY (spieler2_id) REFERENCES player(spieler_id)
 );
 
 CREATE TABLE IF NOT EXISTS turnier_ergebnisse (
