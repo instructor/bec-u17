@@ -9,10 +9,18 @@ Phase 4: Elo-Rangliste je Disziplin + Turnierstaerke (Ø-Elo der Teilnehmer) -- 
   - chronologisch sortiert nach matches.spieldatum (+ match_id als stabiler Tie-Breaker),
     nicht nach DB-Einfuegereihenfolge
 
-Bekannte Vereinfachung (bewusst uebernommen von compute_elo_strength.py): Turnierstaerke nutzt
-die FINALEN Ratings nach dem kompletten Replay, nicht den Rating-Stand zum jeweiligen
-Turnierzeitpunkt -- fuer fruehe Turniere dadurch ein gewisser Rueckschau-Effekt, wie beim
-U15-Vorbild nicht weiter behoben.
+Turnierstaerke nutzt den Rating-STAND VOR dem jeweiligen Turnier (erste Zeile des Spielers in
+diesem Turnier, bevor deren erstes Match dort verarbeitet wird), nicht die finalen Ratings nach
+dem kompletten Replay -- eine erste Fassung nutzte die finalen Werte (wie
+compute_elo_strength.py) und zeigte dadurch einen klaren Rueckschau-Effekt: bei identisch
+benannten wiederkehrenden Turnieren (z.B. "Austrian U17 Open" 2025 vs. 2026) fiel der berechnete
+Wert 2026 systematisch, obwohl kein Grund zur Annahme bestand, dass dasselbe Turnier real
+schwaecher besetzt war (User-Nachfrage 2026-09-18, per Vergleich mehrerer wiederkehrender
+Turnierpaare bestaetigt, ~-21 Punkte im Schnitt). Ursache: Teilnehmer frueher (2025er) Turniere
+hatten bis zum Ende des Datenbestands (~Sept. 2026) weit mehr Zeit, ihr Rating durch spaetere
+Siege zu steigern, was dem fruehen Turnier faelschlich rueckwirkend gutgeschrieben wurde. Die
+Spieler-Rangliste (elo_spieler.csv) nutzt weiterhin die finalen Ratings -- das ist dort korrekt,
+da sie den AKTUELLEN Stand zeigen soll, nicht einen historischen Zeitpunkt.
 
 Walkover-Matches ohne vollstaendige Spielerdaten (leeres ergebnis, eine Seite komplett NULL)
 werden uebersprungen -- kein echtes Staerke-Signal, keine ID zum Aktualisieren.
@@ -82,11 +90,22 @@ def apply_delta(ratings, team, delta):
 
 
 def compute_elo_for_disziplin(matches):
+    """Spielt alle Matches chronologisch durch. Neben dem laufenden (finalen) Rating wird pro
+    (Turnier, Spieler) ein "Vor-Turnier"-Snapshot festgehalten: der Rating-Stand beim ERSTEN
+    Auftreten dieses Spielers in diesem Turnier, bevor das jeweilige Match verarbeitet wird --
+    das ist die Grundlage fuer eine rueckschaufreie Turnierstaerke (siehe compute_tournament_
+    strength). Matches innerhalb desselben Turniers aendern den Snapshot nicht mehr nachtraeglich."""
     ratings = {}
     match_counts = defaultdict(int)
+    pre_tournament = {}  # (turnier_id, spieler_id) -> Rating vor diesem Turnier
 
     for m in matches:
         heim, gast = m["heim"], m["gast"]
+        turnier_id = m["turnier_id"]
+        for pid in (heim[0], heim[1], gast[0], gast[1]):
+            if pid is not None and (turnier_id, pid) not in pre_tournament:
+                pre_tournament[(turnier_id, pid)] = ratings.get(pid, BASE_RATING)
+
         r_heim = team_rating(ratings, heim)
         r_gast = team_rating(ratings, gast)
         score_heim = 1.0 if m["heim_win"] else 0.0
@@ -100,12 +119,13 @@ def compute_elo_for_disziplin(matches):
             if pid is not None:
                 match_counts[pid] += 1
 
-    return ratings, match_counts
+    return ratings, match_counts, pre_tournament
 
 
-def compute_tournament_strength(matches, ratings):
-    """Ø-Elo aller Teilnehmer je Turnier (Teilnehmer = alle Spieler, die mind. 1 Match in
-    diesem Turnier/dieser Disziplin bestritten haben)."""
+def compute_tournament_strength(matches, pre_tournament):
+    """Ø-Elo aller Teilnehmer je Turnier, JEWEILS zum Rating-Stand vor diesem Turnier (nicht
+    final) -- vermeidet den Rueckschau-Effekt frueherer Turniere, die sonst von der spaeteren
+    Formkurve ihrer Teilnehmer profitiert haetten (siehe Moduldocstring)."""
     participants_by_turnier = defaultdict(set)
     for m in matches:
         for pid in (m["heim"][0], m["heim"][1], m["gast"][0], m["gast"][1]):
@@ -114,7 +134,7 @@ def compute_tournament_strength(matches, ratings):
 
     rows = []
     for turnier_id, spieler_ids in participants_by_turnier.items():
-        werte = [ratings[p] for p in spieler_ids if p in ratings]
+        werte = [pre_tournament[(turnier_id, p)] for p in spieler_ids if (turnier_id, p) in pre_tournament]
         if werte:
             rows.append((turnier_id, len(werte), round(sum(werte) / len(werte), 1)))
     return rows
@@ -125,7 +145,13 @@ def main():
     os.makedirs(OUT_DIR, exist_ok=True)
     try:
         turnier_lookup = pd.read_sql_query(
-            "SELECT turnier_id, name, jahr, kw, bec17type FROM turnier", conn
+            """
+            SELECT t.turnier_id, t.name, t.jahr, t.kw, t.bec17type, MIN(m.spieldatum) AS datum
+            FROM turnier t
+            LEFT JOIN matches m ON m.turnier_id = t.turnier_id
+            GROUP BY t.turnier_id
+            """,
+            conn,
         )
         player_lookup = pd.read_sql_query(
             "SELECT spieler_id, vorname, name, nation, bec_player_id FROM player", conn
@@ -135,7 +161,7 @@ def main():
         all_strength_rows = []
         for disziplin in DISZIPLINEN:
             matches = load_matches(conn, disziplin)
-            ratings, match_counts = compute_elo_for_disziplin(matches)
+            ratings, match_counts, pre_tournament = compute_elo_for_disziplin(matches)
             print(f"{disziplin}: {len(matches)} Matches, {len(ratings)} Spieler")
 
             for spieler_id, rating in ratings.items():
@@ -146,7 +172,7 @@ def main():
                     }
                 )
 
-            for turnier_id, n_teilnehmer, avg_elo in compute_tournament_strength(matches, ratings):
+            for turnier_id, n_teilnehmer, avg_elo in compute_tournament_strength(matches, pre_tournament):
                 all_strength_rows.append(
                     {"disziplin": disziplin, "turnier_id": turnier_id,
                      "teilnehmer": n_teilnehmer, "avg_elo": avg_elo}
@@ -190,10 +216,10 @@ def main():
         json_path = os.path.join(OUT_DIR, "turnier_staerke.json")
         payload = {
             "je_disziplin": strength_df[
-                ["disziplin", "turnier_id", "name", "jahr", "kw", "bec17type", "teilnehmer", "avg_elo", "rang"]
+                ["disziplin", "turnier_id", "name", "jahr", "kw", "datum", "bec17type", "teilnehmer", "avg_elo", "rang"]
             ].to_dict(orient="records"),
             "gesamt": gesamt_df[
-                ["turnier_id", "name", "jahr", "kw", "bec17type", "teilnehmer_gesamt", "n_disziplinen",
+                ["turnier_id", "name", "jahr", "kw", "datum", "bec17type", "teilnehmer_gesamt", "n_disziplinen",
                  "avg_elo_gesamt", "rang"]
             ].to_dict(orient="records"),
         }
