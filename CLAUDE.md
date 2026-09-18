@@ -8,17 +8,20 @@ statt ~14 wiederkehrender Serien) andere Architekturentscheidungen braucht. Sieh
 `../CLAUDE.md` (übergeordnetes Domänenmodell, gilt auch hier) und `../bec_u15_auswertung/` als
 Vorbild/Quelle der übernommenen Module.
 
-## Status (2026-09-18, Phase 0 abgeschlossen)
+## Status (2026-09-18, Phase 1 abgeschlossen)
 
 - Projekt angelegt, `.venv` mit den Kern-Dependencies installiert, `u17_int.db` per `schema.sql`
-  angelegt (leer, noch keine Daten geladen -- das ist Phase 1).
-- Die beiden Turnierkatalog-Excel-Dateien liegen bereits unter
-  `_TOURNAMENT_DATA/BEC-U17-Circuit/` (Kopie aus dem BRAIN-Projekt, macht dieses Projekt
-  eigenständig lauffähig ohne Abhängigkeit vom BRAIN-Repo-Pfad).
+  angelegt.
 - Wiederverwendbare, schema-unabhängige Module 1:1 (bzw. mit kleinen Anpassungen) aus
   `bec_u15_auswertung` übernommen -- siehe "Übernommene Module" unten.
-- Noch **nicht** begonnen: Phase 1 (Turnierkatalog laden), Phase 2 (Scraping), Phase 3+ (Punkte/
-  Elo-Ranglisten). Kein einziges Turnier bisher gescraped.
+- **Phase 1 (`load_turnierkatalog.py`) erledigt**: beide Turnierkatalog-Excel-Dateien
+  (`_TOURNAMENT_DATA/BEC-U17-Circuit/*.xlsx`) in die `turnier`-Tabelle geladen -- 48 Zeilen (29
+  aus 2025, 19 aus 2026), alle mit gebauter URL (`tournament_code` bei keiner Zeile leer/NULL).
+  Tier-Verteilung: 10× `U17 GP`, 15× `U17 IC`, 23× `U17 IS`. UPSERT auf `tournament_id`,
+  verifiziert idempotent (zweiter Lauf bleibt bei 48 Zeilen). Keine doppelten `TournamentID`
+  über beide Dateien hinweg.
+- Noch **nicht** begonnen: Phase 2 (Scraping). Kein einziges Turnier bisher gescraped, `player`/
+  `matches`/`turnier_ergebnisse` sind noch leer.
 
 ## Datenbasis
 
@@ -29,9 +32,10 @@ Vorbild/Quelle der übernommenen Module.
 direkten URL-Bau (`https://www.tournamentsoftware.com/tournament/{TournamentCode}`) -- anders als
 beim U15-Vorbild, das URLs manuell in einer `tournament-urls.csv` sammeln musste.
 
-**Entscheidung (User, 2026-09-18): `UseInRanking=False`-Zeilen (7 von 48) werden trotzdem mit
-aufgenommen.** Dieses Flag stammt aus der BRAIN-DBV-Pipeline und bezieht sich auf die
-DBV-U19-Ranglisten-Eligibilität, nicht auf die Vollständigkeit des BEC-Circuits selbst.
+**Entscheidung (User, 2026-09-18): `UseInRanking=False`-Zeilen (5 von 48, verifiziert nach dem
+Laden) werden trotzdem mit aufgenommen.** Dieses Flag stammt aus der BRAIN-DBV-Pipeline und
+bezieht sich auf die DBV-U19-Ranglisten-Eligibilität, nicht auf die Vollständigkeit des
+BEC-Circuits selbst.
 
 ## Architekturentscheidungen (User-bestätigt, 2026-09-18)
 
@@ -86,7 +90,8 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
 ## Phasenplan
 
 - **Phase 0 (erledigt)**: Projekt-Setup, Module übernommen, Schema angelegt, Quelldaten kopiert.
-- **Phase 1**: Turnierkatalog aus den beiden Excel-Dateien in `turnier` laden, URLs bauen.
+- **Phase 1 (erledigt)**: Turnierkatalog aus den beiden Excel-Dateien in `turnier` geladen
+  (`load_turnierkatalog.py`), URLs gebaut.
 - **Phase 2**: Scraping (Spieler, Draws inkl. Doppel/Mixed, Matches) pro Turnier, resumable;
   Fuzzy-Matching + `memory_manager` für Namenskonflikte; Fallback-Fälle (analog bfib/jot beim
   U15-Vorbild) erst behandeln, sobald ein konkretes Turnier beim Scraping tatsächlich scheitert.

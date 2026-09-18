@@ -10,8 +10,10 @@ Phasenplan: siehe `CLAUDE.md`.
 python -m venv .venv
 .venv\Scripts\pip install -r requirements.txt
 .venv\Scripts\python create_db.py
+.venv\Scripts\python load_turnierkatalog.py
 ```
 
 ## Status
 
-Phase 0 (Projekt-Setup) abgeschlossen. Noch keine Turnierdaten geladen/gescraped.
+Phase 0 + Phase 1 abgeschlossen: `turnier`-Tabelle mit allen 48 BEC-U17-Turnieren (2025+2026)
+gefüllt. Noch keine Spieler/Matches gescraped (Phase 2).
