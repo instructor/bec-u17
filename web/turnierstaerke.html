@@ -184,6 +184,7 @@
 
   <div class="controls">
     <div class="tabs" id="tabs" role="tablist" aria-label="Disziplin"></div>
+    <div class="tabs" id="zeitraum-tabs" role="tablist" aria-label="Zeitraum"></div>
     <div class="legend">
       <span class="item"><span class="swatch" style="background:var(--gp)"></span>GP – Grand Prix</span>
       <span class="item"><span class="swatch" style="background:var(--ic)"></span>IC – Int. Challenge</span>
@@ -215,13 +216,14 @@
   </section>
 
   <footer class="note">
-    Ø-Elo je Turnier = Mittelwert der Elo-Ratings aller Teilnehmer dieser Disziplin bei diesem
-    Turnier (BASE_RATING 1200, K=32), nach chronologischem Replay aller 48 Turniere 2025–26.
-    „Gesamt“ mittelt die je-Disziplin-Werte eines Turniers unbenutzt (nicht jedes Turnier hat
-    Daten in allen 5 Disziplinen). Bekannte Einschränkung: die Ratings sind die <em>finalen</em>
-    Werte nach dem kompletten Zeitraum, nicht der Stand zum jeweiligen Turnierzeitpunkt — frühe
-    2025er-Turniere profitieren dadurch leicht von der späteren Formkurve der Teilnehmer. Quelle:
-    <code>bec_u17_auswertung/compute_elo.py</code>, Datenbasis BEC-Datenhub-API.
+    Ø-Elo je Turnier = Mittelwert der Elo-Ratings aller Teilnehmer dieser Disziplin, jeweils zum
+    Rating-<strong>Stand direkt vor diesem Turnier</strong> (nicht final) — vermeidet, dass ein
+    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert.
+    BASE_RATING 1200, K=32, chronologischer Replay aller 48 Turniere 2025–26. „Gesamt“ mittelt
+    die je-Disziplin-Werte eines Turniers unbenutzt (nicht jedes Turnier hat Daten in allen 5
+    Disziplinen). Der Zeitraum-Filter schränkt nur ein, welche Turniere angezeigt/gerankt werden —
+    die zugrunde liegenden Elo-Werte berücksichtigen immer die volle Matchhistorie bis zu diesem
+    Zeitpunkt. Quelle: <code>bec_u17_auswertung/compute_elo.py</code>, Datenbasis BEC-Datenhub-API.
   </footer>
 </div>
 
@@ -231,12 +233,15 @@
 
   var DIS_LABELS = { GESAMT: "Gesamt", BS: "Jungeneinzel (BS)", GS: "Mädcheneinzel (GS)", BD: "Jungendoppel (BD)", GD: "Mädchendoppel (GD)", XD: "Mixed (XD)" };
   var DIS_ORDER = ["GESAMT", "BS", "GS", "BD", "GD", "XD"];
+  var ZEITRAUM_ORDER = ["12M", "2026", "2025", "ALLE"];
+  var ZEITRAUM_LABELS = { "12M": "12 Monate", "2026": "2026", "2025": "2025", "ALLE": "Alle" };
   var TIER_CLASS = { "U17 GP": "gp", "U17 IC": "ic", "U17 IS": "is" };
   var TIER_LABEL = { "U17 GP": "GP", "U17 IC": "IC", "U17 IS": "IS" };
   var AXIS_MIN = 1150, AXIS_MAX = 1300;
   var AXIS_MID = Math.round((AXIS_MIN + AXIS_MAX) / 2 / 25) * 25;
+  var MS_PER_DAY = 24 * 60 * 60 * 1000;
 
-  var state = { disziplin: "GESAMT", view: "chart", data: null };
+  var state = { disziplin: "GESAMT", zeitraum: "12M", view: "chart", data: null, maxDatum: null };
 
   function pct(v) {
     var clamped = Math.max(AXIS_MIN, Math.min(AXIS_MAX, v));
@@ -249,13 +254,34 @@
     });
   }
 
+  function inZeitraum(r) {
+    if (state.zeitraum === "2025") return r.jahr === 2025;
+    if (state.zeitraum === "2026") return r.jahr === 2026;
+    if (state.zeitraum === "ALLE") return true;
+    // "12M": letzte 12 Monate relativ zum juengsten Turnierdatum im Datensatz (nicht Systemdatum --
+    // die Daten sind ein fester 2025/26-Saison-Schnappschuss, kein Live-Feed).
+    if (!r.datum || !state.maxDatum) return true;
+    var cutoff = new Date(state.maxDatum).getTime() - 365 * MS_PER_DAY;
+    return new Date(r.datum).getTime() >= cutoff;
+  }
+
+  function rankBy(rows, key) {
+    rows.sort(function (a, b) { return b[key] - a[key]; });
+    var rang = 0, last = null;
+    rows.forEach(function (r, i) {
+      if (r[key] !== last) { rang = i + 1; last = r[key]; }
+      r.rang = rang;
+    });
+    return rows;
+  }
+
   function rowsForCurrent() {
     if (state.disziplin === "GESAMT") {
-      return state.data.gesamt.slice().sort(function (a, b) { return a.rang - b.rang; });
+      var g = state.data.gesamt.filter(inZeitraum);
+      return rankBy(g, "avg_elo_gesamt");
     }
-    return state.data.je_disziplin
-      .filter(function (r) { return r.disziplin === state.disziplin; })
-      .sort(function (a, b) { return a.rang - b.rang; });
+    var d = state.data.je_disziplin.filter(function (r) { return r.disziplin === state.disziplin; }).filter(inZeitraum);
+    return rankBy(d, "avg_elo");
   }
 
   function buildTabs() {
@@ -272,6 +298,21 @@
         render();
       });
       tabs.appendChild(b);
+    });
+
+    var zt = document.getElementById("zeitraum-tabs");
+    zt.innerHTML = "";
+    ZEITRAUM_ORDER.forEach(function (z) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = ZEITRAUM_LABELS[z];
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-pressed", z === state.zeitraum ? "true" : "false");
+      b.addEventListener("click", function () {
+        state.zeitraum = z;
+        render();
+      });
+      zt.appendChild(b);
     });
   }
 
@@ -301,7 +342,7 @@
     var isGesamt = state.disziplin === "GESAMT";
 
     document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin] + " — Rangfolge nach Ø-Elo";
-    document.getElementById("panel-sub").textContent = rows.length + " Turniere · Skala " + AXIS_MIN + "–" + AXIS_MAX + " Elo (nicht bei 0 beginnend)";
+    document.getElementById("panel-sub").textContent = rows.length + " Turniere · Zeitraum: " + ZEITRAUM_LABELS[state.zeitraum] + " · Skala " + AXIS_MIN + "–" + AXIS_MAX + " Elo (nicht bei 0 beginnend)";
 
     buildAxis();
 
@@ -365,6 +406,9 @@
     .then(function (json) {
       state.data = json;
       var nT = json.gesamt.length;
+      state.maxDatum = json.gesamt.reduce(function (max, r) {
+        return r.datum && (!max || r.datum > max) ? r.datum : max;
+      }, null);
       document.getElementById("meta-line").textContent = nT + " Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32";
       render();
     })

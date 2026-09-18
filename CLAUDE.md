@@ -329,6 +329,19 @@ beiden Fetch-Skripten.
   ineinander -- vereinfacht auf 3 gut getrennte, randbündig ausgerichtete Ticks
   (Minimum/Mitte/Maximum) statt weiter an der Positionierung zu justieren.
 
+  **Zeitraum-Filter nachgerüstet (User-Nachfrage, 2026-09-18)**: Auslöser war die Frage, warum
+  2025er Turniere fast durchgängig stärker erscheinen als 2026er -- Antwort siehe
+  "Turnierstärke: zeitpunktbezogene statt finale Elo-Ratings" oben (Rückschau-Effekt, jetzt
+  behoben). Dabei zusätzlich ein zweites Tab-Segment "Zeitraum" mit 4 Optionen ergänzt: `2026`,
+  `2025`, `12 Monate` (Default), `Alle`. "12 Monate" bezieht sich auf das jüngste Turnierdatum
+  IM DATENSATZ (nicht das Systemdatum -- die Daten sind ein fester Saison-Schnappschuss, kein
+  Live-Feed). Filterung wirkt nur auf die ANGEZEIGTE/GERANKTE Teilmenge, die zugrunde liegenden
+  Elo-Werte selbst berücksichtigen weiterhin immer die volle Matchhistorie bis zum jeweiligen
+  Zeitpunkt (kein Neuberechnen der Ratings je Filter). Rang wird nach Filterung clientseitig neu
+  vergeben (`rankBy()`, dense rank), da der serverseitig vorberechnete `rang` nur für den
+  ungefilterten Vollbestand gilt. Dafür `compute_elo.py`s `turnier_lookup`-Query um `MIN(matches.
+  spieldatum)` je Turnier erweitert (`datum`-Feld, jetzt auch im JSON-Export).
+
 - **Phase 5** (später, optional): tier-abhängige Punktetabelle nachrüsten, Abgleich mit
   DBV-Daten für deutsche Teilnehmer (`player.german_spieler_id`, analog
   `RESULTS_AUSLAENDISCHE_TURNIERE/` im BRAIN-Projekt).
