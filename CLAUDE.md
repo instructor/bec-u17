@@ -8,7 +8,7 @@ statt ~14 wiederkehrender Serien) andere Architekturentscheidungen braucht. Sieh
 `../CLAUDE.md` (übergeordnetes Domänenmodell, gilt auch hier) und `../bec_u15_auswertung/` als
 Vorbild/Quelle der übernommenen Module.
 
-## Status (2026-09-18, Phase 4 abgeschlossen -- alle geplanten Phasen erledigt)
+## Status (2026-09-18, Phase 4 + Web-Visualisierung abgeschlossen -- alle geplanten Phasen erledigt)
 
 - Projekt angelegt, `.venv` mit den Kern-Dependencies installiert (`requests`, `pandas`,
   `openpyxl` -- kein Selenium/Browser mehr nötig, siehe Architektur-Pivot unten), `u17_int.db`
@@ -307,6 +307,27 @@ beiden Fetch-Skripten.
   jeweiligen Turnierzeitpunkt -- für frühe Turniere (2025 KW5) dadurch ein gewisser
   Rückschau-Effekt (spätere Formkurve eines Spielers fließt in die Bewertung eines früheren
   Turniers ein). Nicht behoben, analog `compute_elo_strength.py`.
+
+- **Web-Visualisierung "Turnierstärke BEC U17" (2026-09-18, User-Wunsch)**: interaktive
+  Rangfolge-Seite als Artifact veröffentlicht (`web/turnierstaerke.html`, private Artifact-URL --
+  siehe Session-Verlauf/Artifact-Gallery für den Link). Tabs für Gesamt + je Disziplin
+  (BS/GS/BD/GD/XD), horizontales Balkendiagramm (Skala 1150-1300 Elo, bewusst nicht bei 0
+  beginnend -- bei Elo-Ratings üblich/sinnvoll, da 0 keine intrinsische Bedeutung hat), Tier-Pills
+  (GP/IC/IS) farbcodiert nach dem dataviz-Skill-Standardpalette (blau/orange/aqua, Kontrast- und
+  CVD-validiert per `validate_palette.js`), Tabellenansicht als Barrierefreiheits-Fallback (aqua
+  unterschreitet 3:1-Kontrast im Light-Mode -- "Relief"-Pflicht laut Skill, hier durch sichtbare
+  Text-Pills + Tabellenansicht erfüllt). Datenbasis: `_RESULTS/turnier_staerke.json`
+  (`compute_elo.py` erweitert um `bec17type`-Spalte in `turnier_staerke.csv` und eine neue
+  `turnier_staerke_gesamt.csv`/`turnier_staerke.json` mit unbenutzt gemitteltem `avg_elo_gesamt`
+  über alle Disziplinen, in denen ein Turnier Daten hat).
+
+  **Ein Layout-Bug beim ersten Entwurf gefunden und gefixt**: Turnliernamen wurden auf ein
+  einzelnes Zeichen abgeschnitten (Flex-Basis-Konflikt zwischen mehreren `.name-col`/`.bar-col`-
+  Regeln unterschiedlicher Spezifität) -- behoben durch CSS-Grid mit einheitlichem
+  Spalten-Template für Achsen- und Datenzeilen statt Flexbox. Die ursprüngliche 7-Tick-Achse
+  (1150/1175/.../1300) kollidierte bei den engen ~38px-Abständen zu Textlabels, die liefen visuell
+  ineinander -- vereinfacht auf 3 gut getrennte, randbündig ausgerichtete Ticks
+  (Minimum/Mitte/Maximum) statt weiter an der Positionierung zu justieren.
 
 - **Phase 5** (später, optional): tier-abhängige Punktetabelle nachrüsten, Abgleich mit
   DBV-Daten für deutsche Teilnehmer (`player.german_spieler_id`, analog
