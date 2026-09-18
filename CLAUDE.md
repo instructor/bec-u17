@@ -109,6 +109,27 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
   `matches`/`turnier_ergebnisse` weiterhin leer. `draw_scraper.py`/`match_scraper.py` haben ihre
   Phase-0-TODO-Kommentare (Doppel/Mixed-Erweiterung) noch unangetastet, da eine funktionale
   Erweiterung vor Klärung des Zugriffsproblems keinen Sinn ergibt.
+
+  **User-Hinweis (2026-09-18): `badmintoneurope.com` als öffentliche Alternative.** Muster
+  `https://badmintoneurope.com/web/corporate/tournament?tournament_code={code}` (gleiches
+  `TournamentCode`-GUID wie im Excel-Katalog) verlangt **kein** Login -- Fortschritt gegenüber
+  dem BWF-Portal. Recherche per `tools/debug_research_bec_site.py` +
+  `tools/debug_bec_network.py`: die Seite ist eine React/Liferay-SPA
+  (`com-stellis-one-bec-sportdata-web`-Komponenten `TournamentDraws`/`TournamentMatches`/
+  `TournamentEntries`/`TournamentHistory` im Page-Source sichtbar -- die Daten wären also
+  grundsätzlich da), aber **Cloudflare Turnstile (Bot-Erkennung) greift vor dem eigentlichen
+  Daten-Request**: Netzwerk-Log (CDP Performance-Log) zeigt einen
+  `cdn-cgi/challenge-platform/.../chl_page`-Request unmittelbar nach dem Seitenaufruf --
+  Headless-Selenium bekommt eine Challenge-Seite statt echtem Content, keine einzige
+  API-/JSON-Anfrage für Turnierdaten feuert. Kein Umgehungsversuch unternommen (kein
+  Fingerprint-Spoofing, kein Turnstile-Bypass) -- das wäre eine bewusste
+  Bot-Erkennungs-Umgehung und braucht explizite User-Entscheidung. Zur Diskussion stehende
+  Optionen: (a) nicht-headless/"menschlicher" Selenium-Lauf testen (nicht garantiert, Cloudflare
+  erkennt oft trotzdem `navigator.webdriver`), (b) Claude-in-Chrome nutzen (steuert den
+  echten Chrome-Browser/Profil des Users statt einer frischen automatisierten Instanz --
+  plausibel unauffälliger gegenüber Cloudflare, aber pro Turnier interaktiv/langsamer), (c)
+  halbmanueller Ansatz analog dem "JOT"-Sonderfall im U15-Vorbild, (d) weiter nach einer
+  dritten, unauffälligeren öffentlichen Quelle suchen.
 - **Phase 3**: Punkte-Rangliste (Punktetabelle anwenden, Best-of-N je Disziplin aggregieren,
   Export).
 - **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
