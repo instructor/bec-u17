@@ -33,10 +33,17 @@ EVENT_LABEL_TO_DISZIPLIN = {
 }
 
 
+class NoDataAvailable(Exception):
+    """BEC-Datenhub kennt dieses Turnier nicht (HTTP 200, aber leerer Body) -- z.B. weil es
+    ausserhalb Europas ausgetragen wurde und nicht in BECs eigenem System erfasst ist."""
+
+
 def get_json(path, params=None):
     url = f"{API_BASE}/{path}"
     r = requests.get(url, headers=HEADERS, params=params, timeout=20)
     r.raise_for_status()
+    if not r.text.strip():
+        raise NoDataAvailable(url)
     return r.json()
 
 
@@ -132,12 +139,27 @@ def import_match(conn, turnier_id, match_json):
     return True
 
 
+def mark_scraped(conn, turnier_id):
+    conn.execute(
+        "UPDATE turnier SET scraped_at = ? WHERE turnier_id = ?",
+        (dt.datetime.now().isoformat(timespec="seconds"), turnier_id),
+    )
+    conn.commit()
+
+
 def fetch_tournament(conn, turnier_id, tournament_code, name):
     print(f"\n=== {name} ({tournament_code}) ===")
-    meta = get_json(f"tournament/{tournament_code}")
-    time.sleep(REQUEST_DELAY_SECONDS)
+    try:
+        meta = get_json(f"tournament/{tournament_code}")
+    except NoDataAvailable:
+        print("  KEINE BEC-Daten verfuegbar (leere Antwort -- vermutlich ausser-europaeisches "
+              "Turnier, nicht im BEC-Datenhub erfasst). Als erledigt markiert, kein Retry.")
+        mark_scraped(conn, turnier_id)
+        return 0
+
     start_date = parse_iso_date(meta["startDate"])
     end_date = parse_iso_date(meta["endDate"])
+    time.sleep(REQUEST_DELAY_SECONDS)
 
     total_matches = 0
     for day in daterange(start_date, end_date):
@@ -152,11 +174,7 @@ def fetch_tournament(conn, turnier_id, tournament_code, name):
             print(f"  {day.isoformat()}: {day_matches} Matches importiert")
         total_matches += day_matches
 
-    conn.execute(
-        "UPDATE turnier SET scraped_at = ? WHERE turnier_id = ?",
-        (dt.datetime.now().isoformat(timespec="seconds"), turnier_id),
-    )
-    conn.commit()
+    mark_scraped(conn, turnier_id)
     print(f"  -> {total_matches} Matches gesamt")
     return total_matches
 

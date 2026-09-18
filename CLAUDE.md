@@ -8,18 +8,25 @@ statt ~14 wiederkehrender Serien) andere Architekturentscheidungen braucht. Sieh
 `../CLAUDE.md` (übergeordnetes Domänenmodell, gilt auch hier) und `../bec_u15_auswertung/` als
 Vorbild/Quelle der übernommenen Module.
 
-## Status (2026-09-18, Phase 1 abgeschlossen)
+## Status (2026-09-18, Phase 2 abgeschlossen)
 
-- Projekt angelegt, `.venv` mit den Kern-Dependencies installiert, `u17_int.db` per `schema.sql`
-  angelegt.
-- Wiederverwendbare, schema-unabhängige Module 1:1 (bzw. mit kleinen Anpassungen) aus
-  `bec_u15_auswertung` übernommen -- siehe "Übernommene Module" unten.
+- Projekt angelegt, `.venv` mit den Kern-Dependencies installiert (`requests`, `pandas`,
+  `openpyxl` -- kein Selenium/Browser mehr nötig, siehe Architektur-Pivot unten), `u17_int.db`
+  per `schema.sql` angelegt.
 - **Phase 1 (`load_turnierkatalog.py`) erledigt**: beide Turnierkatalog-Excel-Dateien
   (`_TOURNAMENT_DATA/BEC-U17-Circuit/*.xlsx`) in die `turnier`-Tabelle geladen -- 48 Zeilen (29
   aus 2025, 19 aus 2026), alle mit gebauter URL (`tournament_code` bei keiner Zeile leer/NULL).
   Tier-Verteilung: 10× `U17 GP`, 15× `U17 IC`, 23× `U17 IS`. UPSERT auf `tournament_id`,
   verifiziert idempotent (zweiter Lauf bleibt bei 48 Zeilen). Keine doppelten `TournamentID`
   über beide Dateien hinweg.
+- **Phase 2 (`fetch_bec_data.py`) erledigt, alle 48 Turniere erfolgreich verarbeitet**: nach dem
+  Architektur-Pivot auf die direkte BEC-Datenhub-API (siehe unten) vollständig automatisiert
+  gelaufen, kein Browser/keine Interaktion nötig. Ergebnis: **8.884 Matches, 1.873 Spieler** über
+  alle 5 Disziplinen (BS 2800, GS 2272, XD 1665, BD 1202, GD 945). 47 von 48 Turnieren mit Daten,
+  1 Turnier ohne (`YONEX SUNRISE Pembangunan Jaya Raya ... 2025`, Indonesien -- kein
+  BEC-Datenhub-Eintrag, da ausser-europäisch; sauber erkannt und als erledigt markiert, kein
+  Fehler). Top-Nationen nach Spieleranzahl: GER 186, POL 144, ESP 139, FRA 130, DEN 123.
+  Schnitt ~189 Matches/Turnier (Spanne 60-290).
 - Noch **nicht** begonnen: Phase 2 (Scraping). Kein einziges Turnier bisher gescraped, `player`/
   `matches`/`turnier_ergebnisse` sind noch leer.
 
@@ -79,8 +86,11 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
 - **Phase 0 (erledigt)**: Projekt-Setup, Module übernommen, Schema angelegt, Quelldaten kopiert.
 - **Phase 1 (erledigt)**: Turnierkatalog aus den beiden Excel-Dateien in `turnier` geladen
   (`load_turnierkatalog.py`), URLs gebaut.
-- **Phase 2 (BLOCKIERT, 2026-09-18)**: Scraping (Spieler, Draws inkl. Doppel/Mixed, Matches) pro
-  Turnier, resumable; Fuzzy-Matching + `memory_manager` für Namenskonflikte. **Fundamentaler
+- **Phase 2 (ERLEDIGT, 2026-09-18, nach Architektur-Pivot -- Verlauf unten dokumentiert der
+  historischen Reihenfolge halber)**: Scraping (Spieler, Draws inkl. Doppel/Mixed, Matches) pro
+  Turnier, resumable; Fuzzy-Matching + `memory_manager` für Namenskonflikte -- **so ursprünglich
+  geplant, am Ende ganz anders gelöst, siehe "DURCHBRUCH" weiter unten für den tatsächlichen
+  Endstand.** Fundamentaler
   Blocker gefunden, bevor auch nur ein Turnier gescraped wurde**: alle 48 von 48 Turnier-URLs
   (`https://www.tournamentsoftware.com/tournament/{code}`) leiten beim Aufruf auf eine
   Login-Seite von `bwf.tournamentsoftware.com` um (`.../user/login?ReturnUrl=...`) --
@@ -185,9 +195,13 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
   Turniertag, Spieler + Matches per `bec_player_id`/`bec_match_id` upserten,
   `turnier.scraped_at` setzen (resumable via `WHERE scraped_at IS NULL`, `--no-resume` erzwingt
   Neuabruf). Höflichkeits-Delay `REQUEST_DELAY_SECONDS = 0.4` zwischen Requests, eigener
-  `User-Agent`-Header. Getestet an den ersten 3 Turnieren (`--limit 3`): 719 Matches, 377 Spieler,
-  alle 5 Disziplinen vertreten, Einzel/Doppel korrekt unterschieden (Doppel: 4 distinkte
-  `spieler_id`, Einzel: `*_spieler2_id` NULL) -- siehe Session-Verlauf für Stichprobenwerte.
+  `User-Agent`-Header. Erst an 3 Turnieren getestet (`--limit 3`: 719 Matches, 377 Spieler, alle 5
+  Disziplinen, Einzel/Doppel korrekt unterschieden -- Doppel: 4 distinkte `spieler_id`, Einzel:
+  `*_spieler2_id` NULL), danach vollständig über alle 48 gelaufen -- **Endergebnis: 8.884
+  Matches, 1.873 Spieler, siehe "Status" oben.** Ein Turnier lieferte eine leere Antwort (HTTP
+  200, 0 Bytes) statt JSON -- `get_json()` erkennt das jetzt als `NoDataAvailable` und markiert
+  das Turnier trotzdem als erledigt (kein Retry-Loop bei permanent fehlenden Daten), statt mit
+  `JSONDecodeError` abzubrechen wie beim allerersten Vollauf.
 
   **BEC-eventLabel-Präfix ≠ unser Disziplin-Code**: BEC nutzt für U17 die Erwachsenen-Kürzel
   `MS`/`WS`/`MD`/`WD`/`XD` (Männer/Frauen-Konvention) statt der in Phase 0 für dieses Projekt
