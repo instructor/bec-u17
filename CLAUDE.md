@@ -8,7 +8,7 @@ statt ~14 wiederkehrender Serien) andere Architekturentscheidungen braucht. Sieh
 `../CLAUDE.md` (übergeordnetes Domänenmodell, gilt auch hier) und `../bec_u15_auswertung/` als
 Vorbild/Quelle der übernommenen Module.
 
-## Status (2026-09-18, Phase 3 abgeschlossen)
+## Status (2026-09-18, Phase 4 abgeschlossen -- alle geplanten Phasen erledigt)
 
 - Projekt angelegt, `.venv` mit den Kern-Dependencies installiert (`requests`, `pandas`,
   `openpyxl` -- kein Selenium/Browser mehr nötig, siehe Architektur-Pivot unten), `u17_int.db`
@@ -273,11 +273,41 @@ beiden Fetch-Skripten.
   noch nicht final mit dem User abgestimmt**, analog dem U15-Vorbild aber nicht bewusst dort
   übernommen, leicht anpassbar (`BEST_OF_N`-Konstante). Bei Doppel/Mixed bekommen beide Partner
   die vollen Punkte individuell angerechnet. Ergebnis: 4.597 (Spieler, Disziplin)-Kombinationen
-  in `rangliste`, exportiert nach `_RESULTS/rangliste_{BS,GS,BD,GD,XD}.csv`.
+  in `rangliste`, exportiert nach `_RESULTS/rangliste_{BS,GS,BD,GD,XD}.csv`. **Best-of-3
+  User-bestätigt (2026-09-18)**, kein Startwert mehr.
 
-- **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
-  Geschlecht) -- **das eigentliche Kernziel des Projekts** (siehe Entscheidung oben), nicht nur
-  Nice-to-have neben der Punkte-Rangliste.
+- **Phase 4 (ERLEDIGT, 2026-09-18)**: Elo-Rangliste + Turnierstärke, `compute_elo.py`, analog
+  `../bec_u15_auswertung/compute_elo_strength.py` -- **das eigentliche Kernziel des Projekts**
+  (siehe Entscheidung oben). Unterschiede zum U15-Vorbild: je Disziplin (BS/GS/BD/GD/XD) statt
+  nur je Geschlecht (unser Schema trennt ohnehin schon so); Doppel/Mixed nutzen Team-Rating =
+  Mittelwert der Partner-Ratings mit identischem Delta für beide Partner (Konvention aus dem
+  BRAIN-Projekt/`build_elo_ranking.py`); chronologisch nach `matches.spieldatum` statt nach
+  DB-Einfügereihenfolge sortiert.
+
+  **Voraussetzung nachgezogen**: `matches.spieldatum` fehlte bisher (Phase 2 hatte nur
+  Turnierjahr/-KW gespeichert, kein Matchdatum) -- ohne echtes Datum wäre die
+  Turnierreihenfolge nur über Jahr/KW + `match_id` angenähert worden, innerhalb eines Turniers
+  praktisch beliebig. Migration + Neuabruf aller 48 Turniere (`fetch_bec_data.py --no-resume`,
+  Upsert, weiterhin 8.884 Matches, jetzt alle mit Datum).
+
+  **18 Matches mit unvollständigen Spielerdaten übersprungen** (leeres `ergebnis`, eine Seite
+  komplett NULL -- Walkover/Nichtantreten ohne erfasstes Gegner-Team, kein echtes
+  Stärke-Signal).
+
+  BASE_RATING=1200, K_FACTOR=32 (unverändert vom U15-Vorbild übernommen, anders als bei der
+  Punktetabelle hier bewusst NICHT hinterfragt -- rein technische Elo-Parameter, keine
+  inhaltliche Bewertungsskala wie die Punktetabelle). Ergebnis: **4.632 (Spieler,
+  Disziplin)-Ratings**, exportiert nach `_RESULTS/elo_spieler.csv`; Turnierstärke (Ø-Elo der
+  Teilnehmer je Turnier/Disziplin) nach `_RESULTS/turnier_staerke.csv` (233 Zeilen). Stichprobe
+  BS: Top-Elo-Spieler (Axel Boesen) deckt sich mit dem Top-Platz in der Punkte-Rangliste (Phase
+  3) -- beide Ranglisten stimmen an der Spitze plausibel überein.
+
+  **Bekannte Vereinfachung, bewusst vom U15-Vorbild übernommen**: Turnierstärke nutzt die
+  FINALEN Ratings nach dem kompletten Replay über alle 48 Turniere, nicht den Rating-Stand zum
+  jeweiligen Turnierzeitpunkt -- für frühe Turniere (2025 KW5) dadurch ein gewisser
+  Rückschau-Effekt (spätere Formkurve eines Spielers fließt in die Bewertung eines früheren
+  Turniers ein). Nicht behoben, analog `compute_elo_strength.py`.
+
 - **Phase 5** (später, optional): tier-abhängige Punktetabelle nachrüsten, Abgleich mit
   DBV-Daten für deutsche Teilnehmer (`player.german_spieler_id`, analog
   `RESULTS_AUSLAENDISCHE_TURNIERE/` im BRAIN-Projekt).
