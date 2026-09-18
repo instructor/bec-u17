@@ -8,7 +8,7 @@ statt ~14 wiederkehrender Serien) andere Architekturentscheidungen braucht. Sieh
 `../CLAUDE.md` (übergeordnetes Domänenmodell, gilt auch hier) und `../bec_u15_auswertung/` als
 Vorbild/Quelle der übernommenen Module.
 
-## Status (2026-09-18, Phase 2 abgeschlossen)
+## Status (2026-09-18, Phase 3 abgeschlossen)
 
 - Projekt angelegt, `.venv` mit den Kern-Dependencies installiert (`requests`, `pandas`,
   `openpyxl` -- kein Selenium/Browser mehr nötig, siehe Architektur-Pivot unten), `u17_int.db`
@@ -254,10 +254,27 @@ beiden Fetch-Skripten.
   `WINNERS`-`POINTS`-Werte von der Webseite (Platz 1: 640, Platz 2: 535, ...) sind damit **nicht**
   die Zielgröße für die Turnierstärke, allenfalls späterer Vergleichswert. Das relativiert die
   ursprüngliche Phase-0-Frage nach einer tier-abhängigen Punktetabelle: die Punkte-Rangliste
-  (Phase 3) bleibt ein separates, einfacheres Modell (flache Punktetabelle wie beim U15-Vorbild),
-  die eigentliche Turnierstärke-Aussage liefert die Elo-Komponente (Phase 4), nicht Phase 3.
-- **Phase 3**: Punkte-Rangliste (Punktetabelle anwenden, Best-of-N je Disziplin aggregieren,
-  Export).
+  (Phase 3) bleibt ein separates, einfacheres Modell, die eigentliche Turnierstärke-Aussage
+  liefert die Elo-Komponente (Phase 4), nicht Phase 3.
+
+- **Phase 3 (ERLEDIGT, 2026-09-18)**: Punkte-Rangliste. **Korrektur unterwegs**: zunächst wie in
+  Phase 0 vorgesehen die tatsächlichen U15-Punktwerte übernommen -- User-Einwand ("Warum
+  U15-Punktetabelle? Wir sind bei BEC U17"), zu Recht: die Phase-0-Entscheidung "flache
+  U15-Tabelle übernehmen" war als Platzhalter gemeint, nicht als 1:1-Übernahme der für U15
+  kalibrierten Zahlenwerte für eine andere Altersklasse. **Finale Entscheidung (User): eigenes,
+  einfaches platzbasiertes Schema, unabhängig von U15** -- `load_punktetabelle.py` generiert eine
+  geometrische Punktekurve (`Punkte = round(1000 * 0.8**i)`, i=0,1,2,... je
+  Platzierungs-Tiegroup: Platz 1→1000, 2→800, 3→640, 5→512, 9→410, 17→328, 33→262, 65→210, ...),
+  `bec17type` bleibt `NULL` (flach/tier-unabhängig). Vor der Punkteberechnung musste
+  `fetch_bec_entries_winners.import_placements` erst um Platzierungen für ALLE Draw-Runden
+  erweitert werden (vorher nur Platz 1-3 erfasst -- siehe Commit-Historie); jetzt 8.926
+  Platzierungen (Platz 1/2/3/5/9/17/33/65) für 8.941 Entries.
+  `compute_rangliste.py`: Best-of-3 je (Spieler, Disziplin) -- **Best-of-N ist ein Startwert,
+  noch nicht final mit dem User abgestimmt**, analog dem U15-Vorbild aber nicht bewusst dort
+  übernommen, leicht anpassbar (`BEST_OF_N`-Konstante). Bei Doppel/Mixed bekommen beide Partner
+  die vollen Punkte individuell angerechnet. Ergebnis: 4.597 (Spieler, Disziplin)-Kombinationen
+  in `rangliste`, exportiert nach `_RESULTS/rangliste_{BS,GS,BD,GD,XD}.csv`.
+
 - **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
   Geschlecht) -- **das eigentliche Kernziel des Projekts** (siehe Entscheidung oben), nicht nur
   Nice-to-have neben der Punkte-Rangliste.
