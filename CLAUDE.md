@@ -130,6 +130,29 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
   plausibel unauffälliger gegenüber Cloudflare, aber pro Turnier interaktiv/langsamer), (c)
   halbmanueller Ansatz analog dem "JOT"-Sonderfall im U15-Vorbild, (d) weiter nach einer
   dritten, unauffälligeren öffentlichen Quelle suchen.
+
+  **Ergebnis (User-Test, 2026-09-18): Claude-in-Chrome (echter Chrome-Browser des Users) kommt
+  an Cloudflare vorbei, automatisiertes Python-Selenium NICHT** (auch nicht-headless getestet --
+  `tools/debug_bec_nonheadless.py`, gleiches Blockmuster wie headless: nur Navigations-Chrome,
+  keine Turnierdaten, kein Bypass-Versuch über Fingerprint-Spoofing unternommen). Per
+  Claude-in-Chrome erfolgreich abgerufen (Turnier "Spanish U17 Open 2025",
+  `tournament_code=E6A03CB2-...`): die Seite nutzt URL-Query-Param `tournament_tab`
+  (`overview`/`entries`/`matches`, vermutlich auch `draws`/`history`) statt Klick-Navigation --
+  direkte URL-Navigation reicht, kein Tab-Klicken nötig. **`tournament_tab=matches` liefert für
+  ALLE 5 Disziplinen (MS/WS/MD/WD/XD U17) in einer Seite: Runde, Match-Nr., Dauer, beide
+  Namen je Seite (bei MD/WD/XD bereits zwei Namen = Doppelpaarung), Satzergebnisse, Seed.**
+  `tournament_tab=entries` liefert die volle Teilnehmerliste mit Setzung/Main-Draw-Reserve-
+  Withdrawn-Status (bisher nur MS-U17 ohne weiteren Klick getestet -- andere Disziplinen
+  vermutlich über ein weiteres Sub-Tab, noch zu klären). `tournament_tab=overview` zeigt zusätzlich
+  eine `WINNERS`-Sektion mit Platzierung + **`POINTS`-Wert** je Disziplin (z.B. Platz 1: 640,
+  Platz 2: 535, Platz 3/4: 440) -- könnte eine bereits von BEC selbst gepflegte Punktetabelle
+  sein, relevant für die offene "Punktetabelle tier-abhängig"-Frage aus Phase-0/CLAUDE.md.
+  **Datenqualität insgesamt deutlich besser als ursprünglich für tournamentsoftware.com
+  erwartet** (echte Satzergebnisse statt nur Endplatzierung, saubere Doppel-Paar-Struktur ohne
+  Namens-Split-Heuristik nötig). **Architektur-Konsequenz noch mit User zu klären**: eine
+  vollautomatische Batch-Pipeline (wie ursprünglich für tournamentsoftware.com geplant) ist damit
+  nicht ohne Weiteres möglich -- Scraping müsste über Claude-in-Chrome interaktiv/
+  Turnier-für-Turnier laufen, nicht als unbeaufsichtigtes Python-Skript.
 - **Phase 3**: Punkte-Rangliste (Punktetabelle anwenden, Best-of-N je Disziplin aggregieren,
   Export).
 - **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
