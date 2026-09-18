@@ -3,3 +3,4 @@ __pycache__/
 *.pyc
 _AUXILIARY_DATA/logs/
 .idea/
+.cookie_tracker.json

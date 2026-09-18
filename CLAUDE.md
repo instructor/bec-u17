@@ -92,9 +92,23 @@ Siehe `schema.sql` (per `create_db.py` idempotent nach `u17_int.db` angewendet).
 - **Phase 0 (erledigt)**: Projekt-Setup, Module übernommen, Schema angelegt, Quelldaten kopiert.
 - **Phase 1 (erledigt)**: Turnierkatalog aus den beiden Excel-Dateien in `turnier` geladen
   (`load_turnierkatalog.py`), URLs gebaut.
-- **Phase 2**: Scraping (Spieler, Draws inkl. Doppel/Mixed, Matches) pro Turnier, resumable;
-  Fuzzy-Matching + `memory_manager` für Namenskonflikte; Fallback-Fälle (analog bfib/jot beim
-  U15-Vorbild) erst behandeln, sobald ein konkretes Turnier beim Scraping tatsächlich scheitert.
+- **Phase 2 (BLOCKIERT, 2026-09-18)**: Scraping (Spieler, Draws inkl. Doppel/Mixed, Matches) pro
+  Turnier, resumable; Fuzzy-Matching + `memory_manager` für Namenskonflikte. **Fundamentaler
+  Blocker gefunden, bevor auch nur ein Turnier gescraped wurde**: alle 48 von 48 Turnier-URLs
+  (`https://www.tournamentsoftware.com/tournament/{code}`) leiten beim Aufruf auf eine
+  Login-Seite von `bwf.tournamentsoftware.com` um (`.../user/login?ReturnUrl=...`) --
+  verifiziert per `tools/debug_check_redirects.py`, Ergebnis in
+  `tools/_debug_redirect_check_all48.txt`. Anders als beim U15-Vorbild (öffentliche
+  National-Verband-Instanzen von tournamentsoftware.com) scheinen die BEC-U17-Circuit-Turniere
+  ausschließlich über das zugangsbeschränkte BWF-Portal einsehbar zu sein -- kein einziges der
+  48 Turniere war ohne Login erreichbar. **Kein Bypass-Versuch unternommen** (kein
+  Credential-Guessing, kein Umgehen der Zugriffssperre) -- Entscheidung liegt beim User: siehe
+  Session-Verlauf für die zur Diskussion gestellten Optionen (legitime BWF-Zugangsdaten falls
+  vorhanden, öffentliche Spiegelung auf nationalen Verbandsseiten pruefen, alternative
+  BEC/BWF-Datenquelle, oder Scope-Reduktion). Noch kein einziges Turnier gescraped, `player`/
+  `matches`/`turnier_ergebnisse` weiterhin leer. `draw_scraper.py`/`match_scraper.py` haben ihre
+  Phase-0-TODO-Kommentare (Doppel/Mixed-Erweiterung) noch unangetastet, da eine funktionale
+  Erweiterung vor Klärung des Zugriffsproblems keinen Sinn ergibt.
 - **Phase 3**: Punkte-Rangliste (Punktetabelle anwenden, Best-of-N je Disziplin aggregieren,
   Export).
 - **Phase 4**: Elo-Rangliste + Turnierstärke (analog `compute_elo_strength.py`, je Disziplin/
