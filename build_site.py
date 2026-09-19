@@ -1,6 +1,6 @@
-"""Kopiert die fuer die Website benoetigten JSON-Exporte aus _RESULTS nach docs/data.
+"""Kopiert die fuer die Website benoetigten JSON-Exporte aus _RESULTS nach data/.
 
-Die Seiten unter docs/ (GitHub Pages, Quelle: master + /docs) laden ihre Daten per
+Die Seiten im Repo-Root (GitHub Pages, Quelle: master + / (root)) laden ihre Daten per
 fetch("data/<name>.json") relativ zur HTML-Datei. Nach einem Neulauf von compute_elo.py /
 export_spielerrangliste.py / compute_official_strength.py dieses Skript ausfuehren, damit die
 veroeffentlichte Seite die neuen Zahlen bekommt:
@@ -16,10 +16,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
 RESULTS = ROOT / "_RESULTS"
-DATA = ROOT / "docs" / "data"
+DATA = ROOT / "data"
 
-# Quelldatei in _RESULTS -> Zielname unter docs/data (identisch, aber explizit gelistet,
-# damit nicht versehentlich der komplette _RESULTS-Ordner veroeffentlicht wird)
+# Quelldatei in _RESULTS -> Zielname unter data/ (identisch, aber explizit gelistet, damit
+# nicht versehentlich der komplette _RESULTS-Ordner veroeffentlicht wird)
 FILES = [
     "turnier_staerke.json",
     "turnier_staerke_offiziell.json",
@@ -39,7 +39,7 @@ def main() -> int:
         src = RESULTS / name
         dst = DATA / name
         shutil.copy2(src, dst)
-        print("%-34s %8.1f KB -> docs/data/" % (name, src.stat().st_size / 1024))
+        print("%-34s %8.1f KB -> data/" % (name, src.stat().st_size / 1024))
 
     print("Fertig. Danach committen und pushen, damit GitHub Pages neu baut.")
     return 0
