@@ -180,10 +180,9 @@
 <div class="wrap">
   <header class="page">
     <h1>Ranglisten-Turnierstärke BEC U17</h1>
-    <p>Zweiter, von unserer eigenen Elo-Berechnung unabhängiger Ansatz: Turnierstärke aus den Punkten der <strong>offiziellen BEC-U17-Circuit-Rangliste</strong> (tournamentsoftware.com) — ein Turnier ist stark, wenn viele dort hoch platzierte Spieler teilgenommen haben. Ø-Punkte der 16 laut offizieller Rangliste stärksten Teilnehmer je Turnier.</p>
+    <p>Turnierstärke auf Basis der <strong>offiziellen BEC-U17-Circuit-Rangliste</strong> (tournamentsoftware.com) — ein Turnier ist stark, wenn viele dort hoch platzierte Spieler teilgenommen haben. Ø-Punkte der 16 laut offizieller Rangliste stärksten Teilnehmer je Turnier.</p>
     <p class="meta" id="meta-line">Lädt…</p>
     <p class="crosslinks">
-      <a href="https://claude.ai/artifact/TBktndxKj8DGTN7RDziaFD">→ Turnierstärke (Elo, eigene Matchdaten)</a>
       <a href="https://claude.ai/artifact/SKXbZzDH7PAnqmG7hGGKrk">→ Spieler-Rangliste</a>
     </p>
   </header>
@@ -221,16 +220,13 @@
   </section>
 
   <footer class="note">
-    Ø-Punkte je Turnier = Mittelwert der offiziellen BEC-Circuit-Ranglistenpunkte der 16
-    punktstärksten Teilnehmer (nicht des kompletten Meldefelds) — Teilnehmer ohne Eintrag in der
-    offiziellen Rangliste zählen mit 0 Punkten. Die offizielle Rangliste ist ein aktueller
-    Schnappschuss (nicht zeitpunktbezogen je Turnierdatum wie bei der Elo-Methode) und wird für
-    alle 46 Turniere im gleichen Stand verwendet — ein bewusster Unterschied zur Elo-Seite, siehe
-    dort für die rückschaufreie Variante. Ergebnis: GP-Turniere liegen mit dieser unabhängigen
-    Quelle klar vorn (Ø ca. 260 Punkte vs. IC ca. 212 vs. IS ca. 167) — deutlicher getrennt als
-    bei der Elo-Methode, die durch begrenzte Datenabdeckung einzelner Turniere (z.B. wenig
-    Matchhistorie zu Saisonbeginn) an einzelnen Stellen verzerrt sein kann. Quelle:
-    <code>bec_u17_auswertung/fetch_official_ranking.py</code> +
+    Diese Auswertung basiert auf der offiziellen BEC U17 Rangliste (tournamentsoftware.com,
+    "BEC U17 Circuit Ranking"). Ø-Punkte je Turnier = Mittelwert der offiziellen
+    Ranglistenpunkte der 16 punktstärksten Teilnehmer (nicht des kompletten Meldefelds) —
+    Teilnehmer ohne Eintrag in der offiziellen Rangliste zählen mit 0 Punkten. Die offizielle
+    Rangliste ist ein aktueller Schnappschuss und wird für alle 46 Turniere im gleichen Stand
+    verwendet. Ergebnis: GP-Turniere liegen klar vorn (Ø ca. 260 Punkte vs. IC ca. 212 vs. IS
+    ca. 167). Quelle: <code>bec_u17_auswertung/fetch_official_ranking.py</code> +
     <code>compute_official_strength.py</code>, Datenbasis tournamentsoftware.com rid=187
     ("BEC U17 Circuit Ranking"), Stand der zuletzt geladenen Ranking-Woche.
   </footer>
