@@ -1,0 +1,424 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Spieler-Rangliste BEC U17</title>
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #fbfaf7;
+    --surface-1: #ffffff;
+    --surface-2: #f1efe9;
+    --border: #e2ded3;
+    --text-primary: #17150f;
+    --text-secondary: #5c5a51;
+    --text-muted: #8b887c;
+    --accent: #184f95;
+    --accent-soft: #e6eefa;
+    --gp: #2a78d6;
+    --ic: #eb6834;
+    --is: #1baf7a;
+    --gp-soft: #e6eefa;
+    --ic-soft: #fce8de;
+    --is-soft: #e1f5ec;
+    --star: #b6791a;
+    --star-soft: #fbf1de;
+    --focus: #184f95;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #16161a;
+      --surface-1: #1e1e22;
+      --surface-2: #26262b;
+      --border: #37373d;
+      --text-primary: #f3f2ee;
+      --text-secondary: #b8b6ad;
+      --text-muted: #86847c;
+      --accent: #5fa0e8;
+      --accent-soft: #1d2c40;
+      --gp: #3987e5;
+      --ic: #d95926;
+      --is: #199e70;
+      --gp-soft: #1d2c40;
+      --ic-soft: #3a2418;
+      --is-soft: #163227;
+      --star: #e0ac4c;
+      --star-soft: #3a2e10;
+      --focus: #5fa0e8;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #16161a;
+    --surface-1: #1e1e22;
+    --surface-2: #26262b;
+    --border: #37373d;
+    --text-primary: #f3f2ee;
+    --text-secondary: #b8b6ad;
+    --text-muted: #86847c;
+    --accent: #5fa0e8;
+    --accent-soft: #1d2c40;
+    --gp: #3987e5;
+    --ic: #d95926;
+    --is: #199e70;
+    --gp-soft: #1d2c40;
+    --ic-soft: #3a2418;
+    --is-soft: #163227;
+    --star: #e0ac4c;
+    --star-soft: #3a2e10;
+    --focus: #5fa0e8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    font-variant-numeric: tabular-nums;
+    padding-inline: 16px;
+    padding-block: 20px 48px;
+  }
+  h1, h2 { font-family: "Fraunces", Georgia, serif; }
+  a { color: var(--accent); }
+  .star { color: var(--star); }
+
+  .wrap { max-width: 880px; margin-inline: auto; display: flex; flex-direction: column; gap: 18px; }
+
+  header.page { display: flex; flex-direction: column; gap: 6px; }
+  header.page h1 { font-size: clamp(24px, 4vw, 34px); margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
+  header.page p { margin: 0; color: var(--text-secondary); font-size: 14px; max-width: 62ch; line-height: 1.55; }
+  header.page .meta { color: var(--text-muted); font-size: 12.5px; }
+  header.page .crosslink { font-size: 13px; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px;
+    padding: 12px;
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
+  }
+  .tabs { display: flex; flex-wrap: wrap; gap: 4px; background: var(--surface-2); border-radius: 9px; padding: 4px; }
+  .tabs button {
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--text-secondary);
+    background: transparent; border: none; border-radius: 6px; padding: 7px 12px;
+    cursor: pointer;
+  }
+  .tabs button[aria-pressed="true"] { background: var(--surface-1); color: var(--text-primary); box-shadow: 0 1px 2px rgba(0,0,0,.08); }
+  .tabs button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .search-wrap { position: relative; flex: 1 1 180px; min-width: 140px; }
+  .search-wrap input {
+    width: 100%; font: inherit; font-size: 13.5px; color: var(--text-primary);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 8px;
+    padding: 8px 10px 8px 30px;
+  }
+  .search-wrap input:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+  .search-wrap svg { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text-muted); pointer-events: none; }
+
+  .sort-toggle { display: flex; gap: 4px; }
+  .sort-toggle button {
+    font: inherit; font-size: 12.5px; font-weight: 600; color: var(--text-secondary);
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 7px;
+    padding: 6px 10px; cursor: pointer; white-space: nowrap;
+  }
+  .sort-toggle button[aria-pressed="true"] { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .sort-toggle button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+  .panel { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .panel-head { padding: 14px 16px 8px; display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+  .panel-head h2 { font-size: 16px; margin: 0; font-weight: 600; }
+  .panel-head .sub { font-size: 12.5px; color: var(--text-muted); }
+
+  .col-head {
+    display: grid; grid-template-columns: 34px minmax(0,1.6fr) 66px 66px 70px 20px;
+    column-gap: 10px; padding: 0 16px 8px; font-size: 11px; font-weight: 600;
+    color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .col-head .num { text-align: right; }
+
+  ul.rows { list-style: none; margin: 0; padding: 0 0 8px; display: flex; flex-direction: column; }
+  li.prow { border-top: 1px solid var(--border); }
+  li.prow:first-child { border-top: none; }
+
+  .prow-head {
+    display: grid; grid-template-columns: 34px minmax(0,1.6fr) 66px 66px 70px 20px;
+    column-gap: 10px; align-items: center;
+    padding: 9px 16px; cursor: pointer; background: none; border: none; width: 100%;
+    font: inherit; color: inherit; text-align: left;
+  }
+  .prow-head:hover, .prow-head:focus-visible { background: var(--surface-2); }
+  .prow-head:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+  .rank-col { font-size: 12.5px; color: var(--text-muted); text-align: right; }
+  .name-col { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+  .name-col .n { font-size: 13.5px; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .name-col .nation { font-size: 11px; color: var(--text-muted); }
+  .num-col { text-align: right; font-size: 13px; font-weight: 600; }
+  .num-col.dim { font-weight: 500; color: var(--text-secondary); }
+  .chev { color: var(--text-muted); transition: transform .15s ease; justify-self: end; }
+  li.prow.open .chev { transform: rotate(90deg); }
+
+  .tdetail { display: none; padding: 2px 16px 14px 60px; }
+  li.prow.open .tdetail { display: block; }
+  .tdetail .hint { font-size: 11.5px; color: var(--text-muted); margin: 0 0 8px; }
+  .tlist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .tlist li {
+    display: flex; align-items: center; gap: 8px; font-size: 12.5px;
+    background: var(--surface-2); border-radius: 8px; padding: 7px 9px;
+  }
+  .tlist li.top3 { background: var(--star-soft); }
+  .tlist a { color: var(--text-primary); text-decoration: none; font-weight: 500; flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .tlist a:hover { text-decoration: underline; }
+  .tlist .tdate { color: var(--text-muted); font-size: 11.5px; flex: none; }
+  .tlist .star { color: var(--star); flex: none; font-size: 13px; line-height: 1; }
+  .tlist .ext { color: var(--text-muted); flex: none; }
+
+  .pill {
+    flex: none; font-size: 10px; font-weight: 700; letter-spacing: 0.02em;
+    padding: 2px 6px; border-radius: 999px; line-height: 1.4;
+  }
+  .pill.gp { background: var(--gp-soft); color: var(--gp); }
+  .pill.ic { background: var(--ic-soft); color: var(--ic); }
+  .pill.is { background: var(--is-soft); color: var(--is); }
+
+  .loadmore { display: flex; justify-content: center; padding: 4px 16px 16px; }
+  .loadmore button {
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--accent);
+    background: var(--accent-soft); border: 1px solid var(--border); border-radius: 999px;
+    padding: 8px 18px; cursor: pointer;
+  }
+  .loadmore button:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+  .empty { padding: 28px 16px; text-align: center; color: var(--text-muted); font-size: 13.5px; }
+
+  footer.note { font-size: 12px; color: var(--text-muted); line-height: 1.6; max-width: 72ch; }
+  footer.note code { background: var(--surface-2); border-radius: 4px; padding: 1px 5px; font-size: 11.5px; }
+
+  @media (max-width: 560px) {
+    .col-head, .prow-head { grid-template-columns: 26px minmax(0,1fr) 50px 20px; }
+    .col-head .punkte-col, .prow-head .punkte-col, .col-head .matches-col, .prow-head .matches-col { display: none; }
+    .tdetail { padding-left: 16px; }
+  }
+</style>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div class="wrap">
+  <header class="page">
+    <h1>Spieler-Rangliste BEC U17</h1>
+    <p>Alle Spieler des BEC-U17-Circuits 2025/26, je Disziplin nach Elo-Rating gerankt. Turnierliste je Spieler mit Link zum Turnier — <span class="star">★</span> markiert die 3 laut Turnierstärke stärksten Turniere dieser Disziplin.</p>
+    <p class="meta" id="meta-line">Lädt…</p>
+    <p class="crosslink"><a href="https://claude.ai/artifact/TBktndxKj8DGTN7RDziaFD">→ Turnierstärke-Rangfolge</a></p>
+  </header>
+
+  <div class="controls">
+    <div class="tabs" id="tabs" role="tablist" aria-label="Disziplin"></div>
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Name oder Nation suchen…" autocomplete="off">
+    </div>
+    <div class="sort-toggle" role="group" aria-label="Sortierung">
+      <button id="sort-elo" aria-pressed="true">Elo-Rang</button>
+      <button id="sort-punkte" aria-pressed="false">Punkte-Rang</button>
+    </div>
+  </div>
+
+  <section class="panel">
+    <div class="panel-head">
+      <h2 id="panel-title">Jungeneinzel (BS)</h2>
+      <div class="sub" id="panel-sub"></div>
+    </div>
+    <div class="col-head" id="col-head" aria-hidden="true"></div>
+    <ul class="rows" id="rows"></ul>
+    <div class="loadmore" id="loadmore" hidden><button id="loadmore-btn" type="button">Mehr laden</button></div>
+    <div class="empty" id="empty" hidden>Keine Spieler gefunden.</div>
+  </section>
+
+  <footer class="note">
+    Elo-Rang = aktuelles (finales) Rating nach dem chronologischen Replay aller Matches, BASE_RATING
+    1200, K=32 — bei Doppel/Mixed teilen sich beide Partner Rating und Delta. Punkte-Rang = eigene,
+    tier-unabhängige platzbasierte Punktekurve (Best-of-3 je Spieler/Disziplin). Turnierlinks führen
+    zu badmintoneurope.com (öffentlich einsehbar, kein Login nötig). Für das „European Youth Olympic
+    Festival 2025" liegt keine vollständige Teilnehmerliste vor (abweichendes Turnierformat) — falls
+    es unter den Top-3-Turnieren einer Disziplin ist, kann es dort trotz Teilnahme nicht als
+    <span class="star">★</span> erscheinen. Quelle: <code>bec_u17_auswertung/export_spielerrangliste.py</code>.
+  </footer>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var DIS_LABELS = { BS: "Jungeneinzel (BS)", GS: "Mädcheneinzel (GS)", BD: "Jungendoppel (BD)", GD: "Mädchendoppel (GD)", XD: "Mixed (XD)" };
+  var DIS_ORDER = ["BS", "GS", "BD", "GD", "XD"];
+  var TIER_CLASS = { "U17 GP": "gp", "U17 IC": "ic", "U17 IS": "is" };
+  var TIER_LABEL = { "U17 GP": "GP", "U17 IC": "IC", "U17 IS": "IS" };
+  var PAGE_SIZE = 50;
+
+  var state = { disziplin: "BS", query: "", sortBy: "elo", visible: PAGE_SIZE, data: null, openId: null };
+
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return "";
+    var p = iso.split("-");
+    return p.length === 3 ? p[2] + "." + p[1] + "." + p[0].slice(2) : iso;
+  }
+
+  function currentDisziplinData() {
+    return state.data.disziplinen[state.disziplin];
+  }
+
+  function filteredSorted() {
+    var d = currentDisziplinData();
+    var q = state.query.trim().toLowerCase();
+    var rows = d.spieler.filter(function (r) {
+      if (!q) return true;
+      var hay = (r.vorname + " " + r.name + " " + r.nation).toLowerCase();
+      return hay.indexOf(q) !== -1;
+    });
+    var key = state.sortBy === "elo" ? "elo_rang" : "punkte_rang";
+    rows = rows.slice().sort(function (a, b) {
+      var av = a[key], bv = b[key];
+      if (av === null) return 1;
+      if (bv === null) return -1;
+      return av - bv;
+    });
+    return rows;
+  }
+
+  function buildTabs() {
+    var tabs = document.getElementById("tabs");
+    tabs.innerHTML = "";
+    DIS_ORDER.forEach(function (d) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.textContent = d;
+      b.setAttribute("role", "tab");
+      b.setAttribute("aria-pressed", d === state.disziplin ? "true" : "false");
+      b.addEventListener("click", function () {
+        state.disziplin = d;
+        state.visible = PAGE_SIZE;
+        state.openId = null;
+        render();
+      });
+      tabs.appendChild(b);
+    });
+  }
+
+  function buildColHead() {
+    document.getElementById("col-head").innerHTML =
+      '<span class="rank-col">#</span><span>Name</span>' +
+      '<span class="num matches-col">Elo</span><span class="num punkte-col">Pkt.</span>' +
+      '<span class="num">Turn.</span><span></span>';
+  }
+
+  function tournamentChip(t) {
+    var tierClass = TIER_CLASS[t.bec17type] || "";
+    var tierLabel = TIER_LABEL[t.bec17type] || t.bec17type || "";
+    return (
+      '<li class="' + (t.top3 ? "top3" : "") + '">' +
+        (t.top3 ? '<span class="star" title="Top-3-Turnierstärke dieser Disziplin">★</span>' : "") +
+        '<span class="pill ' + tierClass + '">' + escapeHtml(tierLabel) + "</span>" +
+        '<a href="' + t.url + '" target="_blank" rel="noopener noreferrer" title="' + escapeHtml(t.name) + '">' + escapeHtml(t.name) + "</a>" +
+        '<span class="tdate">' + fmtDate(t.datum) + "</span>" +
+        '<svg class="ext" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>' +
+      "</li>"
+    );
+  }
+
+  function render() {
+    buildTabs();
+    buildColHead();
+    var d = currentDisziplinData();
+    var rows = filteredSorted();
+
+    document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin];
+    document.getElementById("panel-sub").textContent = rows.length + " von " + d.spieler.length + " Spielern";
+
+    var visRows = rows.slice(0, state.visible);
+    var list = document.getElementById("rows");
+    var empty = document.getElementById("empty");
+    empty.hidden = rows.length > 0;
+
+    list.innerHTML = visRows.map(function (r) {
+      var key = state.sortBy === "elo" ? "elo_rang" : "punkte_rang";
+      var rang = r[key] !== null ? r[key] : "–";
+      var elo = r.elo !== null ? r.elo.toFixed(1) : "–";
+      var pkt = r.punkte !== null ? r.punkte : "–";
+      var rid = state.disziplin + "-" + r.spieler_id;
+      var isOpen = state.openId === rid;
+      var turniere = r.turniere.map(function (tid) { return d.turniere[tid]; }).filter(Boolean);
+      var nTop3 = turniere.filter(function (t) { return t.top3; }).length;
+      return (
+        '<li class="prow' + (isOpen ? " open" : "") + '" data-rid="' + rid + '">' +
+          '<button type="button" class="prow-head" aria-expanded="' + isOpen + '">' +
+            '<span class="rank-col">' + rang + "</span>" +
+            '<span class="name-col"><span class="n">' + escapeHtml(r.vorname + " " + r.name) + "</span>" +
+              '<span class="nation">' + escapeHtml(r.nation || "") + (nTop3 ? " · " + nTop3 + "★" : "") + "</span></span>" +
+            '<span class="num-col matches-col">' + elo + "</span>" +
+            '<span class="num-col dim punkte-col">' + pkt + "</span>" +
+            '<span class="num-col dim">' + turniere.length + "</span>" +
+            '<svg class="chev" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>' +
+          "</button>" +
+          '<div class="tdetail">' +
+            '<p class="hint">' + turniere.length + ' Turniere · Elo-Rang #' + (r.elo_rang !== null ? r.elo_rang : "–") +
+              " (" + elo + ") · Punkte-Rang #" + (r.punkte_rang !== null ? r.punkte_rang : "–") + " (" + pkt + " Pkt.)</p>" +
+            '<ul class="tlist">' + turniere.map(tournamentChip).join("") + "</ul>" +
+          "</div>" +
+        "</li>"
+      );
+    }).join("");
+
+    var loadmore = document.getElementById("loadmore");
+    loadmore.hidden = rows.length <= state.visible;
+
+    list.querySelectorAll(".prow-head").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var li = btn.closest(".prow");
+        var rid = li.getAttribute("data-rid");
+        state.openId = state.openId === rid ? null : rid;
+        render();
+      });
+    });
+  }
+
+  document.getElementById("search").addEventListener("input", function (e) {
+    state.query = e.target.value;
+    state.visible = PAGE_SIZE;
+    render();
+  });
+
+  document.getElementById("sort-elo").addEventListener("click", function () {
+    state.sortBy = "elo";
+    document.getElementById("sort-elo").setAttribute("aria-pressed", "true");
+    document.getElementById("sort-punkte").setAttribute("aria-pressed", "false");
+    render();
+  });
+  document.getElementById("sort-punkte").addEventListener("click", function () {
+    state.sortBy = "punkte";
+    document.getElementById("sort-punkte").setAttribute("aria-pressed", "true");
+    document.getElementById("sort-elo").setAttribute("aria-pressed", "false");
+    render();
+  });
+  document.getElementById("loadmore-btn").addEventListener("click", function () {
+    state.visible += PAGE_SIZE;
+    render();
+  });
+
+  fetch("data/spielerrangliste.json")
+    .then(function (r) { return r.json(); })
+    .then(function (json) {
+      state.data = json;
+      var total = DIS_ORDER.reduce(function (sum, d) { return sum + json.disziplinen[d].spieler.length; }, 0);
+      document.getElementById("meta-line").textContent = total + " Spieler-Disziplin-Einträge · Saison 2025/26 BEC-U17-Circuit";
+      render();
+    })
+    .catch(function (err) {
+      document.getElementById("meta-line").textContent = "Daten konnten nicht geladen werden.";
+      console.error(err);
+    });
+})();
+</script>
+
+</body></html>

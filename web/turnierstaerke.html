@@ -1,3 +1,4 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Turnierstärke BEC U17</title>
 <style>
   :root {
@@ -79,6 +80,7 @@
   header.page h1 { font-size: clamp(24px, 4vw, 34px); margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
   header.page p { margin: 0; color: var(--text-secondary); font-size: 14px; max-width: 60ch; line-height: 1.55; }
   header.page .meta { color: var(--text-muted); font-size: 12.5px; }
+  header.page .crosslink { font-size: 13px; }
 
   .controls {
     display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
@@ -178,8 +180,9 @@
 <div class="wrap">
   <header class="page">
     <h1>Turnierstärke BEC U17</h1>
-    <p>Rangfolge der 2025/26 BEC-U17-Circuit-Turniere nach Ø-Elo der tatsächlich angetretenen Teilnehmer — je Disziplin und gemittelt über alle Disziplinen. Elo aus 8.884 Matches berechnet, nicht aus dem offiziellen BEC-Tier.</p>
+    <p>Rangfolge der 2025/26 BEC-U17-Circuit-Turniere nach Ø-Elo der 16 ratingstärksten Teilnehmer (nicht des kompletten Meldefelds) — je Disziplin und gemittelt über alle Disziplinen. Elo aus 8.884 Matches berechnet, nicht aus dem offiziellen BEC-Tier.</p>
     <p class="meta" id="meta-line">Lädt…</p>
+    <p class="crosslink"><a href="https://claude.ai/artifact/SKXbZzDH7PAnqmG7hGGKrk">→ Spieler-Rangliste</a></p>
   </header>
 
   <div class="controls">
@@ -216,14 +219,18 @@
   </section>
 
   <footer class="note">
-    Ø-Elo je Turnier = Mittelwert der Elo-Ratings aller Teilnehmer dieser Disziplin, jeweils zum
+    Ø-Elo je Turnier = Mittelwert der Elo-Ratings der bis zu 16 ratingstärksten Teilnehmer dieser
+    Disziplin (nicht des kompletten, oft 150–350 Personen umfassenden Meldefelds), jeweils zum
     Rating-<strong>Stand direkt vor diesem Turnier</strong> (nicht final) — vermeidet, dass ein
-    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert.
-    BASE_RATING 1200, K=32, chronologischer Replay aller 48 Turniere 2025–26. „Gesamt“ mittelt
-    die je-Disziplin-Werte eines Turniers unbenutzt (nicht jedes Turnier hat Daten in allen 5
-    Disziplinen). Der Zeitraum-Filter schränkt nur ein, welche Turniere angezeigt/gerankt werden —
-    die zugrunde liegenden Elo-Werte berücksichtigen immer die volle Matchhistorie bis zu diesem
-    Zeitpunkt. Quelle: <code>bec_u17_auswertung/compute_elo.py</code>, Datenbasis BEC-Datenhub-API.
+    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert. Ein
+    Mittelwert über das komplette Feld hatte die BEC-Tiers (GP/IS/IC) nicht getrennt, da das Tier
+    offenbar das Niveau der Spitze misst, nicht des gesamten Feldes; mit Top-16 liegt GP jetzt
+    wie erwartet klar vor IS vor IC. BASE_RATING 1200, K=32, chronologischer Replay aller 48
+    Turniere 2025–26. „Gesamt" mittelt die je-Disziplin-Werte eines Turniers unbenutzt (nicht
+    jedes Turnier hat Daten in allen 5 Disziplinen). Der Zeitraum-Filter schränkt nur ein, welche
+    Turniere angezeigt/gerankt werden — die zugrunde liegenden Elo-Werte berücksichtigen immer die
+    volle Matchhistorie bis zu diesem Zeitpunkt. Quelle: <code>bec_u17_auswertung/compute_elo.py</code>,
+    Datenbasis BEC-Datenhub-API.
   </footer>
 </div>
 
@@ -237,7 +244,7 @@
   var ZEITRAUM_LABELS = { "12M": "12 Monate", "2026": "2026", "2025": "2025", "ALLE": "Alle" };
   var TIER_CLASS = { "U17 GP": "gp", "U17 IC": "ic", "U17 IS": "is" };
   var TIER_LABEL = { "U17 GP": "GP", "U17 IC": "IC", "U17 IS": "IS" };
-  var AXIS_MIN = 1150, AXIS_MAX = 1300;
+  var AXIS_MIN = 1150, AXIS_MAX = 1350;
   var AXIS_MID = Math.round((AXIS_MIN + AXIS_MAX) / 2 / 25) * 25;
   var MS_PER_DAY = 24 * 60 * 60 * 1000;
 
@@ -341,7 +348,7 @@
     var rows = rowsForCurrent();
     var isGesamt = state.disziplin === "GESAMT";
 
-    document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin] + " — Rangfolge nach Ø-Elo";
+    document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin] + " — Rangfolge nach Ø-Elo (Top 16 je Turnier)";
     document.getElementById("panel-sub").textContent = rows.length + " Turniere · Zeitraum: " + ZEITRAUM_LABELS[state.zeitraum] + " · Skala " + AXIS_MIN + "–" + AXIS_MAX + " Elo (nicht bei 0 beginnend)";
 
     buildAxis();
@@ -351,7 +358,9 @@
       var val = isGesamt ? r.avg_elo_gesamt : r.avg_elo;
       var tierClass = TIER_CLASS[r.bec17type] || "";
       var tierLabel = TIER_LABEL[r.bec17type] || r.bec17type;
-      var teiln = isGesamt ? (r.teilnehmer_gesamt + " Teiln. · " + r.n_disziplinen + " Disz.") : (r.teilnehmer + " Teiln.");
+      var teiln = isGesamt
+        ? (r.teilnehmer_gesamt + " Teiln. · " + r.n_disziplinen + " Disz.")
+        : (r.teilnehmer_fuer_staerke + " von " + r.teilnehmer + " Teiln. gewertet");
       return (
         '<li tabindex="0">' +
           '<span class="rank-col">' + r.rang + "</span>" +
@@ -377,14 +386,13 @@
     var body = document.getElementById("table-body");
     var cols = isGesamt
       ? ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teiln. gesamt", "Disziplinen", "Ø-Elo gesamt"]
-      : ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teilnehmer", "Ø-Elo"];
+      : ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teilnehmer", "Gewertet (Top-N)", "Ø-Elo"];
     head.innerHTML = cols.map(function (c) { return "<th>" + c + "</th>"; }).join("");
     body.innerHTML = rows.map(function (r) {
       var cells = isGesamt
         ? [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer_gesamt, r.n_disziplinen, r.avg_elo_gesamt.toFixed(1)]
-        : [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer, r.avg_elo.toFixed(1)];
-      return "<tr>" + cells.map(function (v, i) {
-        var numeric = i >= (isGesamt ? 5 : 5);
+        : [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer, r.teilnehmer_fuer_staerke, r.avg_elo.toFixed(1)];
+      return "<tr>" + cells.map(function (v) {
         return '<td class="' + (typeof v === "number" ? "num" : "") + '">' + v + "</td>";
       }).join("") + "</tr>";
     }).join("");
@@ -409,7 +417,7 @@
       state.maxDatum = json.gesamt.reduce(function (max, r) {
         return r.datum && (!max || r.datum > max) ? r.datum : max;
       }, null);
-      document.getElementById("meta-line").textContent = nT + " Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32";
+      document.getElementById("meta-line").textContent = nT + " Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32 · Ø-Elo je Turnier = Top 16 stärkste Teilnehmer";
       render();
     })
     .catch(function (err) {
@@ -418,3 +426,5 @@
     });
 })();
 </script>
+
+</body></html>
