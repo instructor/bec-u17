@@ -19,7 +19,11 @@ Turnier im gleichen (aktuellen) Stand ein, unabhaengig vom Turnierdatum. Das ist
 Kompromiss: die offizielle Rangliste hat keine rueckwirkend abrufbare Historie je Kalenderwoche
 in unserem Zugriff, im Gegensatz zu unserer eigenen chronologischen Elo-Berechnung.
 
-Teilnahmequelle: `entries` (wie compute_elo.py/export_spielerrangliste.py).
+Teilnahmequelle: `entries` (wie export_spielerrangliste.py), also das gemeldete Feld.
+compute_elo.py leitet seine Teilnehmer dagegen aus `matches` ab (nur wer mindestens ein Match
+gespielt hat) -- wer zurueckgezogen hat/nicht angetreten ist, zaehlt dort nicht mit. In der Praxis
+ein kleiner Unterschied (Beispiel Spanish International U17 2025, BS: 30 zu 30), methodisch aber
+zu beachten, wenn die beiden Rangfolgen verglichen werden.
 """
 import json
 import os

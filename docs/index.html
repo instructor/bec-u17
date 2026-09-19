@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BEC U17 Circuit 2025/26 – Auswertung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light;
+    --surface-0: #fbfaf7;
+    --surface-1: #ffffff;
+    --surface-2: #f1efe9;
+    --border: #e2ded3;
+    --text-primary: #17150f;
+    --text-secondary: #5c5a51;
+    --text-muted: #8b887c;
+    --accent: #184f95;
+    --gp: #2a78d6;
+    --ic: #eb6834;
+    --is: #1baf7a;
+    --focus: #184f95;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --surface-0: #16161a;
+      --surface-1: #1e1e22;
+      --surface-2: #26262b;
+      --border: #37373d;
+      --text-primary: #f3f2ee;
+      --text-secondary: #b8b6ad;
+      --text-muted: #86847c;
+      --accent: #5fa0e8;
+      --gp: #3987e5;
+      --ic: #d95926;
+      --is: #199e70;
+      --focus: #5fa0e8;
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --surface-0: #16161a;
+    --surface-1: #1e1e22;
+    --surface-2: #26262b;
+    --border: #37373d;
+    --text-primary: #f3f2ee;
+    --text-secondary: #b8b6ad;
+    --text-muted: #86847c;
+    --accent: #5fa0e8;
+    --gp: #3987e5;
+    --ic: #d95926;
+    --is: #199e70;
+    --focus: #5fa0e8;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--surface-0);
+    color: var(--text-primary);
+    font-family: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+    font-variant-numeric: tabular-nums;
+    padding-inline: 16px;
+    padding-block: 28px 56px;
+  }
+  h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; }
+  a { color: var(--accent); }
+
+  .wrap { max-width: 920px; margin-inline: auto; display: flex; flex-direction: column; gap: 28px; }
+
+  header.page { display: flex; flex-direction: column; gap: 8px; }
+  header.page h1 { font-size: clamp(26px, 5vw, 38px); margin: 0; letter-spacing: -0.01em; text-wrap: balance; }
+  header.page p { margin: 0; color: var(--text-secondary); font-size: 15px; max-width: 62ch; line-height: 1.6; }
+
+  .stats { display: flex; flex-wrap: wrap; gap: 8px; }
+  .stat {
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px;
+    padding: 10px 14px; min-width: 104px;
+  }
+  .stat .val { font-size: 19px; font-weight: 600; letter-spacing: -0.01em; }
+  .stat .lbl { font-size: 12px; color: var(--text-muted); margin-top: 1px; }
+
+  .cards { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card {
+    display: flex; flex-direction: column; gap: 8px;
+    background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px;
+    padding: 18px; text-decoration: none; color: inherit;
+    transition: border-color .12s ease, transform .12s ease;
+  }
+  .card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .card:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; }
+  .card .kicker { font-size: 11.5px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: var(--text-muted); }
+  .card h2 { margin: 0; font-size: 19px; }
+  .card p { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.55; }
+  .card .go { margin-top: auto; font-size: 13px; font-weight: 600; color: var(--accent); }
+
+  section.note { display: flex; flex-direction: column; gap: 8px; }
+  section.note h3 { margin: 0; font-size: 16px; }
+  section.note p, section.note li { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.6; }
+  section.note ul { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 5px; }
+
+  .tiers { display: flex; flex-wrap: wrap; gap: 12px; font-size: 12.5px; color: var(--text-secondary); }
+  .tiers .item { display: flex; align-items: center; gap: 6px; }
+  .tiers .swatch { width: 11px; height: 11px; border-radius: 3px; display: inline-block; }
+
+  footer { border-top: 1px solid var(--border); padding-top: 14px; font-size: 12.5px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="page">
+    <h1>BEC U17 Circuit 2025/26 – Auswertung</h1>
+    <p>Eigene Auswertung des Badminton-Europe-U17-Circuits: eine Spieler-Rangliste und zwei voneinander
+    unabhängig berechnete Turnierstärke-Rangfolgen — eine aus den Matchergebnissen (Elo), eine aus der
+    offiziellen BEC-Rangliste als Gegenprobe.</p>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="val">48</div><div class="lbl">Turniere</div></div>
+    <div class="stat"><div class="val">8.884</div><div class="lbl">Matches</div></div>
+    <div class="stat"><div class="val">1.874</div><div class="lbl">Spieler</div></div>
+    <div class="stat"><div class="val">8.941</div><div class="lbl">Meldungen</div></div>
+    <div class="stat"><div class="val">5</div><div class="lbl">Disziplinen</div></div>
+  </div>
+
+  <div class="cards">
+    <a class="card" href="turnierstaerke.html">
+      <span class="kicker">Turnierstärke · Elo</span>
+      <h2>Turnierstärke (Elo)</h2>
+      <p>Rangfolge der Turniere nach Ø-Elo der 16 stärksten Teilnehmer, je Disziplin und gesamt. Elo aus
+      allen 8.884 Matches, mit Zeitraum-Filter.</p>
+      <span class="go">Öffnen →</span>
+    </a>
+    <a class="card" href="turnierstaerke_offiziell.html">
+      <span class="kicker">Turnierstärke · Gegenprobe</span>
+      <h2>Ranglisten-Turnierstärke</h2>
+      <p>Dieselbe Frage, andere Datenquelle: Ø-Punkte der 16 laut offizieller BEC-U17-Rangliste stärksten
+      Teilnehmer je Turnier.</p>
+      <span class="go">Öffnen →</span>
+    </a>
+    <a class="card" href="spielerrangliste.html">
+      <span class="kicker">Spieler</span>
+      <h2>Spieler-Rangliste</h2>
+      <p>Alle Spieler je Disziplin nach Elo gerankt, mit Turnierliste je Spieler und Suche nach Name oder
+      Nation.</p>
+      <span class="go">Öffnen →</span>
+    </a>
+  </div>
+
+  <section class="note">
+    <h3>Datenbasis</h3>
+    <p>48 Turniere des BEC-U17-Circuits mit Spielterminen vom 31.01.2025 bis 30.08.2026, abgerufen vom
+    öffentlichen BEC-Datenhub. Disziplinen: BS (Jungeneinzel), GS (Mädcheneinzel), BD (Jungendoppel),
+    GD (Mädchendoppel), XD (Mixed).</p>
+    <div class="tiers">
+      <span class="item"><span class="swatch" style="background:var(--gp)"></span>GP – Grand Prix (10 Turniere)</span>
+      <span class="item"><span class="swatch" style="background:var(--ic)"></span>IC – International Challenge (15)</span>
+      <span class="item"><span class="swatch" style="background:var(--is)"></span>IS – International Series (23)</span>
+    </div>
+  </section>
+
+  <section class="note">
+    <h3>Zu den beiden Turnierstärke-Ansätzen</h3>
+    <ul>
+      <li><strong>Elo-Ansatz:</strong> bewertet Spieler ausschließlich aus den tatsächlichen
+      Matchergebnissen des Circuits — unabhängig von der offiziellen Rangliste, aber blind für alles, was
+      außerhalb dieser 48 Turniere passiert.</li>
+      <li><strong>Ranglisten-Ansatz:</strong> nutzt die offiziellen BEC-U17-Circuit-Ranglistenpunkte der
+      Teilnehmer. Breitere Grundlage, dafür abhängig von der Punktelogik und dem Stand der offiziellen
+      Rangliste.</li>
+      <li>Beide ranken nach dem Mittelwert der <strong>Top 16</strong> eines Meldefelds, nicht über das
+      gesamte Feld — das trennt die Tier-Stufen klarer, weil ein großes schwaches Feld den Schnitt sonst
+      verwässert.</li>
+    </ul>
+  </section>
+
+  <footer>
+    Nicht-offizielle, private Auswertung. Quelle der Ergebnisdaten: Badminton Europe (Datenhub) und
+    tournamentsoftware.com.
+  </footer>
+
+</div>
+</body>
+</html>
