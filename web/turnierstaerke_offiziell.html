@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Turnierstärke BEC U17</title>
+<title>Ranglisten-Turnierstärke BEC U17</title>
 <style>
   :root {
     color-scheme: light;
@@ -78,9 +78,9 @@
 
   header.page { display: flex; flex-direction: column; gap: 6px; }
   header.page h1 { font-size: clamp(24px, 4vw, 34px); margin: 0; font-weight: 600; letter-spacing: -0.01em; text-wrap: balance; }
-  header.page p { margin: 0; color: var(--text-secondary); font-size: 14px; max-width: 60ch; line-height: 1.55; }
+  header.page p { margin: 0; color: var(--text-secondary); font-size: 14px; max-width: 62ch; line-height: 1.55; }
   header.page .meta { color: var(--text-muted); font-size: 12.5px; }
-  header.page .crosslink { font-size: 13px; }
+  header.page .crosslinks { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 13px; }
 
   .controls {
     display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
@@ -179,15 +179,17 @@
 
 <div class="wrap">
   <header class="page">
-    <h1>Turnierstärke BEC U17</h1>
-    <p>Rangfolge der 2025/26 BEC-U17-Circuit-Turniere nach Ø-Elo der 16 ratingstärksten Teilnehmer (nicht des kompletten Meldefelds) — je Disziplin und gemittelt über alle Disziplinen. Elo aus 8.884 Matches berechnet, nicht aus dem offiziellen BEC-Tier.</p>
+    <h1>Ranglisten-Turnierstärke BEC U17</h1>
+    <p>Zweiter, von unserer eigenen Elo-Berechnung unabhängiger Ansatz: Turnierstärke aus den Punkten der <strong>offiziellen BEC-U17-Circuit-Rangliste</strong> (tournamentsoftware.com) — ein Turnier ist stark, wenn viele dort hoch platzierte Spieler teilgenommen haben. Ø-Punkte der 16 laut offizieller Rangliste stärksten Teilnehmer je Turnier.</p>
     <p class="meta" id="meta-line">Lädt…</p>
-    <p class="crosslink"><a href="https://claude.ai/artifact/SKXbZzDH7PAnqmG7hGGKrk">→ Spieler-Rangliste</a> · <a href="https://claude.ai/artifact/6VBPCo6kcrxN9zjnowGYb8">→ Turnierstärke (offizielle Rangliste, Gegenprobe)</a></p>
+    <p class="crosslinks">
+      <a href="https://claude.ai/artifact/TBktndxKj8DGTN7RDziaFD">→ Turnierstärke (Elo, eigene Matchdaten)</a>
+      <a href="https://claude.ai/artifact/SKXbZzDH7PAnqmG7hGGKrk">→ Spieler-Rangliste</a>
+    </p>
   </header>
 
   <div class="controls">
     <div class="tabs" id="tabs" role="tablist" aria-label="Disziplin"></div>
-    <div class="tabs" id="zeitraum-tabs" role="tablist" aria-label="Zeitraum"></div>
     <div class="legend">
       <span class="item"><span class="swatch" style="background:var(--gp)"></span>GP – Grand Prix</span>
       <span class="item"><span class="swatch" style="background:var(--ic)"></span>IC – Int. Challenge</span>
@@ -219,18 +221,18 @@
   </section>
 
   <footer class="note">
-    Ø-Elo je Turnier = Mittelwert der Elo-Ratings der bis zu 16 ratingstärksten Teilnehmer dieser
-    Disziplin (nicht des kompletten, oft 150–350 Personen umfassenden Meldefelds), jeweils zum
-    Rating-<strong>Stand direkt vor diesem Turnier</strong> (nicht final) — vermeidet, dass ein
-    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert. Ein
-    Mittelwert über das komplette Feld hatte die BEC-Tiers (GP/IS/IC) nicht getrennt, da das Tier
-    offenbar das Niveau der Spitze misst, nicht des gesamten Feldes; mit Top-16 liegt GP jetzt
-    wie erwartet klar vor IS vor IC. BASE_RATING 1200, K=32, chronologischer Replay aller 48
-    Turniere 2025–26. „Gesamt" mittelt die je-Disziplin-Werte eines Turniers unbenutzt (nicht
-    jedes Turnier hat Daten in allen 5 Disziplinen). Der Zeitraum-Filter schränkt nur ein, welche
-    Turniere angezeigt/gerankt werden — die zugrunde liegenden Elo-Werte berücksichtigen immer die
-    volle Matchhistorie bis zu diesem Zeitpunkt. Quelle: <code>bec_u17_auswertung/compute_elo.py</code>,
-    Datenbasis BEC-Datenhub-API.
+    Ø-Punkte je Turnier = Mittelwert der offiziellen BEC-Circuit-Ranglistenpunkte der 16
+    punktstärksten Teilnehmer (nicht des kompletten Meldefelds) — Teilnehmer ohne Eintrag in der
+    offiziellen Rangliste zählen mit 0 Punkten. Die offizielle Rangliste ist ein aktueller
+    Schnappschuss (nicht zeitpunktbezogen je Turnierdatum wie bei der Elo-Methode) und wird für
+    alle 46 Turniere im gleichen Stand verwendet — ein bewusster Unterschied zur Elo-Seite, siehe
+    dort für die rückschaufreie Variante. Ergebnis: GP-Turniere liegen mit dieser unabhängigen
+    Quelle klar vorn (Ø ca. 260 Punkte vs. IC ca. 212 vs. IS ca. 167) — deutlicher getrennt als
+    bei der Elo-Methode, die durch begrenzte Datenabdeckung einzelner Turniere (z.B. wenig
+    Matchhistorie zu Saisonbeginn) an einzelnen Stellen verzerrt sein kann. Quelle:
+    <code>bec_u17_auswertung/fetch_official_ranking.py</code> +
+    <code>compute_official_strength.py</code>, Datenbasis tournamentsoftware.com rid=187
+    ("BEC U17 Circuit Ranking"), Stand der zuletzt geladenen Ranking-Woche.
   </footer>
 </div>
 
@@ -240,15 +242,12 @@
 
   var DIS_LABELS = { GESAMT: "Gesamt", BS: "Jungeneinzel (BS)", GS: "Mädcheneinzel (GS)", BD: "Jungendoppel (BD)", GD: "Mädchendoppel (GD)", XD: "Mixed (XD)" };
   var DIS_ORDER = ["GESAMT", "BS", "GS", "BD", "GD", "XD"];
-  var ZEITRAUM_ORDER = ["12M", "2026", "2025", "ALLE"];
-  var ZEITRAUM_LABELS = { "12M": "12 Monate", "2026": "2026", "2025": "2025", "ALLE": "Alle" };
   var TIER_CLASS = { "U17 GP": "gp", "U17 IC": "ic", "U17 IS": "is" };
   var TIER_LABEL = { "U17 GP": "GP", "U17 IC": "IC", "U17 IS": "IS" };
-  var AXIS_MIN = 1150, AXIS_MAX = 1350;
-  var AXIS_MID = Math.round((AXIS_MIN + AXIS_MAX) / 2 / 25) * 25;
-  var MS_PER_DAY = 24 * 60 * 60 * 1000;
+  var AXIS_MIN = 0, AXIS_MAX = 500;
+  var AXIS_MID = 250;
 
-  var state = { disziplin: "GESAMT", zeitraum: "12M", view: "chart", data: null, maxDatum: null };
+  var state = { disziplin: "GESAMT", view: "chart", data: null };
 
   function pct(v) {
     var clamped = Math.max(AXIS_MIN, Math.min(AXIS_MAX, v));
@@ -259,17 +258,6 @@
     return String(s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
-  }
-
-  function inZeitraum(r) {
-    if (state.zeitraum === "2025") return r.jahr === 2025;
-    if (state.zeitraum === "2026") return r.jahr === 2026;
-    if (state.zeitraum === "ALLE") return true;
-    // "12M": letzte 12 Monate relativ zum juengsten Turnierdatum im Datensatz (nicht Systemdatum --
-    // die Daten sind ein fester 2025/26-Saison-Schnappschuss, kein Live-Feed).
-    if (!r.datum || !state.maxDatum) return true;
-    var cutoff = new Date(state.maxDatum).getTime() - 365 * MS_PER_DAY;
-    return new Date(r.datum).getTime() >= cutoff;
   }
 
   function rankBy(rows, key) {
@@ -284,10 +272,9 @@
 
   function rowsForCurrent() {
     if (state.disziplin === "GESAMT") {
-      var g = state.data.gesamt.filter(inZeitraum);
-      return rankBy(g, "avg_elo_gesamt");
+      return rankBy(state.data.gesamt.slice(), "avg_elo_gesamt");
     }
-    var d = state.data.je_disziplin.filter(function (r) { return r.disziplin === state.disziplin; }).filter(inZeitraum);
+    var d = state.data.je_disziplin.filter(function (r) { return r.disziplin === state.disziplin; });
     return rankBy(d, "avg_elo");
   }
 
@@ -306,26 +293,10 @@
       });
       tabs.appendChild(b);
     });
-
-    var zt = document.getElementById("zeitraum-tabs");
-    zt.innerHTML = "";
-    ZEITRAUM_ORDER.forEach(function (z) {
-      var b = document.createElement("button");
-      b.type = "button";
-      b.textContent = ZEITRAUM_LABELS[z];
-      b.setAttribute("role", "tab");
-      b.setAttribute("aria-pressed", z === state.zeitraum ? "true" : "false");
-      b.addEventListener("click", function () {
-        state.zeitraum = z;
-        render();
-      });
-      zt.appendChild(b);
-    });
   }
 
   function buildAxis() {
     var axis = document.getElementById("axis-row");
-    // Nur 3 gut getrennte Marken (Rand/Rand vermeidet Kollisionen bei vielen engen Zwischenwerten).
     var ticks = [
       { v: AXIS_MIN, align: "left" },
       { v: AXIS_MID, align: "center" },
@@ -348,8 +319,8 @@
     var rows = rowsForCurrent();
     var isGesamt = state.disziplin === "GESAMT";
 
-    document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin] + " — Rangfolge nach Ø-Elo (Top 16 je Turnier)";
-    document.getElementById("panel-sub").textContent = rows.length + " Turniere · Zeitraum: " + ZEITRAUM_LABELS[state.zeitraum] + " · Skala " + AXIS_MIN + "–" + AXIS_MAX + " Elo (nicht bei 0 beginnend)";
+    document.getElementById("panel-title").textContent = DIS_LABELS[state.disziplin] + " — Rangfolge nach Ø-Ranglistenpunkten (Top 16)";
+    document.getElementById("panel-sub").textContent = rows.length + " Turniere · Skala " + AXIS_MIN + "–" + AXIS_MAX + " Punkte";
 
     buildAxis();
 
@@ -360,7 +331,7 @@
       var tierLabel = TIER_LABEL[r.bec17type] || r.bec17type;
       var teiln = isGesamt
         ? (r.teilnehmer_gesamt + " Teiln. · " + r.n_disziplinen + " Disz.")
-        : (r.teilnehmer_fuer_staerke + " von " + r.teilnehmer + " Teiln. gewertet");
+        : (r.teilnehmer_offiziell_gerankt + " von " + r.teilnehmer_fuer_staerke + " gewertet ranglisten-gefuehrt");
       return (
         '<li tabindex="0">' +
           '<span class="rank-col">' + r.rang + "</span>" +
@@ -373,7 +344,7 @@
             '<span class="grid" style="left:' + pct(AXIS_MID).toFixed(2) + '%"></span>' +
             '<span class="fill ' + tierClass + '" style="width:' + pct(val).toFixed(2) + '%"></span></span>' +
           '<span class="val-col">' + val.toFixed(1) + "</span>" +
-          '<span class="tooltip">' + escapeHtml(r.name) + " · " + r.jahr + " KW" + r.kw + "<br>" + teiln + " · Ø-Elo " + val.toFixed(1) + "</span>" +
+          '<span class="tooltip">' + escapeHtml(r.name) + " · " + r.jahr + " KW" + r.kw + "<br>" + teiln + " · Ø " + val.toFixed(1) + " Pkt." + "</span>" +
         "</li>"
       );
     }).join("");
@@ -385,13 +356,13 @@
     var head = document.getElementById("table-head");
     var body = document.getElementById("table-body");
     var cols = isGesamt
-      ? ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teiln. gesamt", "Disziplinen", "Ø-Elo gesamt"]
-      : ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teilnehmer", "Gewertet (Top-N)", "Ø-Elo"];
+      ? ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teiln. gesamt", "Disziplinen", "Ø-Punkte gesamt"]
+      : ["Rang", "Turnier", "Jahr", "KW", "Tier", "Teilnehmer", "Davon gerankt", "Ø-Punkte"];
     head.innerHTML = cols.map(function (c) { return "<th>" + c + "</th>"; }).join("");
     body.innerHTML = rows.map(function (r) {
       var cells = isGesamt
         ? [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer_gesamt, r.n_disziplinen, r.avg_elo_gesamt.toFixed(1)]
-        : [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer, r.teilnehmer_fuer_staerke, r.avg_elo.toFixed(1)];
+        : [r.rang, escapeHtml(r.name), r.jahr, r.kw, TIER_LABEL[r.bec17type] || r.bec17type, r.teilnehmer, r.teilnehmer_offiziell_gerankt, r.avg_elo.toFixed(1)];
       return "<tr>" + cells.map(function (v) {
         return '<td class="' + (typeof v === "number" ? "num" : "") + '">' + v + "</td>";
       }).join("") + "</tr>";
@@ -409,15 +380,12 @@
   document.getElementById("btn-chart").addEventListener("click", function () { setView("chart"); });
   document.getElementById("btn-table").addEventListener("click", function () { setView("table"); });
 
-  fetch("data/turnier_staerke.json")
+  fetch("data/turnier_staerke_offiziell.json")
     .then(function (r) { return r.json(); })
     .then(function (json) {
       state.data = json;
       var nT = json.gesamt.length;
-      state.maxDatum = json.gesamt.reduce(function (max, r) {
-        return r.datum && (!max || r.datum > max) ? r.datum : max;
-      }, null);
-      document.getElementById("meta-line").textContent = nT + " Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32 · Ø-Elo je Turnier = Top 16 stärkste Teilnehmer";
+      document.getElementById("meta-line").textContent = nT + " Turniere · Quelle: offizielle BEC-U17-Circuit-Rangliste (aktueller Stand) · Top-16-Mittelwert";
       render();
     })
     .catch(function (err) {
