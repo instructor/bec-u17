@@ -22,6 +22,31 @@ Siege zu steigern, was dem fruehen Turnier faelschlich rueckwirkend gutgeschrieb
 Spieler-Rangliste (elo_spieler.csv) nutzt weiterhin die finalen Ratings -- das ist dort korrekt,
 da sie den AKTUELLEN Stand zeigen soll, nicht einen historischen Zeitpunkt.
 
+Turnierstaerke = Ø-Rating der TOP_N_STRENGTH staerksten Teilnehmer (nicht des kompletten Feldes)
+-- User-Nachfrage 2026-09-19, warum GP-Turniere (offizielles BEC-Tier "hoechste Kategorie") in
+der Turnierstaerke nicht klar vor IS/IC lagen. Verifiziert per Vergleich mit den offiziellen
+BEC-Ranglisten (tournamentsoftware.com rid=187/178): unsere staerksten Spieler laut Elo/Punkte-
+Rangliste deckten sich mit den dortigen Top-10 (siehe Session), das Problem lag also nicht an
+falschen Matchdaten. Zwei Hypothesen dafuer getestet, warum das reine Feld-Ø die Tiers nicht
+trennt:
+  1. Cold-Start (fruehe 2025er-Turniere starten alle bei BASE_RATING): per Warmlauf ueber ALLE
+     48 Turniere chronologisch ohnehin schon vermieden (pre_tournament-Snapshot nutzt den
+     bereits akkumulierten Rating-Stand, auch fuer 2025er-Turniere in der Mitte/am Ende der
+     Saison). Test: Beschraenkung der Turnierstaerke-Ausgabe auf ausschliesslich 2026er-Turniere
+     (nach 1+ Jahr Warmlauf) zeigte KEINE Verbesserung der Tier-Trennung (GP sogar leicht hinter
+     IS) -- verworfen, kein struktureller Fix noetig, da der Warmlauf bereits vorhanden ist.
+  2. Feld-Groesse/-Zusammensetzung: `avg_elo` mittelte bisher ueber das KOMPLETTE Meldefeld
+     (150-350 Teilnehmer je Turnier), das bei allen Turnieren unabhaengig vom Tier zu einem
+     Grossteil aus nicht-elitaeren/neuen Spielern besteht (Korrelation Feldgroesse<->avg_elo
+     ueber alle 47 Turniere: r=-0.02, GP hatte sogar die groessten Felder im Schnitt). Das
+     BEC-Tier bemisst vermutlich das Niveau der SPITZE eines Turniers (Preisgeld/Prestige), nicht
+     das Niveau des kompletten Feldes -- ein Volltfeld-Mittelwert kann diese Tier-Unterschiede
+     also strukturell nicht abbilden. Umgestellt auf Top-16-Mittelwert (User-Entscheidung,
+     2026-09-19) als naeherungsweises Mass fuer "Staerke der Spitze" statt "Staerke des
+     gesamten Feldes". `teilnehmer` bleibt zusaetzlich als Feldgroesse des KOMPLETTEN Feldes in
+     der Ausgabe erhalten (Kontext), `teilnehmer_fuer_staerke` zeigt, wie viele Werte tatsaechlich
+     in den Top-16-Mittelwert eingeflossen sind (< 16 bei kleineren Feldern).
+
 Walkover-Matches ohne vollstaendige Spielerdaten (leeres ergebnis, eine Seite komplett NULL)
 werden uebersprungen -- kein echtes Staerke-Signal, keine ID zum Aktualisieren.
 """
@@ -35,6 +60,7 @@ DB_PATH = "u17_int.db"
 OUT_DIR = "_RESULTS"
 BASE_RATING = 1200
 K_FACTOR = 32
+TOP_N_STRENGTH = 16
 DISZIPLINEN = ["BS", "GS", "BD", "GD", "XD"]
 DOUBLES = {"BD", "GD", "XD"}
 
@@ -122,10 +148,13 @@ def compute_elo_for_disziplin(matches):
     return ratings, match_counts, pre_tournament
 
 
-def compute_tournament_strength(matches, pre_tournament):
-    """Ø-Elo aller Teilnehmer je Turnier, JEWEILS zum Rating-Stand vor diesem Turnier (nicht
-    final) -- vermeidet den Rueckschau-Effekt frueherer Turniere, die sonst von der spaeteren
-    Formkurve ihrer Teilnehmer profitiert haetten (siehe Moduldocstring)."""
+def compute_tournament_strength(matches, pre_tournament, top_n=TOP_N_STRENGTH):
+    """Ø-Elo der TOP_N_STRENGTH staerksten Teilnehmer je Turnier (nicht des kompletten Feldes),
+    JEWEILS zum Rating-Stand vor diesem Turnier (nicht final) -- vermeidet den Rueckschau-Effekt
+    frueherer Turniere, die sonst von der spaeteren Formkurve ihrer Teilnehmer profitiert haetten
+    (siehe Moduldocstring). Volltfeld-Mittelwert wurde verworfen, da er die BEC-Tiers (GP/IS/IC)
+    nicht trennte -- die Tier-Einordnung bemisst sich offenbar an der Spitze eines Turniers, nicht
+    am Durchschnitt des gesamten (oft 150-350 Personen grossen) Meldefelds."""
     participants_by_turnier = defaultdict(set)
     for m in matches:
         for pid in (m["heim"][0], m["heim"][1], m["gast"][0], m["gast"][1]):
@@ -136,7 +165,8 @@ def compute_tournament_strength(matches, pre_tournament):
     for turnier_id, spieler_ids in participants_by_turnier.items():
         werte = [pre_tournament[(turnier_id, p)] for p in spieler_ids if (turnier_id, p) in pre_tournament]
         if werte:
-            rows.append((turnier_id, len(werte), round(sum(werte) / len(werte), 1)))
+            top_werte = sorted(werte, reverse=True)[:top_n]
+            rows.append((turnier_id, len(werte), len(top_werte), round(sum(top_werte) / len(top_werte), 1)))
     return rows
 
 
@@ -172,10 +202,11 @@ def main():
                     }
                 )
 
-            for turnier_id, n_teilnehmer, avg_elo in compute_tournament_strength(matches, pre_tournament):
+            for turnier_id, n_teilnehmer, n_fuer_staerke, avg_elo in compute_tournament_strength(matches, pre_tournament):
                 all_strength_rows.append(
                     {"disziplin": disziplin, "turnier_id": turnier_id,
-                     "teilnehmer": n_teilnehmer, "avg_elo": avg_elo}
+                     "teilnehmer": n_teilnehmer, "teilnehmer_fuer_staerke": n_fuer_staerke,
+                     "avg_elo": avg_elo}
                 )
 
         player_df = pd.DataFrame(all_player_rows).merge(player_lookup, on="spieler_id", how="left")
@@ -216,7 +247,8 @@ def main():
         json_path = os.path.join(OUT_DIR, "turnier_staerke.json")
         payload = {
             "je_disziplin": strength_df[
-                ["disziplin", "turnier_id", "name", "jahr", "kw", "datum", "bec17type", "teilnehmer", "avg_elo", "rang"]
+                ["disziplin", "turnier_id", "name", "jahr", "kw", "datum", "bec17type",
+                 "teilnehmer", "teilnehmer_fuer_staerke", "avg_elo", "rang"]
             ].to_dict(orient="records"),
             "gesamt": gesamt_df[
                 ["turnier_id", "name", "jahr", "kw", "datum", "bec17type", "teilnehmer_gesamt", "n_disziplinen",
