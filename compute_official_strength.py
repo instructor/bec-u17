@@ -30,8 +30,8 @@ import os
 import sqlite3
 from collections import defaultdict
 
-DB_PATH = "u17_int.db"
-OUT_DIR = "_RESULTS"
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
+from ak_config import OUT_DIR  # _RESULTS bzw. _RESULTS/U19
 DISZIPLINEN = ["BS", "GS", "BD", "GD", "XD"]
 TOP_N_STRENGTH = 16
 

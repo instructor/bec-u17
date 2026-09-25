@@ -342,6 +342,23 @@ beiden Fetch-Skripten.
   ungefilterten Vollbestand gilt. Dafür `compute_elo.py`s `turnier_lookup`-Query um `MIN(matches.
   spieldatum)` je Turnier erweitert (`datum`-Feld, jetzt auch im JSON-Export).
 
+- **U19/Junior-Erweiterung (2026-09-26, User-Wunsch)**: dieselbe Pipeline läuft per
+  Umgebungsvariable `BEC_AK=U19` (siehe `ak_config.py`, Default `U17` -- alle U17-Pfade/Ausgaben
+  unverändert, per Prüfsumme von `_RESULTS/turnier_staerke.json` verifiziert) gegen eine eigene DB
+  `u19_int.db` und schreibt nach `_RESULTS/U19/`. Turnierkatalog aus `build_junior_turnierliste.py`
+  (`_TOURNAMENT_DATA/BEC-U19-Junior/`: DBV-Listen 2025/2026 mit Spalte `BEC19type` + Ergänzungsliste
+  mit 12 Junior-Turnieren ohne deutsche Beteiligung aus dem BEC-Kalender). `turnier.bec17type`
+  trägt bei U19 den Junior-Typ (`U19 JIS/JIC/JIGP/EJC/WJC/JFS`), Spaltenname bewusst nicht
+  umbenannt. Ergebnis: 52 Turniere, 48 mit Daten (ohne Daten: Junioren-WM 2025 Indien, 2× Junior GP
+  Indonesien, Egypt Junior -- außereuropäisch), 9.458 Matches, 2.320 Spieler, 9.718 Entries.
+  Web: `u19_turnierstaerke.html` (Kopie der U17-Elo-Seite, EJC mit neutraler Farbe, da kein
+  vierter Kategorie-Farbton die Kontrastprüfung im Dark Mode besteht), Daten
+  `data/u19_turnier_staerke.json` via `build_site.py`. **Bekannte Schwäche**: Einlaufphase -- die
+  ersten Turniere 2025 (Hungarian Junior Feb. 2025 = exakt 1200, Dutch/German Junior GP März 2025)
+  sind unterbewertet, weil noch niemand ein Rating hat; der Default-Filter „12 Monate“ blendet sie
+  aus. **Keine Ranglisten-Gegenprobe für U19**: die BWF-Junior-Weltrangliste ist nicht öffentlich
+  abrufbar (bwf.tournamentsoftware.com verlangt Login, bwfbadminton.com liefert 403).
+
 - **Phase 5** (später, optional): tier-abhängige Punktetabelle nachrüsten, Abgleich mit
   DBV-Daten für deutsche Teilnehmer (`player.german_spieler_id`, analog
   `RESULTS_AUSLAENDISCHE_TURNIERE/` im BRAIN-Projekt).

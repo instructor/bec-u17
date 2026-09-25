@@ -8,7 +8,7 @@ Daten (Matches/Spieler) zu verlieren.
 import os
 import sqlite3
 
-DB_PATH = "u17_int.db"
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
 SCHEMA_PATH = "schema.sql"
 
 # (Tabelle, Spalte, SQL-Typ) -- wird nur ergaenzt, falls die Spalte noch fehlt.

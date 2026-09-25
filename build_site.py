@@ -24,22 +24,24 @@ FILES = [
     "turnier_staerke.json",
     "turnier_staerke_offiziell.json",
     "spielerrangliste.json",
+    # U19/Junior (BEC_AK=U19, siehe ak_config.py): Quelle _RESULTS/U19/, Ziel mit Praefix u19_
+    ("U19/turnier_staerke.json", "u19_turnier_staerke.json"),
 ]
 
 
 def main() -> int:
     DATA.mkdir(parents=True, exist_ok=True)
-    missing = [name for name in FILES if not (RESULTS / name).is_file()]
+    pairs = [(f, f) if isinstance(f, str) else f for f in FILES]
+    missing = [src for src, _ in pairs if not (RESULTS / src).is_file()]
     if missing:
         print("FEHLT in _RESULTS: " + ", ".join(missing))
         print("Erst die zugehoerigen compute_*/export_*-Skripte laufen lassen.")
         return 1
 
-    for name in FILES:
-        src = RESULTS / name
-        dst = DATA / name
-        shutil.copy2(src, dst)
-        print("%-34s %8.1f KB -> data/" % (name, src.stat().st_size / 1024))
+    for src_name, dst_name in pairs:
+        src = RESULTS / src_name
+        shutil.copy2(src, DATA / dst_name)
+        print("%-34s %8.1f KB -> data/%s" % (src_name, src.stat().st_size / 1024, dst_name))
 
     print("Fertig. Danach committen und pushen, damit GitHub Pages neu baut.")
     return 0

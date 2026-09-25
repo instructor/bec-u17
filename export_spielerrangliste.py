@@ -18,8 +18,8 @@ import json
 import os
 import sqlite3
 
-DB_PATH = "u17_int.db"
-OUT_DIR = "_RESULTS"
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
+from ak_config import OUT_DIR  # _RESULTS bzw. _RESULTS/U19
 DISZIPLINEN = ["BS", "GS", "BD", "GD", "XD"]
 TOURNAMENT_URL = "https://badmintoneurope.com/web/corporate/tournament?tournament_code={code}"
 

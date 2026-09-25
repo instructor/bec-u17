@@ -56,8 +56,8 @@ from collections import defaultdict
 
 import pandas as pd
 
-DB_PATH = "u17_int.db"
-OUT_DIR = "_RESULTS"
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
+from ak_config import OUT_DIR  # _RESULTS bzw. _RESULTS/U19
 BASE_RATING = 1200
 K_FACTOR = 32
 TOP_N_STRENGTH = 16

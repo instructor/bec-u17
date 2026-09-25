@@ -23,7 +23,7 @@ import sqlite3
 
 from bec_api import NoDataAvailable, disziplin_from_event_label, get_json, upsert_team
 
-DB_PATH = "u17_int.db"
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
 
 
 def import_entries(conn, turnier_id, disziplin, first_col):

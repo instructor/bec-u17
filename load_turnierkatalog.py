@@ -1,7 +1,8 @@
 """
 load_turnierkatalog.py
-Phase 1: laedt die beiden BEC-U17-Turnierkatalog-Excel-Dateien
-(_TOURNAMENT_DATA/BEC-U17-Circuit/*.xlsx) in die Tabelle "turnier" von u17_int.db.
+Phase 1: laedt die Turnierkatalog-Excel-Dateien (U17: _TOURNAMENT_DATA/BEC-U17-Circuit/*.xlsx,
+U19: _TOURNAMENT_DATA/BEC-U19-Junior/*.xlsx, siehe ak_config.py) in die Tabelle "turnier".
+Die Typ-Spalte (BEC17type bzw. BEC19type) landet in turnier.bec17type.
 
 Idempotent: UNIQUE(tournament_id) in schema.sql -- ein erneuter Lauf aktualisiert
 bestehende Zeilen (UPSERT) statt sie zu duplizieren, ausser dem einmal gesetzten
@@ -17,8 +18,8 @@ import sqlite3
 
 import pandas as pd
 
-DB_PATH = "u17_int.db"
-CATALOG_DIR = os.path.join("_TOURNAMENT_DATA", "BEC-U17-Circuit")
+from ak_config import DB_PATH  # u17_int.db bzw. u19_int.db, siehe ak_config.py
+from ak_config import CATALOG_DIR, TYPE_COLUMN
 URL_TEMPLATE = "https://www.tournamentsoftware.com/tournament/{code}"
 
 
@@ -37,9 +38,29 @@ def load_catalog_files():
     return pd.concat(frames, ignore_index=True)
 
 
+def _int_or_none(v):
+    return int(v) if pd.notna(v) else None
+
+
 def upsert_turnier(conn, row):
     tournament_code = str(row["TournamentCode"]).strip()
     url = URL_TEMPLATE.format(code=tournament_code) if tournament_code else None
+    typ = str(row[TYPE_COLUMN]).strip() if pd.notna(row[TYPE_COLUMN]) else None
+
+    if pd.isna(row["TournamentID"]):
+        # U19-Ergaenzungsliste (BEC-Kalender, nicht in der DBV-Liste): keine TournamentID, der
+        # UNIQUE(tournament_id)-UPSERT greift bei NULL nicht -- deshalb ueber tournament_code
+        # abgleichen, damit ein erneuter Lauf keine Duplikate erzeugt.
+        values = (str(row["RankingTournamentName"]).strip(), int(row["YearNr"]), _int_or_none(row["WeekNr"]),
+                  str(row["Country"]).strip() if pd.notna(row["Country"]) else None, typ, url, row["_quelle_excel"])
+        existing = conn.execute("SELECT turnier_id FROM turnier WHERE tournament_code = ?", (tournament_code,)).fetchone()
+        if existing:
+            conn.execute("UPDATE turnier SET name=?, jahr=?, kw=?, land=?, bec17type=?, url=?, quelle_excel=? "
+                         "WHERE turnier_id=?", values + (existing[0],))
+        else:
+            conn.execute("INSERT INTO turnier (name, jahr, kw, land, bec17type, url, quelle_excel, tournament_code) "
+                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", values + (tournament_code,))
+        return
 
     conn.execute(
         """
@@ -61,14 +82,14 @@ def upsert_turnier(conn, row):
             quelle_excel          = excluded.quelle_excel
         """,
         (
-            int(row["RankingTournamentID"]),
+            _int_or_none(row["RankingTournamentID"]),
             int(row["TournamentID"]),
             tournament_code,
             str(row["RankingTournamentName"]).strip(),
             int(row["YearNr"]),
             int(row["WeekNr"]) if pd.notna(row["WeekNr"]) else None,
             str(row["Country"]).strip() if pd.notna(row["Country"]) else None,
-            str(row["BEC17type"]).strip() if pd.notna(row["BEC17type"]) else None,
+            typ,
             str(row["Grading"]).strip() if pd.notna(row["Grading"]) else None,
             bool(row["UseInRanking"]) if pd.notna(row["UseInRanking"]) else None,
             url,
@@ -81,7 +102,7 @@ def main():
     print("Lade Turnierkatalog ...")
     df = load_catalog_files()
 
-    dupes = df["TournamentID"].duplicated(keep=False)
+    dupes = df["TournamentID"].notna() & df["TournamentID"].duplicated(keep=False)
     if dupes.any():
         print("WARNUNG: doppelte TournamentID ueber beide Dateien hinweg:")
         print(df.loc[dupes, ["TournamentID", "RankingTournamentName", "_quelle_excel"]])
