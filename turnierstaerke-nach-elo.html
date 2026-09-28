@@ -1,5 +1,5 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Turnierstärke BEC U19</title>
+<title>Turnierstärke BEC U17</title>
 <style>
   :root {
     color-scheme: light;
@@ -18,8 +18,6 @@
     --gp-soft: #e6eefa;
     --ic-soft: #fce8de;
     --is-soft: #e1f5ec;
-    --ejc: #5c5a51;
-    --ejc-soft: #ebe9e3;
     --focus: #184f95;
   }
   @media (prefers-color-scheme: dark) {
@@ -40,8 +38,6 @@
       --gp-soft: #1d2c40;
       --ic-soft: #3a2418;
       --is-soft: #163227;
-      --ejc: #b8b6ad;
-      --ejc-soft: #2e2d29;
       --focus: #5fa0e8;
     }
   }
@@ -62,8 +58,6 @@
     --gp-soft: #1d2c40;
     --ic-soft: #3a2418;
     --is-soft: #163227;
-    --ejc: #b8b6ad;
-    --ejc-soft: #2e2d29;
     --focus: #5fa0e8;
   }
 
@@ -145,7 +139,6 @@
   .pill.gp { background: var(--gp-soft); color: var(--gp); }
   .pill.ic { background: var(--ic-soft); color: var(--ic); }
   .pill.is { background: var(--is-soft); color: var(--is); }
-  .pill.ejc { background: var(--ejc-soft); color: var(--ejc); }
 
   .bar-col { position: relative; height: 18px; min-width: 0; }
   .bar-col .track { position: absolute; inset: 0; background: var(--surface-2); border-radius: 4px; }
@@ -153,7 +146,6 @@
   .bar-col .fill.gp { background: var(--gp); }
   .bar-col .fill.ic { background: var(--ic); }
   .bar-col .fill.is { background: var(--is); }
-  .bar-col .fill.ejc { background: var(--ejc); }
   .bar-col .grid { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--border); opacity: .7; }
 
   .val-col { text-align: right; font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
@@ -187,20 +179,19 @@
 
 <div class="wrap">
   <header class="page">
-    <h1>Turnierstärke BEC U19 (Junior)</h1>
-    <p>Rangfolge der 2025/26 europäischen Junior-Turniere (U19, BWF/BEC) nach Ø-Elo der 16 ratingstärksten Teilnehmer (nicht des kompletten Meldefelds) — je Disziplin und gemittelt über alle Disziplinen. Elo aus 9.458 Matches berechnet, nicht aus der offiziellen Turnierkategorie.</p>
+    <h1>Turnierstärke BEC U17</h1>
+    <p>Rangfolge der 2025/26 BEC-U17-Circuit-Turniere nach Ø-Elo der 16 ratingstärksten Teilnehmer (nicht des kompletten Meldefelds) — je Disziplin und gemittelt über alle Disziplinen. Elo aus 8.884 Matches berechnet, nicht aus dem offiziellen BEC-Tier.</p>
     <p class="meta" id="meta-line">Lädt…</p>
-    <p class="crosslink"><a href="./">→ Start</a> · <a href="turnierstaerke-nach-elo.html">→ Turnierstärke U17</a></p>
+    <p class="crosslink"><a href="./">→ Start</a> · <a href="spielerrangliste.html">→ Spieler-Rangliste</a> · <a href="turnierstaerke-nach-bec-u17-ranking.html">→ Turnierstärke (offizielle Rangliste, Gegenprobe)</a></p>
   </header>
 
   <div class="controls">
     <div class="tabs" id="tabs" role="tablist" aria-label="Disziplin"></div>
     <div class="tabs" id="zeitraum-tabs" role="tablist" aria-label="Zeitraum"></div>
     <div class="legend">
-      <span class="item"><span class="swatch" style="background:var(--ejc)"></span>EJC – Junioren-EM</span>
-      <span class="item"><span class="swatch" style="background:var(--gp)"></span>JIGP – Grand Prix</span>
-      <span class="item"><span class="swatch" style="background:var(--ic)"></span>JIC – Challenge</span>
-      <span class="item"><span class="swatch" style="background:var(--is)"></span>JIS – Series</span>
+      <span class="item"><span class="swatch" style="background:var(--gp)"></span>GP – Grand Prix</span>
+      <span class="item"><span class="swatch" style="background:var(--ic)"></span>IC – Int. Challenge</span>
+      <span class="item"><span class="swatch" style="background:var(--is)"></span>IS – Int. Series</span>
     </div>
     <div class="view-toggle" role="group" aria-label="Ansicht">
       <button id="btn-chart" aria-pressed="true">Diagramm</button>
@@ -229,20 +220,16 @@
 
   <footer class="note">
     Ø-Elo je Turnier = Mittelwert der Elo-Ratings der bis zu 16 ratingstärksten Teilnehmer dieser
-    Disziplin (nicht des kompletten Meldefelds), jeweils zum
+    Disziplin (nicht des kompletten, oft 150–350 Personen umfassenden Meldefelds), jeweils zum
     Rating-<strong>Stand direkt vor diesem Turnier</strong> (nicht final) — vermeidet, dass ein
-    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert. Dadurch
-    sind die <strong>ersten Turniere 2025 unterbewertet</strong>: Alle Ratings starten bei 1200, und
-    Anfang 2025 hatte noch kaum jemand Matches im Datenbestand (Hungarian Junior 2025 als erstes
-    Turnier liegt exakt bei 1200, auch die Grand Prix Dutch/German Junior 2025 im März sind davon
-    betroffen). Der voreingestellte Zeitraum „12 Monate" enthält diese Einlaufphase nicht.
-    BASE_RATING 1200, K=32, chronologischer Replay aller 48 Junior-Turniere 2025–26 mit Daten im
-    BEC-Datenhub. Ohne Daten und daher nicht enthalten: Junioren-WM 2025 (Indien), die Junior Grand
-    Prix in Indonesien und Egypt Junior 2025. Enthalten sind auch 12 Turniere ohne deutsche
-    Beteiligung (nicht in der DBV-Turnierliste). „Gesamt" mittelt die je-Disziplin-Werte eines Turniers unbenutzt (nicht
+    frühes Turnier rückwirkend von der späteren Formkurve seiner Teilnehmer profitiert. Ein
+    Mittelwert über das komplette Feld hatte die BEC-Tiers (GP/IS/IC) nicht getrennt, da das Tier
+    offenbar das Niveau der Spitze misst, nicht des gesamten Feldes; mit Top-16 liegt GP jetzt
+    wie erwartet klar vor IS vor IC. BASE_RATING 1200, K=32, chronologischer Replay aller 48
+    Turniere 2025–26. „Gesamt" mittelt die je-Disziplin-Werte eines Turniers unbenutzt (nicht
     jedes Turnier hat Daten in allen 5 Disziplinen). Der Zeitraum-Filter schränkt nur ein, welche
     Turniere angezeigt/gerankt werden — die zugrunde liegenden Elo-Werte berücksichtigen immer die
-    volle Matchhistorie bis zu diesem Zeitpunkt. Quelle: <code>BEC_AK=U19 python compute_elo.py</code> (bec_u17_auswertung),
+    volle Matchhistorie bis zu diesem Zeitpunkt. Quelle: <code>bec_u17_auswertung/compute_elo.py</code>,
     Datenbasis BEC-Datenhub-API.
   </footer>
 </div>
@@ -255,8 +242,8 @@
   var DIS_ORDER = ["GESAMT", "BS", "GS", "BD", "GD", "XD"];
   var ZEITRAUM_ORDER = ["12M", "2026", "2025", "ALLE"];
   var ZEITRAUM_LABELS = { "12M": "12 Monate", "2026": "2026", "2025": "2025", "ALLE": "Alle" };
-  var TIER_CLASS = { "U19 EJC": "ejc", "U19 JIGP": "gp", "U19 JIC": "ic", "U19 JIS": "is" };
-  var TIER_LABEL = { "U19 EJC": "EJC", "U19 JIGP": "JIGP", "U19 JIC": "JIC", "U19 JIS": "JIS", "U19 WJC": "WJC", "U19 JFS": "JFS" };
+  var TIER_CLASS = { "U17 GP": "gp", "U17 IC": "ic", "U17 IS": "is" };
+  var TIER_LABEL = { "U17 GP": "GP", "U17 IC": "IC", "U17 IS": "IS" };
   var AXIS_MIN = 1150, AXIS_MAX = 1350;
   var AXIS_MID = Math.round((AXIS_MIN + AXIS_MAX) / 2 / 25) * 25;
   var MS_PER_DAY = 24 * 60 * 60 * 1000;
@@ -422,7 +409,7 @@
   document.getElementById("btn-chart").addEventListener("click", function () { setView("chart"); });
   document.getElementById("btn-table").addEventListener("click", function () { setView("table"); });
 
-  fetch("data/u19_turnier_staerke.json")
+  fetch("data/turnier_staerke.json")
     .then(function (r) { return r.json(); })
     .then(function (json) {
       state.data = json;
@@ -430,7 +417,7 @@
       state.maxDatum = json.gesamt.reduce(function (max, r) {
         return r.datum && (!max || r.datum > max) ? r.datum : max;
       }, null);
-      document.getElementById("meta-line").textContent = nT + " Junior-Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32 · Ø-Elo je Turnier = Top 16 stärkste Teilnehmer";
+      document.getElementById("meta-line").textContent = nT + " Turniere mit Elo-Daten · Saison 2025/26 · BASE_RATING 1200, K=32 · Ø-Elo je Turnier = Top 16 stärkste Teilnehmer";
       render();
     })
     .catch(function (err) {
