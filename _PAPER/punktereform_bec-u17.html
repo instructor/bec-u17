@@ -262,12 +262,6 @@ tr.recommended td.name::after{
   .scale-cell{border-right:none; border-bottom:1px solid var(--line);}
   .scale-cell:last-child{border-bottom:none;}
 }
-.deanon{display:none; gap:8px; align-items:center; flex-wrap:wrap; margin-top:12px; font-size:0.82rem; color:var(--muted);}
-.deanon.ready{display:flex;}
-.deanon input{font:inherit; padding:4px 8px; border:1px solid var(--line); border-radius:4px; background:var(--paper-raised); color:var(--ink); width:14em;}
-.deanon button{font:inherit; padding:4px 12px; border:1px solid var(--accent); border-radius:4px; background:var(--accent-tint); color:var(--accent-strong); cursor:pointer;}
-.deanon .msg{min-width:10em;}
-.anon.revealed{background:var(--warn-tint); border-radius:3px; padding:0 0.2em;}
 </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -280,14 +274,8 @@ tr.recommended td.name::after{
     <div class="meta">
       <span><b>Gremium:</b> DBV-Jugendausschuss (AfJ)</span>
       <span><b>Betrifft:</b> Punktetabelle im JWS U19, Grading &bdquo;BEC U17 Circuit&ldquo;</span>
-      <span><b>Stand:</b> 28. September 2026</span>
+      <span><b>Stand:</b> 30. September 2026</span>
     </div>
-<!--    <form class="deanon" id="deanon-form" autocomplete="off">
-      <label for="deanon-pw">Namen in den Beispielen anzeigen (nur für Berechtigte):</label>
-      <input type="password" id="deanon-pw" placeholder="Kennwort">
-      <button type="submit">Anzeigen</button>
-      <span class="msg" id="deanon-msg" role="status"></span>
-    </form>-->
   </div>
 
   <div class="tldr">
@@ -299,22 +287,17 @@ tr.recommended td.name::after{
 	<a href="https://instructor.github.io/bec-u17/turnierstaerke-nach-bec-u17-ranking.html" target="_blank">
 	&rarr; Stärkemessung über alle 48 BEC-Circuit-Turniere 2025/2026</a>
 	bestätigt die Rangfolge GP&nbsp;&gt;&nbsp;IC&nbsp;&gt;&nbsp;IS.</p>
-    <p>Empfehlung: Abwertung der BEC U17 IC/IS Turniere gegenüber GP Turnieren: GP=DEM, IC/IS=A-RLT.
-	Optional zusätzliche Abwertung von IS gegenüber IC (IS=B-Mst). 
-	Für die Platzierungen 1 - 8 (Erreichen des Viertelfinals) wird wie auch bei den 
-	BEC U19/Junior-Turnieren ein Punkteaufschlag mit Faktor 7/6 beibehalten.
-	
-	Für beide Vorschläge wurde eine Variante der
-	Rangliste erstellt für die KW 35 / 2026, bei der die Bepunktung aller BEC-U17-Turniere im 
-	vorhergehenden 12-Monats-Fenster nach der jeweiligen Variante vergeben wurden: Variante 
-	<a href="https://instructor.github.io/brain/bec-u17-gestuft-light/rangliste-bec-u17-gestuft-light.html" 
-	target="_blank">&rarr; BEC-U17 gestuft-light (GP=DEM, IC/IS=A-RLT)</a> und Variante 
-	<a href="https://instructor.github.io/brain/bec-u17-gestuft/rangliste-bec-u17-gestuft.html" 
-	target="_blank">&rarr; BEC-U17 gestuft (GP=DEM, IC=A-RLT, IS=B-Mst)</a>. Die Ranglisten sind analog
-	der offiziellen JWS Rangliste bei badminton.de aufgebaut, ergänzt um Zusatzinformation: 
-	Die Spalten "Rang" und "Punkte" enthalten
-	die nach der jeweiligen Variante berechneten Werte, dahinter sind in Klammern zum Vergleich 
-	die Werte der Original-Rangliste aufgeführt.
+    <p>Empfehlung &bdquo;gestuft-light&ldquo;: Abwertung der BEC-U17-IC/IS-Turniere gegenüber den
+	GP-Turnieren: GP=DEM, IC/IS=A-RLT. Für die Platzierungen 1&ndash;8 (Erreichen des Viertelfinals)
+	wird wie auch bei den BEC-U19/Junior-Turnieren ein Punkteaufschlag mit Faktor 7/6 beibehalten.
+	GP-Ergebnisse zählen damit wie bisher, jedes IC- und IS-Ergebnis zählt ein Sechstel weniger.</p>
+	<p>Dazu wurde eine Variante der Rangliste für die KW&nbsp;35/2026 erstellt, bei der alle
+	BEC-U17-Turniere im vorhergehenden 12-Monats-Fenster nach diesem Vorschlag bepunktet sind:
+	<a href="https://instructor.github.io/brain/bec-u17-gestuft-light/rangliste-bec-u17-gestuft-light.html"
+	target="_blank">&rarr; Rangliste BEC-U17 gestuft-light (GP=DEM, IC/IS=A-RLT)</a>. Sie ist analog
+	der offiziellen JWS-Rangliste bei badminton.de aufgebaut, ergänzt um Zusatzinformation:
+	Die Spalten "Rang" und "Punkte" enthalten die neu berechneten Werte, dahinter sind in Klammern
+	zum Vergleich die Werte der heutigen Rangliste aufgeführt.
 	</p>
   </div>
 
@@ -411,25 +394,27 @@ tr.recommended td.name::after{
     der eigenen Altersklasse, KW&nbsp;35/2026, und alle Kopf-an-Kopf-Ergebnisse der letzten zwölf
     Monate aus DBV- und internationalen Turnieren.</p>
     <ul>
-      <li><strong>Doppel.</strong> <span class="anon" data-anon="b1">Ein Spieler</span> (U15,
-      Jungendoppel) steht auf Platz&nbsp;4 der U15-Rangliste. Zwei seiner fünf gewerteten Ergebnisse
-      stammen von BEC-U17-Turnieren. Das höchste ist ein Viertelfinale beim IS-Turnier TEM Mirna
-      2026 mit 20.359 Punkten, mehr als jedes seiner übrigen Ergebnisse. Gegen die Spieler auf
-      Platz&nbsp;6 und 7<span class="anon" data-anon="b1g"></span> hat er alle direkten Duelle der
-      letzten zwölf Monate verloren, jeweils 0:3. Bei &bdquo;gestuft&ldquo; zählt das Viertelfinale noch
-      10.179 Punkte und fällt aus der Top&#8209;5. Beide ziehen an ihm vorbei (Platz&nbsp;4 und 5, er
-      selbst Platz&nbsp;7). Bei &bdquo;light&ldquo; (16.966 Punkte) bleibt er auf Platz&nbsp;4.</li>
-      <li><strong>Einzel.</strong> <span class="anon" data-anon="b2">Ein Spieler</span> (U17,
-      Jungeneinzel) steht auf Platz&nbsp;4 der U17-Rangliste. Sein bestes Ergebnis ist der
-      Turniersieg beim IS-Turnier TEM Mirna 2026: 31.322 Punkte, mehr als sein 2.&nbsp;Platz bei einer
-      DBV-A-RLT (30.977). Gegen die Spieler auf Platz&nbsp;5, 7 und
-      8<span class="anon" data-anon="b2g"></span> hat er das jeweils einzige direkte Duell verloren.
-      Bei &bdquo;gestuft&ldquo; zählt der Turniersieg 15.660 Punkte, und der Spieler von Platz&nbsp;5 zieht an
-      ihm vorbei. Bei &bdquo;light&ldquo; (26.101 Punkte) bleibt er auf Platz&nbsp;4.</li>
+      <li><strong>Doppel.</strong> Ein Spieler (U15,
+      Jungendoppel) steht auf Platz&nbsp;5 der U15-Rangliste. Sein höchstes Ergebnis ist ein
+      Viertelfinale beim IC-Turnier YONEX German U17 Open 2026 mit 20.359 Punkten, mehr als jedes
+      seiner DBV-Ergebnisse (bestes: Turniersieg bei einer A-RLT, 12.305 Punkte). Gegen die Spieler
+      auf Platz&nbsp;6 und 7 hat er die direkten Duelle der
+      letzten zwölf Monate jeweils mit 1:3 verloren. Mit &bdquo;gestuft-light&ldquo; zählt das
+      Viertelfinale 16.966 Punkte; beide ziehen an ihm vorbei (Platz&nbsp;5 und 6, er selbst
+      Platz&nbsp;7).</li>
+      <li><strong>Einzel.</strong> Ein Spieler (U17,
+      Jungeneinzel) steht auf Platz&nbsp;10 der U17-Rangliste. Drei seiner fünf gewerteten Ergebnisse
+      stammen von IC-Turnieren; die beiden höchsten (3.&nbsp;Platz HEBAR U17 Bulgaria Open 2026 mit
+      25.057 und 5.&nbsp;Platz YONEX German U17 Open 2026 mit 20.359 Punkten) liegen weit über seinem
+      besten DBV-Ergebnis (5.&nbsp;Platz bei einer A-RLT, 14.542 Punkte). Gegen den Spieler auf
+      Platz&nbsp;11 hat er das einzige direkte Duell verloren.
+      Mit &bdquo;gestuft-light&ldquo; zählen die beiden Ergebnisse 20.881 und 16.966 Punkte, er fällt auf
+      Platz&nbsp;13, und der Spieler von Platz&nbsp;11 zieht an ihm vorbei.</li>
     </ul>
-    <p>Beide Fälle folgen demselben Muster: Ein einzelnes IS-Ergebnis zählt heute mehr als die
-    besten DBV-Ergebnisse und hebt einen Spieler vor Konkurrenten, gegen die er im direkten Duell
-    verloren hat.</p>
+    <p>Beide Fälle folgen demselben Muster: IC- oder IS-Ergebnisse zählen heute mehr als die
+    besten DBV-Ergebnisse und heben einen Spieler vor Konkurrenten, gegen die er im direkten Duell
+    verloren hat. Mit &bdquo;gestuft-light&ldquo; stehen die unmittelbar folgenden Konkurrenten, gegen
+    die er verloren hat, wieder vor ihm.</p>
   </section>
 
   <section>
@@ -449,15 +434,13 @@ tr.recommended td.name::after{
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">4</span><h2>Auswirkungen der gestuften Versionen </h2></div>
-    <p>Für knapp die Hälfte der Betroffenen ändert sich in beiden Varianten nichts. Zwei Drittel
-    (gestuft) bzw. drei Viertel (gestuft-light) verlieren höchstens 5&nbsp;% ihrer Punkte. Grundlage
-    ist die Rangliste KW&nbsp;35/2026: 171 Spieler:innen mit mindestens einem BEC-U17-Ergebnis im
-    52-Wochen-Fenster, zusammen 423 Wertungen (Spieler:in&nbsp;&times;&nbsp;Disziplin) aus 28
-    BEC-Turnieren. Die Rangplätze beziehen sich auf die Gesamtrangliste der Disziplin über alle
-    Altersklassen.</p>
-    <p>Beide Varianten bepunkten GP und IC gleich. Sie unterscheiden sich nur bei IS-Ergebnissen
-    (B-Mst bzw. A-RLT) und damit nur in 57 der 423 Wertungen (13&nbsp;%).</p>
+    <div class="sec-head"><span class="sec-num">4</span><h2>Auswirkungen von &bdquo;gestuft-light&ldquo;</h2></div>
+    <p>GP-Ergebnisse zählen unverändert, jedes IC- und IS-Ergebnis zählt ein Sechstel
+    (16,7&nbsp;%) weniger als heute. Für knapp die Hälfte der Betroffenen ändert sich nichts, drei
+    Viertel verlieren höchstens 5&nbsp;% ihrer Punkte. Grundlage ist die Rangliste KW&nbsp;35/2026:
+    171 Spieler:innen mit mindestens einem BEC-U17-Ergebnis im 52-Wochen-Fenster, zusammen 423
+    Wertungen (Spieler:in&nbsp;&times;&nbsp;Disziplin) aus 28 BEC-Turnieren. Die Rangplätze beziehen
+    sich auf die Gesamtrangliste der Disziplin über alle Altersklassen.</p>
 
     <h3>Wie oft welcher Fall eintritt</h3>
     <div class="table-wrap">
@@ -465,62 +448,54 @@ tr.recommended td.name::after{
         <thead>
           <tr>
             <th>Fall</th>
-            <th class="num">gestuft</th>
-            <th class="num">light</th>
+            <th class="num">Wertungen</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td class="name">Keine Änderung</td>
-            <td class="num">199 (47&thinsp;%)</td>
-            <td class="num">199 (47&thinsp;%)</td>
+            <td class="num">202 (48&thinsp;%)</td>
           </tr>
           <tr>
             <td class="name">BEC-Ergebnis bleibt in der Top&#8209;5, zählt weniger</td>
-            <td class="num">120 (28&thinsp;%)</td>
-            <td class="num">154 (36&thinsp;%)</td>
+            <td class="num">151 (36&thinsp;%)</td>
           </tr>
           <tr>
             <td class="name">Einziges BEC-Ergebnis fällt aus der Top&#8209;5</td>
-            <td class="num">57 (13&thinsp;%)</td>
             <td class="num">38 (9&thinsp;%)</td>
           </tr>
           <tr>
             <td class="name">Mehrere BEC-Ergebnisse, eines fällt aus der Top&#8209;5</td>
-            <td class="num">47 (11&thinsp;%)</td>
             <td class="num">32 (8&thinsp;%)</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="note">Bei &bdquo;light&ldquo; fallen IS-Ergebnisse seltener aus der Top&#8209;5, weil sie weniger
-    stark abgewertet werden. Sie bleiben dann mit etwas weniger Punkten in der Wertung.</p>
 
     <h3>Typische Fälle</h3>
     <ul>
       <li><strong>Keine Änderung.</strong> Die Wertung enthält nur Grand-Prix-Ergebnisse, oder die
       BEC-Ergebnisse zählen ohnehin nicht zu den besten fünf. Punkte und Rang bleiben gleich; der
       Rang kann sich sogar verbessern, wenn andere zurückfallen.</li>
-      <li><strong>Einziges BEC-Ergebnis fällt heraus.</strong> Eine Spielerin (U17, Dameneinzel)
-      erreicht beim IS-Turnier TEM Mirna 2026 das Halbfinale. Heute bringt das 25.057 Punkte, mehr
-      als jedes ihrer DBV-Ranglistenturniere. In der gestuften Version zählt es 12.529 Punkte und
-      fällt aus der Top&#8209;5; ein 5.&nbsp;Platz bei einer A-RLT (14.542) rückt nach. Ihr Punktestand sinkt
-      um 11,8&nbsp;%, ihr Rang von 21 auf 28. Bei &bdquo;light&ldquo; zählt das Halbfinale 20.881 Punkte und
-      bleibt in der Top&#8209;5: &minus;4,7&nbsp;%, Rang 24. Meist ist der Verlust in diesem Fall klein
-      (Median 2,3&nbsp;% bzw. 1,7&nbsp;%), weil das Nachrück-Ergebnis fast gleich viel wert ist.</li>
+      <li><strong>BEC-Ergebnis bleibt in der Wertung, zählt weniger.</strong> Eine Spielerin (U17,
+      Dameneinzel) erreicht beim IS-Turnier TEM Mirna 2026 das Halbfinale. Heute bringt das 25.057
+      Punkte, mehr als jedes ihrer DBV-Ranglistenturniere. Mit &bdquo;gestuft-light&ldquo; zählt es
+      20.881 Punkte und bleibt in der Top&#8209;5: Ihr Punktestand sinkt um 4,7&nbsp;%, ihr Rang von 21
+      auf 24.</li>
+      <li><strong>Einziges BEC-Ergebnis fällt heraus.</strong> Ein DBV-Ergebnis rückt in die
+      Top&#8209;5 nach. Der Verlust ist dann klein (Median 1,7&nbsp;%, höchstens 3,5&nbsp;%), weil das
+      Nachrück-Ergebnis fast gleich viel wert ist.</li>
       <li><strong>Viele BEC-Ergebnisse, alle abgewertet.</strong> Ein Mixed-Paar (U17) hat fünf
-      IC- und IS-Ergebnisse in der Top&#8209;5 und kein gleichwertiges DBV-Ergebnis als Ersatz. Bei
-      &bdquo;gestuft&ldquo; verlieren beide je 27&nbsp;% ihrer Punkte (Rang 3&nbsp;bzw.&nbsp;4 &rarr; 8&nbsp;bzw.&nbsp;7), bei
-      &bdquo;light&ldquo; nur 9&nbsp;% (Rang 5&nbsp;bzw.&nbsp;4). Wer seine Saison überwiegend im BEC-Circuit
-      spielt, ist am stärksten betroffen, und hier liegt der größte Unterschied zwischen den
-      Varianten.</li>
-      <li><strong>Nur IC-Ergebnisse.</strong> Wer ausschließlich bei IC-Turnieren gepunktet hat,
-      verliert in beiden Varianten gleich viel, weil beide IC nach A-RLT bepunkten.</li>
-      <li><strong>Indirekt Begünstigte.</strong> 36&nbsp;% (gestuft) bzw. 29&nbsp;% (light) der
-      Wertungen verbessern ihren Rang, ohne selbst Punkte zu gewinnen, weil andere mit BEC-Punkten
-      an ihnen vorbei nach hinten rutschen. Das gilt ebenso für alle Spieler:innen ohne
-      BEC-Teilnahme.</li>
+      IC- und IS-Ergebnisse in der Top&#8209;5 und kein gleichwertiges DBV-Ergebnis als Ersatz. Beide
+      verlieren je 9&nbsp;% ihrer Punkte (Rang 3&nbsp;bzw.&nbsp;4 &rarr; 5&nbsp;bzw.&nbsp;4). Wer seine Saison
+      überwiegend im BEC-Circuit spielt, ist am stärksten betroffen.</li>
+      <li><strong>Indirekt Begünstigte.</strong> 29&nbsp;% der Wertungen verbessern ihren Rang, weil
+      andere mit BEC-Punkten an ihnen vorbei nach hinten rutschen. Das gilt ebenso für alle
+      Spieler:innen ohne BEC-Teilnahme.</li>
     </ul>
+    <p>Größere Verluste sind die Ausnahme: 5 der 171 Spieler:innen verlieren 10&nbsp;% oder mehr
+    ihrer Punkte, der größte Verlust liegt bei 13,8&nbsp;%. Von den 318 betroffenen Wertungen in den
+    Top&#8209;100 einer Disziplin fallen nur 3 um 10 oder mehr Plätze zurück.</p>
   </section>
 
   <section>
@@ -538,18 +513,16 @@ tr.recommended td.name::after{
       und IS ist der Abstand kleiner, und einzelne IS-Turniere sind stärker besetzt als manche IC-
       oder GP-Turniere (Abschnitt&nbsp;2). Eine gemeinsame Stufe verhindert, dass ein starkes
       IS-Turnier zu stark abgewertet wird.</li>
-      <li><strong>Maßvolle Auswirkungen.</strong> Rund 30&nbsp;% weniger Punktabzug als bei
-      &bdquo;gestuft&ldquo;, nur 5 Spieler:innen verlieren 10&nbsp;% oder mehr ihrer Punkte, der größte
-      Verlust liegt bei 13,8&nbsp;%.</li>
+      <li><strong>Maßvolle Auswirkungen.</strong> Drei Viertel der Betroffenen verlieren höchstens
+      5&nbsp;% ihrer Punkte, nur 5 Spieler:innen 10&nbsp;% oder mehr, der größte Verlust liegt bei
+      13,8&nbsp;% (Abschnitt&nbsp;4).</li>
+      <li><strong>Korrigiert die Fehlreihung.</strong> IC- und IS-Ergebnisse heben Spieler:innen nicht
+      mehr vor Konkurrenten, gegen die sie im direkten Duell verloren haben (Beispiele in
+      Abschnitt&nbsp;2).</li>
       <li><strong>Einfach umzusetzen.</strong> Es wird keine neue Punktespalte gebraucht: A-DM und
       A-RLT stehen bereits in der Punktetabelle. Zu pflegen ist nur die Zuordnung jedes
       BEC-U17-Turniers zu seiner Kategorie.</li>
     </ul>
-    <p class="note">Bei den Junior-Turnieren wirkt die Stufung nur auf die Plätze&nbsp;1&ndash;8; ab
-    Platz&nbsp;9 sind dort alle drei Kategorien gleich bepunktet.</p>
-    <p>&bdquo;Gestuft&ldquo; mit einer zusätzlichen Abwertung von IS unter IC bleibt eine Option, wenn
-    die Stufe IS ausdrücklich abgebildet werden soll. Sie trifft allerdings vor allem
-    Spieler:innen, die viele IS-Turniere spielen, mit Verlusten bis 27&nbsp;%.</p>
   </section>
 
   <div class="footer">
@@ -559,40 +532,3 @@ tr.recommended td.name::after{
 
 </div>
 
-<!-- De-Anonymisierung: Namen liegen nur VERSCHLUESSELT in der Seite (PBKDF2-SHA256 + AES-GCM,
-     erzeugt von bec_u17_auswertung/tools/paper_deanon_encrypt.mjs). Ohne Kennwort steht kein
-     Klarname in dieser Datei. Leeres JSON = Funktion ausgeblendet. -->
-<script id="deanon-data" type="application/json">{"iter":310000,"salt":"6m1H6FfzITXiv3Z8zAwzSQ==","iv":"tayD1MP8/bXwzat5","ct":"WUJ1Ln1ADgVhBj9TOj4XeSfxIrhZJ0sI1YqBaGjx5E+LBuH3PMf8Ukpg5+wiTIhlTvirIK/TlbcL78ID8BLz0pt9creXx9lkAd8D5ycip1lyDXDvBWFX3QVZNrJpYC8Zx1hmhnMGzdQrDd9T9Y0PbYE1Q8dYQWogcM7SXADd5O3eicqzB8O3GjQ9kKABzlhbrOlQ/7ll9anTNMqNcd0F"}</script>
-<script>
-(function () {
-  "use strict";
-  var data;
-  try { data = JSON.parse(document.getElementById("deanon-data").textContent); } catch (e) { return; }
-  if (!data || !data.ct || !(window.crypto && crypto.subtle)) return;
-  var form = document.getElementById("deanon-form");
-  var msg = document.getElementById("deanon-msg");
-  form.classList.add("ready");
-  function b64(s) { return Uint8Array.from(atob(s), function (c) { return c.charCodeAt(0); }); }
-  form.addEventListener("submit", async function (ev) {
-    ev.preventDefault();
-    msg.textContent = "…";
-    try {
-      var pw = new TextEncoder().encode(document.getElementById("deanon-pw").value);
-      var base = await crypto.subtle.importKey("raw", pw, "PBKDF2", false, ["deriveKey"]);
-      var key = await crypto.subtle.deriveKey(
-        { name: "PBKDF2", salt: b64(data.salt), iterations: data.iter, hash: "SHA-256" },
-        base, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
-      var plain = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(data.iv) }, key, b64(data.ct));
-      var names = JSON.parse(new TextDecoder().decode(plain));
-      document.querySelectorAll(".anon[data-anon]").forEach(function (el) {
-        var v = names[el.dataset.anon];
-        if (v !== undefined) { el.textContent = v; el.classList.add("revealed"); }
-      });
-      msg.textContent = "Namen eingeblendet.";
-      document.getElementById("deanon-pw").value = "";
-    } catch (e) {
-      msg.textContent = "Kennwort falsch.";
-    }
-  });
-})();
-</script>
