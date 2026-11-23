@@ -31,8 +31,19 @@ pd.set_option("display.width", 250)
 pd.set_option("display.max_columns", 20)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-SRC_DIR = os.path.join(os.path.dirname(BASE_DIR), "_BRAIN_Badminton-RAnking-INsights",
-                       "ALL_TOURNAMENTS+RESULT-RANKINGS")
+# DBV-Turnierliste aus der Master-DB (juengster Snapshot; Plan Master-Data Phase 9 Schritt 5, 2026-11-24) statt
+# aus BRAINs ALL_TOURNAMENTS+RESULT-RANKINGS, das stillgelegt wird.
+sys.path.insert(0, os.path.join(os.path.dirname(BASE_DIR), "_BRAIN_LIB"))
+import masterdata_reader as mdr  # noqa: E402
+
+
+def dbv_turnierliste(year):
+    p = mdr.liste("tournaments", year)
+    if p is None:
+        raise FileNotFoundError(f"keine DBV-Turnierliste {year} in der Master-DB")
+    return pd.read_excel(p) if p.suffix == ".xlsx" else pd.read_csv(p, sep=None, engine="python")
+
+
 CALENDAR = os.path.join(BASE_DIR, "_RESULTS", "_debug_bec_calendar_all.json")
 OUT_DIR = os.path.join(BASE_DIR, "_TOURNAMENT_DATA", "BEC-U19-Junior")
 YEARS = (2025, 2026)
@@ -125,7 +136,7 @@ def main():
     bec = bec_types()
     dbv_lists = []
     for year in YEARS:
-        src = pd.read_excel(os.path.join(SRC_DIR, f"U19_RankingTournaments_{year}.xlsx"))
+        src = dbv_turnierliste(year)
         code = src.TournamentCode.astype(str).str.upper()
         typ_dbv = src.Grading.map(JUNIOR_GRADING_TO_TYPE)
         typ_bec = code.map(bec)

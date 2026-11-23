@@ -59,6 +59,34 @@ Vorbild/Quelle der übernommenen Module.
   hin, nicht weiter verfolgt). Fix: `draw.get("drawData") or {}`, betroffene Events werden mit
   Log-Hinweis übersprungen statt den ganzen Lauf abzubrechen.
 
+## Datenquelle seit 2026-11-24: Master-DB (`C:\_BRAIN_MASTER_DATA`)
+
+Die Daten kommen nicht mehr direkt von der BEC-API, sondern aus der Master-DB, die dieselbe API woechentlich
+laedt (Plan `../_BRAIN_Badminton-RAnking-INsights/PLAN_MASTER_DATA.md`, Phase 9 Schritt 5). Ablauf je AK
+(`BEC_AK=U17|U19`):
+
+1. nur U17: `katalog_aus_master.py [--dry-run]` -- ergaenzt den Katalog um BEC-U17-Circuit-Turniere der
+   DBV-Liste (Master-Snapshot), die NACH dem juengsten Katalogturnier liegen; Kategorie aus dem BEC-Text
+   (`extraData.descriptionHtml`: International Series/Challenge/Grand Prix -> U17 IS/IC/GP), ohne Text wird
+   nur gemeldet. Aeltere Listenturniere ohne Katalogeintrag (Adria U17 2025, Liepaja Beach U17 2025) gelten
+   als bewusst ausgelassen und werden nur gemeldet.
+   U19: Katalog weiter ueber `build_junior_turnierliste.py` (liest die DBV-Liste jetzt aus der Master-DB).
+2. `load_from_master.py [--db PFAD] [--dry-run]` -- ersetzt `fetch_bec_data.py` + `fetch_bec_entries_winners.py`
+   (beide nur noch Altbestand/Notbetrieb): Matches (mit Sieger, auch Walkover), Entries, Platzierungen je
+   Katalogturnier; Spieler-Schluessel `bec_player_id`, vorhandene `spieler_id` bleiben stabil; neue Spieler
+   bekommen `german_spieler_id` (DBV-ID der Master-DB).
+3. Auswertung unveraendert: `compute_rangliste.py`, `compute_elo.py`, `compute_official_strength.py`,
+   `export_spielerrangliste.py`, `build_site.py`.
+
+**Abnahme 2026-11-24** (`tools/debug_load_from_master_vergleich.py`, zuerst auf DB-Kopien, dann echt; Sicherungen
+`u17_int_BACKUP_vor-master_20261124.db`, `u19_int_BACKUP_vor-master_20261124.db`): U17 alle 8.884 Matches
+identisch, Spieler-IDs unveraendert; dazu EYOF 2025 jetzt mit Entries/Platzierungen (+69) und 9 neue Turniere
+2026 KW38-46 (1.527 Matches, 198 Spieler). U19 alle 9.458 Matches identisch (die 11 Kalender-Junior-Turniere
+ohne DBV-Eintrag wurden dafuer am 24.11. in die Master-DB nachgeladen,
+`C:\_BRAIN_MASTER_DATA\tools\run_junior_nachladen_20261124.ps1`), U19 Irish Open 2025 Mixed jetzt mit
+Entries/Platzierungen (+41); Egypt Junior 2025 weiter ohne Daten. **Auswertungen und Webseiten sind noch NICHT
+neu berechnet** (Stand der Seiten weiter 19./26.09.2026).
+
 ## Datenbasis
 
 48 Turniere insgesamt: `U19_RankingTournaments_2025_ausschliesslich-BEC-U17-Differenzierung.xlsx`
