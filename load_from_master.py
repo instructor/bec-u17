@@ -91,9 +91,14 @@ def lade_turnier(conn, m, sp, turnier_id, code):
     if it is None:
         return None
     stat = Counter()
-    conn.execute("DELETE FROM matches WHERE turnier_id = ?", (turnier_id,))
+    # Upsert statt Loeschen+Neuanlegen: vorhandene Matches behalten ihre match_id. compute_elo.py sortiert nach
+    # (spieldatum, match_id) -- neue IDs wuerden die Reihenfolge innerhalb eines Spieltags und damit die Elo-Werte
+    # leicht veraendern (beobachtet 2026-11-24: -0,1 bis -0,6 bei unveraenderten Matches). Neue Matches in der
+    # Reihenfolge der Master-DB (Datum, Master-match_id); Matches, die die Master-DB nicht mehr fuehrt, werden entfernt.
+    gesehen = set()
     rows = m.execute("SELECT match_id, quell_match_id, disziplin, runde, datum, saetze, sieger FROM match "
-                     "WHERE quelle = 'bec_api' AND upper(turnier_code) = upper(?) AND sieger IN (1, 2)", (code,))
+                     "WHERE quelle = 'bec_api' AND upper(turnier_code) = upper(?) AND sieger IN (1, 2) "
+                     "ORDER BY substr(datum, 1, 10), match_id", (code,))
     for r in rows.fetchall():
         dis = DIS.get(r["disziplin"])
         if dis is None:
@@ -106,13 +111,25 @@ def lade_turnier(conn, m, sp, turnier_id, code):
         if False in team[1] + team[2]:
             stat["match_spieler_ohne_bec_id"] += 1
             continue
+        bid = int(r["quell_match_id"])
+        gesehen.add(bid)
         conn.execute(
             "INSERT INTO matches (bec_match_id, turnier_id, disziplin, runde, spieldatum, heim_spieler1_id, "
             "heim_spieler2_id, gast_spieler1_id, gast_spieler2_id, ergebnis, winner_seite) "
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-            (int(r["quell_match_id"]), turnier_id, dis, r["runde"], (r["datum"] or "")[:10] or None,
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) "
+            "ON CONFLICT(bec_match_id) DO UPDATE SET turnier_id = excluded.turnier_id, disziplin = excluded.disziplin, "
+            "runde = excluded.runde, spieldatum = excluded.spieldatum, heim_spieler1_id = excluded.heim_spieler1_id, "
+            "heim_spieler2_id = excluded.heim_spieler2_id, gast_spieler1_id = excluded.gast_spieler1_id, "
+            "gast_spieler2_id = excluded.gast_spieler2_id, ergebnis = excluded.ergebnis, "
+            "winner_seite = excluded.winner_seite",
+            (bid, turnier_id, dis, r["runde"], (r["datum"] or "")[:10] or None,
              *team[1], *team[2], r["saetze"] or "", "heim" if r["sieger"] == 1 else "gast"))
         stat["matches"] += 1
+    alt = [b for (b,) in conn.execute("SELECT bec_match_id FROM matches WHERE turnier_id = ?", (turnier_id,))
+           if b not in gesehen]
+    for b in alt:
+        conn.execute("DELETE FROM matches WHERE bec_match_id = ?", (b,))
+    stat["matches_entfernt"] += len(alt)
 
     for tabelle, ziel, wert in (("entry", "entries", "seed"), ("placement", "turnier_ergebnisse", "platz")):
         conn.execute(f"DELETE FROM {ziel} WHERE turnier_id = ?", (turnier_id,))

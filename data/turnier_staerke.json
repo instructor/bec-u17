@@ -54,6 +54,19 @@
     },
     {
       "disziplin": "BD",
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer": 44,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1265.0,
+      "rang": 5
+    },
+    {
+      "disziplin": "BD",
       "turnier_id": 32,
       "name": "Austrian U17 Open 2026",
       "jahr": 2026,
@@ -63,7 +76,7 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1259.7,
-      "rang": 5
+      "rang": 6
     },
     {
       "disziplin": "BD",
@@ -76,7 +89,7 @@
       "teilnehmer": 58,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1259.0,
-      "rang": 6
+      "rang": 7
     },
     {
       "disziplin": "BD",
@@ -89,7 +102,7 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1256.3,
-      "rang": 7
+      "rang": 8
     },
     {
       "disziplin": "BD",
@@ -102,7 +115,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1255.1,
-      "rang": 8
+      "rang": 9
     },
     {
       "disziplin": "BD",
@@ -115,7 +128,7 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1253.9,
-      "rang": 9
+      "rang": 10
     },
     {
       "disziplin": "BD",
@@ -128,7 +141,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1253.3,
-      "rang": 10
+      "rang": 11
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer": 58,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1253.0,
+      "rang": 12
     },
     {
       "disziplin": "BD",
@@ -141,7 +167,7 @@
       "teilnehmer": 50,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1250.8,
-      "rang": 11
+      "rang": 13
     },
     {
       "disziplin": "BD",
@@ -154,7 +180,7 @@
       "teilnehmer": 84,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1250.6,
-      "rang": 12
+      "rang": 14
     },
     {
       "disziplin": "BD",
@@ -167,7 +193,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1246.3,
-      "rang": 13
+      "rang": 15
     },
     {
       "disziplin": "BD",
@@ -180,7 +206,20 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1244.6,
-      "rang": 14
+      "rang": 16
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer": 40,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1244.4,
+      "rang": 17
     },
     {
       "disziplin": "BD",
@@ -193,7 +232,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1242.3,
-      "rang": 15
+      "rang": 18
     },
     {
       "disziplin": "BD",
@@ -206,7 +245,7 @@
       "teilnehmer": 66,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1237.7,
-      "rang": 16
+      "rang": 19
     },
     {
       "disziplin": "BD",
@@ -219,7 +258,33 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1235.5,
-      "rang": 17
+      "rang": 20
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer": 62,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1234.8,
+      "rang": 21
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer": 64,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1232.8,
+      "rang": 22
     },
     {
       "disziplin": "BD",
@@ -232,7 +297,7 @@
       "teilnehmer": 30,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1229.8,
-      "rang": 18
+      "rang": 23
     },
     {
       "disziplin": "BD",
@@ -245,7 +310,7 @@
       "teilnehmer": 22,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1229.3,
-      "rang": 19
+      "rang": 24
     },
     {
       "disziplin": "BD",
@@ -258,7 +323,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1229.2,
-      "rang": 20
+      "rang": 25
     },
     {
       "disziplin": "BD",
@@ -271,7 +336,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1228.5,
-      "rang": 21
+      "rang": 26
     },
     {
       "disziplin": "BD",
@@ -284,7 +349,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1226.2,
-      "rang": 22
+      "rang": 27
     },
     {
       "disziplin": "BD",
@@ -297,7 +362,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1226.1,
-      "rang": 23
+      "rang": 28
     },
     {
       "disziplin": "BD",
@@ -310,7 +375,7 @@
       "teilnehmer": 58,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1224.7,
-      "rang": 24
+      "rang": 29
     },
     {
       "disziplin": "BD",
@@ -323,7 +388,7 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1223.6,
-      "rang": 25
+      "rang": 30
     },
     {
       "disziplin": "BD",
@@ -336,7 +401,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.5,
-      "rang": 26
+      "rang": 31
     },
     {
       "disziplin": "BD",
@@ -349,7 +414,7 @@
       "teilnehmer": 48,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1221.5,
-      "rang": 27
+      "rang": 32
     },
     {
       "disziplin": "BD",
@@ -362,7 +427,33 @@
       "teilnehmer": 46,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1221.2,
-      "rang": 28
+      "rang": 33
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 34,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1220.0,
+      "rang": 34
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 64,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1219.7,
+      "rang": 35
     },
     {
       "disziplin": "BD",
@@ -375,7 +466,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1219.5,
-      "rang": 29
+      "rang": 36
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer": 50,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1219.1,
+      "rang": 37
     },
     {
       "disziplin": "BD",
@@ -388,7 +492,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1216.2,
-      "rang": 30
+      "rang": 38
     },
     {
       "disziplin": "BD",
@@ -401,7 +505,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1215.7,
-      "rang": 31
+      "rang": 39
+    },
+    {
+      "disziplin": "BD",
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer": 32,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1214.3,
+      "rang": 40
     },
     {
       "disziplin": "BD",
@@ -414,7 +531,7 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.3,
-      "rang": 32
+      "rang": 41
     },
     {
       "disziplin": "BD",
@@ -427,7 +544,7 @@
       "teilnehmer": 26,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.1,
-      "rang": 33
+      "rang": 42
     },
     {
       "disziplin": "BD",
@@ -440,7 +557,7 @@
       "teilnehmer": 40,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1211.4,
-      "rang": 34
+      "rang": 43
     },
     {
       "disziplin": "BD",
@@ -453,7 +570,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.2,
-      "rang": 35
+      "rang": 44
     },
     {
       "disziplin": "BD",
@@ -466,7 +583,7 @@
       "teilnehmer": 38,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1208.8,
-      "rang": 36
+      "rang": 45
     },
     {
       "disziplin": "BD",
@@ -479,7 +596,7 @@
       "teilnehmer": 70,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1207.3,
-      "rang": 37
+      "rang": 46
     },
     {
       "disziplin": "BD",
@@ -492,7 +609,7 @@
       "teilnehmer": 22,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1205.1,
-      "rang": 38
+      "rang": 47
     },
     {
       "disziplin": "BD",
@@ -505,7 +622,7 @@
       "teilnehmer": 82,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.1,
-      "rang": 39
+      "rang": 48
     },
     {
       "disziplin": "BD",
@@ -518,7 +635,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.1,
-      "rang": 39
+      "rang": 48
     },
     {
       "disziplin": "BD",
@@ -531,7 +648,7 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1203.0,
-      "rang": 40
+      "rang": 49
     },
     {
       "disziplin": "BD",
@@ -544,7 +661,7 @@
       "teilnehmer": 40,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1202.3,
-      "rang": 41
+      "rang": 50
     },
     {
       "disziplin": "BD",
@@ -557,7 +674,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1202.0,
-      "rang": 42
+      "rang": 51
     },
     {
       "disziplin": "BD",
@@ -570,7 +687,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 43
+      "rang": 52
     },
     {
       "disziplin": "BD",
@@ -583,7 +700,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 43
+      "rang": 52
     },
     {
       "disziplin": "BD",
@@ -596,7 +713,7 @@
       "teilnehmer": 24,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1192.3,
-      "rang": 44
+      "rang": 53
     },
     {
       "disziplin": "BS",
@@ -639,6 +756,19 @@
     },
     {
       "disziplin": "BS",
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer": 50,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1295.4,
+      "rang": 4
+    },
+    {
+      "disziplin": "BS",
       "turnier_id": 8,
       "name": "VICTOR DENMARK JUNIOR U17 2025",
       "jahr": 2025,
@@ -648,7 +778,7 @@
       "teilnehmer": 68,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1284.3,
-      "rang": 4
+      "rang": 5
     },
     {
       "disziplin": "BS",
@@ -661,7 +791,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1284.0,
-      "rang": 5
+      "rang": 6
     },
     {
       "disziplin": "BS",
@@ -674,7 +804,7 @@
       "teilnehmer": 48,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1279.6,
-      "rang": 6
+      "rang": 7
     },
     {
       "disziplin": "BS",
@@ -687,7 +817,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1279.0,
-      "rang": 7
+      "rang": 8
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer": 52,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1275.1,
+      "rang": 9
     },
     {
       "disziplin": "BS",
@@ -700,7 +843,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1272.3,
-      "rang": 8
+      "rang": 10
     },
     {
       "disziplin": "BS",
@@ -713,7 +856,7 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1268.1,
-      "rang": 9
+      "rang": 11
     },
     {
       "disziplin": "BS",
@@ -726,7 +869,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1266.9,
-      "rang": 10
+      "rang": 12
     },
     {
       "disziplin": "BS",
@@ -739,7 +882,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1266.0,
-      "rang": 11
+      "rang": 13
     },
     {
       "disziplin": "BS",
@@ -752,7 +895,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1258.7,
-      "rang": 12
+      "rang": 14
     },
     {
       "disziplin": "BS",
@@ -765,7 +908,7 @@
       "teilnehmer": 76,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1255.1,
-      "rang": 13
+      "rang": 15
     },
     {
       "disziplin": "BS",
@@ -778,7 +921,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1254.4,
-      "rang": 14
+      "rang": 16
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer": 65,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1251.4,
+      "rang": 17
     },
     {
       "disziplin": "BS",
@@ -791,7 +947,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1249.6,
-      "rang": 15
+      "rang": 18
     },
     {
       "disziplin": "BS",
@@ -804,7 +960,46 @@
       "teilnehmer": 62,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1246.9,
-      "rang": 16
+      "rang": 19
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer": 64,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1246.2,
+      "rang": 20
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer": 78,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1245.2,
+      "rang": 21
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 64,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1244.3,
+      "rang": 22
     },
     {
       "disziplin": "BS",
@@ -817,7 +1012,7 @@
       "teilnehmer": 68,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1241.3,
-      "rang": 17
+      "rang": 23
     },
     {
       "disziplin": "BS",
@@ -830,7 +1025,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1241.1,
-      "rang": 18
+      "rang": 24
     },
     {
       "disziplin": "BS",
@@ -843,7 +1038,7 @@
       "teilnehmer": 79,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1240.0,
-      "rang": 19
+      "rang": 25
     },
     {
       "disziplin": "BS",
@@ -856,7 +1051,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1239.8,
-      "rang": 20
+      "rang": 26
     },
     {
       "disziplin": "BS",
@@ -869,7 +1064,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1239.0,
-      "rang": 21
+      "rang": 27
     },
     {
       "disziplin": "BS",
@@ -882,7 +1077,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1238.9,
-      "rang": 22
+      "rang": 28
     },
     {
       "disziplin": "BS",
@@ -895,7 +1090,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1235.2,
-      "rang": 23
+      "rang": 29
     },
     {
       "disziplin": "BS",
@@ -908,7 +1103,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1234.2,
-      "rang": 24
+      "rang": 30
     },
     {
       "disziplin": "BS",
@@ -921,7 +1116,7 @@
       "teilnehmer": 49,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.5,
-      "rang": 25
+      "rang": 31
     },
     {
       "disziplin": "BS",
@@ -934,7 +1129,7 @@
       "teilnehmer": 65,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1232.1,
-      "rang": 26
+      "rang": 32
     },
     {
       "disziplin": "BS",
@@ -947,7 +1142,7 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1230.5,
-      "rang": 27
+      "rang": 33
     },
     {
       "disziplin": "BS",
@@ -960,7 +1155,20 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1225.9,
-      "rang": 28
+      "rang": 34
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 36,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1224.5,
+      "rang": 35
     },
     {
       "disziplin": "BS",
@@ -973,7 +1181,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1224.0,
-      "rang": 29
+      "rang": 36
     },
     {
       "disziplin": "BS",
@@ -986,7 +1194,7 @@
       "teilnehmer": 23,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.9,
-      "rang": 30
+      "rang": 37
     },
     {
       "disziplin": "BS",
@@ -999,7 +1207,7 @@
       "teilnehmer": 84,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.7,
-      "rang": 31
+      "rang": 38
     },
     {
       "disziplin": "BS",
@@ -1012,7 +1220,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1218.8,
-      "rang": 32
+      "rang": 39
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer": 57,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1218.6,
+      "rang": 40
     },
     {
       "disziplin": "BS",
@@ -1025,7 +1246,7 @@
       "teilnehmer": 41,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1218.5,
-      "rang": 33
+      "rang": 41
     },
     {
       "disziplin": "BS",
@@ -1038,7 +1259,7 @@
       "teilnehmer": 62,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1217.8,
-      "rang": 34
+      "rang": 42
     },
     {
       "disziplin": "BS",
@@ -1051,7 +1272,7 @@
       "teilnehmer": 82,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1217.7,
-      "rang": 35
+      "rang": 43
     },
     {
       "disziplin": "BS",
@@ -1064,7 +1285,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1216.8,
-      "rang": 36
+      "rang": 44
+    },
+    {
+      "disziplin": "BS",
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer": 42,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1214.7,
+      "rang": 45
     },
     {
       "disziplin": "BS",
@@ -1077,7 +1311,7 @@
       "teilnehmer": 45,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1214.5,
-      "rang": 37
+      "rang": 46
     },
     {
       "disziplin": "BS",
@@ -1090,7 +1324,7 @@
       "teilnehmer": 28,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1214.5,
-      "rang": 37
+      "rang": 46
     },
     {
       "disziplin": "BS",
@@ -1103,7 +1337,7 @@
       "teilnehmer": 30,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.3,
-      "rang": 38
+      "rang": 47
     },
     {
       "disziplin": "BS",
@@ -1116,7 +1350,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1212.2,
-      "rang": 39
+      "rang": 48
     },
     {
       "disziplin": "BS",
@@ -1129,7 +1363,7 @@
       "teilnehmer": 30,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.2,
-      "rang": 40
+      "rang": 49
     },
     {
       "disziplin": "BS",
@@ -1142,7 +1376,7 @@
       "teilnehmer": 45,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.2,
-      "rang": 40
+      "rang": 49
     },
     {
       "disziplin": "BS",
@@ -1155,7 +1389,7 @@
       "teilnehmer": 62,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1208.8,
-      "rang": 41
+      "rang": 50
     },
     {
       "disziplin": "BS",
@@ -1168,7 +1402,7 @@
       "teilnehmer": 43,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1207.6,
-      "rang": 42
+      "rang": 51
     },
     {
       "disziplin": "BS",
@@ -1181,7 +1415,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1205.9,
-      "rang": 43
+      "rang": 52
     },
     {
       "disziplin": "BS",
@@ -1194,7 +1428,7 @@
       "teilnehmer": 93,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1205.0,
-      "rang": 44
+      "rang": 53
     },
     {
       "disziplin": "BS",
@@ -1207,7 +1441,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 45
+      "rang": 54
     },
     {
       "disziplin": "GD",
@@ -1289,6 +1523,19 @@
     },
     {
       "disziplin": "GD",
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer": 32,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1255.8,
+      "rang": 6
+    },
+    {
+      "disziplin": "GD",
       "turnier_id": 32,
       "name": "Austrian U17 Open 2026",
       "jahr": 2026,
@@ -1354,6 +1601,19 @@
     },
     {
       "disziplin": "GD",
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer": 46,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1230.2,
+      "rang": 11
+    },
+    {
+      "disziplin": "GD",
       "turnier_id": 1,
       "name": "BADMINTONPLANET Youth Tournament presented by VICTOR 2025",
       "jahr": 2025,
@@ -1367,6 +1627,32 @@
     },
     {
       "disziplin": "GD",
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer": 42,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1229.4,
+      "rang": 13
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 32,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1229.4,
+      "rang": 13
+    },
+    {
+      "disziplin": "GD",
       "turnier_id": 23,
       "name": "YONEX Bozner Cup U17 International 2025",
       "jahr": 2025,
@@ -1376,7 +1662,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1228.2,
-      "rang": 13
+      "rang": 14
     },
     {
       "disziplin": "GD",
@@ -1389,7 +1675,7 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1227.4,
-      "rang": 14
+      "rang": 15
     },
     {
       "disziplin": "GD",
@@ -1402,7 +1688,7 @@
       "teilnehmer": 52,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1226.1,
-      "rang": 15
+      "rang": 16
     },
     {
       "disziplin": "GD",
@@ -1415,7 +1701,20 @@
       "teilnehmer": 40,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1225.4,
-      "rang": 16
+      "rang": 17
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer": 54,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1225.1,
+      "rang": 18
     },
     {
       "disziplin": "GD",
@@ -1428,7 +1727,7 @@
       "teilnehmer": 38,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1224.9,
-      "rang": 17
+      "rang": 19
     },
     {
       "disziplin": "GD",
@@ -1441,7 +1740,7 @@
       "teilnehmer": 46,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1223.0,
-      "rang": 18
+      "rang": 20
     },
     {
       "disziplin": "GD",
@@ -1454,7 +1753,7 @@
       "teilnehmer": 48,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.7,
-      "rang": 19
+      "rang": 21
     },
     {
       "disziplin": "GD",
@@ -1467,7 +1766,7 @@
       "teilnehmer": 50,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.6,
-      "rang": 20
+      "rang": 22
     },
     {
       "disziplin": "GD",
@@ -1480,7 +1779,7 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.7,
-      "rang": 21
+      "rang": 23
     },
     {
       "disziplin": "GD",
@@ -1493,7 +1792,20 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.0,
-      "rang": 22
+      "rang": 24
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer": 44,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1219.4,
+      "rang": 25
     },
     {
       "disziplin": "GD",
@@ -1506,7 +1818,7 @@
       "teilnehmer": 48,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1219.0,
-      "rang": 23
+      "rang": 26
     },
     {
       "disziplin": "GD",
@@ -1519,7 +1831,20 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1217.8,
-      "rang": 24
+      "rang": 27
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer": 42,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1216.3,
+      "rang": 28
     },
     {
       "disziplin": "GD",
@@ -1532,7 +1857,7 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1215.8,
-      "rang": 25
+      "rang": 29
     },
     {
       "disziplin": "GD",
@@ -1545,7 +1870,7 @@
       "teilnehmer": 46,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1214.9,
-      "rang": 26
+      "rang": 30
     },
     {
       "disziplin": "GD",
@@ -1558,7 +1883,7 @@
       "teilnehmer": 28,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1214.7,
-      "rang": 27
+      "rang": 31
     },
     {
       "disziplin": "GD",
@@ -1571,7 +1896,7 @@
       "teilnehmer": 38,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1211.8,
-      "rang": 28
+      "rang": 32
     },
     {
       "disziplin": "GD",
@@ -1584,7 +1909,7 @@
       "teilnehmer": 52,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1211.4,
-      "rang": 29
+      "rang": 33
     },
     {
       "disziplin": "GD",
@@ -1597,7 +1922,7 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.9,
-      "rang": 30
+      "rang": 34
     },
     {
       "disziplin": "GD",
@@ -1610,7 +1935,7 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.9,
-      "rang": 30
+      "rang": 34
     },
     {
       "disziplin": "GD",
@@ -1623,7 +1948,20 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.2,
-      "rang": 31
+      "rang": 35
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 26,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1208.2,
+      "rang": 36
     },
     {
       "disziplin": "GD",
@@ -1636,7 +1974,7 @@
       "teilnehmer": 58,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1207.0,
-      "rang": 32
+      "rang": 37
     },
     {
       "disziplin": "GD",
@@ -1649,7 +1987,7 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1207.0,
-      "rang": 32
+      "rang": 37
     },
     {
       "disziplin": "GD",
@@ -1662,7 +2000,7 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1205.0,
-      "rang": 33
+      "rang": 38
     },
     {
       "disziplin": "GD",
@@ -1675,7 +2013,7 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.9,
-      "rang": 34
+      "rang": 39
     },
     {
       "disziplin": "GD",
@@ -1688,7 +2026,7 @@
       "teilnehmer": 52,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.3,
-      "rang": 35
+      "rang": 40
     },
     {
       "disziplin": "GD",
@@ -1701,7 +2039,7 @@
       "teilnehmer": 10,
       "teilnehmer_fuer_staerke": 10,
       "avg_elo": 1204.2,
-      "rang": 36
+      "rang": 41
     },
     {
       "disziplin": "GD",
@@ -1714,7 +2052,7 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1202.0,
-      "rang": 37
+      "rang": 42
     },
     {
       "disziplin": "GD",
@@ -1727,7 +2065,7 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1201.6,
-      "rang": 38
+      "rang": 43
     },
     {
       "disziplin": "GD",
@@ -1740,7 +2078,7 @@
       "teilnehmer": 24,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.8,
-      "rang": 39
+      "rang": 44
     },
     {
       "disziplin": "GD",
@@ -1753,7 +2091,7 @@
       "teilnehmer": 24,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.4,
-      "rang": 40
+      "rang": 45
     },
     {
       "disziplin": "GD",
@@ -1766,7 +2104,20 @@
       "teilnehmer": 60,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 41
+      "rang": 46
+    },
+    {
+      "disziplin": "GD",
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer": 24,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1198.8,
+      "rang": 47
     },
     {
       "disziplin": "GD",
@@ -1779,7 +2130,7 @@
       "teilnehmer": 20,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1198.4,
-      "rang": 42
+      "rang": 48
     },
     {
       "disziplin": "GD",
@@ -1792,7 +2143,7 @@
       "teilnehmer": 16,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1197.1,
-      "rang": 43
+      "rang": 49
     },
     {
       "disziplin": "GD",
@@ -1805,7 +2156,7 @@
       "teilnehmer": 8,
       "teilnehmer_fuer_staerke": 8,
       "avg_elo": 1186.1,
-      "rang": 44
+      "rang": 50
     },
     {
       "disziplin": "GS",
@@ -1900,6 +2251,32 @@
     },
     {
       "disziplin": "GS",
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer": 47,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1264.4,
+      "rang": 8
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer": 51,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1262.1,
+      "rang": 9
+    },
+    {
+      "disziplin": "GS",
       "turnier_id": 42,
       "name": "Danish Junior Cup U17 2026",
       "jahr": 2026,
@@ -1909,7 +2286,7 @@
       "teilnehmer": 49,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1262.0,
-      "rang": 8
+      "rang": 10
     },
     {
       "disziplin": "GS",
@@ -1922,7 +2299,20 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1259.6,
-      "rang": 9
+      "rang": 11
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer": 38,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1258.7,
+      "rang": 12
     },
     {
       "disziplin": "GS",
@@ -1935,7 +2325,7 @@
       "teilnehmer": 56,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1257.6,
-      "rang": 10
+      "rang": 13
     },
     {
       "disziplin": "GS",
@@ -1948,7 +2338,20 @@
       "teilnehmer": 61,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1251.8,
-      "rang": 11
+      "rang": 14
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer": 58,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1249.8,
+      "rang": 15
     },
     {
       "disziplin": "GS",
@@ -1961,7 +2364,7 @@
       "teilnehmer": 51,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1248.1,
-      "rang": 12
+      "rang": 16
     },
     {
       "disziplin": "GS",
@@ -1974,7 +2377,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1247.1,
-      "rang": 13
+      "rang": 17
     },
     {
       "disziplin": "GS",
@@ -1987,7 +2390,33 @@
       "teilnehmer": 69,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1241.9,
-      "rang": 14
+      "rang": 18
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer": 52,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1240.9,
+      "rang": 19
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer": 57,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1240.8,
+      "rang": 20
     },
     {
       "disziplin": "GS",
@@ -2000,7 +2429,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1234.8,
-      "rang": 15
+      "rang": 21
     },
     {
       "disziplin": "GS",
@@ -2013,7 +2442,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.4,
-      "rang": 16
+      "rang": 22
     },
     {
       "disziplin": "GS",
@@ -2026,7 +2455,7 @@
       "teilnehmer": 46,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.2,
-      "rang": 17
+      "rang": 23
     },
     {
       "disziplin": "GS",
@@ -2039,7 +2468,7 @@
       "teilnehmer": 26,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.2,
-      "rang": 17
+      "rang": 23
     },
     {
       "disziplin": "GS",
@@ -2052,7 +2481,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1232.3,
-      "rang": 18
+      "rang": 24
     },
     {
       "disziplin": "GS",
@@ -2065,7 +2494,7 @@
       "teilnehmer": 59,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1231.3,
-      "rang": 19
+      "rang": 25
     },
     {
       "disziplin": "GS",
@@ -2078,7 +2507,7 @@
       "teilnehmer": 59,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1230.7,
-      "rang": 20
+      "rang": 26
     },
     {
       "disziplin": "GS",
@@ -2091,7 +2520,7 @@
       "teilnehmer": 61,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1230.3,
-      "rang": 21
+      "rang": 27
     },
     {
       "disziplin": "GS",
@@ -2104,7 +2533,20 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1227.9,
-      "rang": 22
+      "rang": 28
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 40,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1227.6,
+      "rang": 29
     },
     {
       "disziplin": "GS",
@@ -2117,7 +2559,7 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1225.7,
-      "rang": 23
+      "rang": 30
     },
     {
       "disziplin": "GS",
@@ -2130,7 +2572,7 @@
       "teilnehmer": 38,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1225.1,
-      "rang": 24
+      "rang": 31
     },
     {
       "disziplin": "GS",
@@ -2143,7 +2585,20 @@
       "teilnehmer": 52,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1224.9,
-      "rang": 25
+      "rang": 32
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 30,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1223.6,
+      "rang": 33
     },
     {
       "disziplin": "GS",
@@ -2156,7 +2611,7 @@
       "teilnehmer": 45,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.9,
-      "rang": 26
+      "rang": 34
     },
     {
       "disziplin": "GS",
@@ -2169,7 +2624,7 @@
       "teilnehmer": 52,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.6,
-      "rang": 27
+      "rang": 35
     },
     {
       "disziplin": "GS",
@@ -2182,7 +2637,7 @@
       "teilnehmer": 43,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.1,
-      "rang": 28
+      "rang": 36
     },
     {
       "disziplin": "GS",
@@ -2195,7 +2650,7 @@
       "teilnehmer": 23,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1219.7,
-      "rang": 29
+      "rang": 37
     },
     {
       "disziplin": "GS",
@@ -2208,7 +2663,7 @@
       "teilnehmer": 58,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1218.0,
-      "rang": 30
+      "rang": 38
     },
     {
       "disziplin": "GS",
@@ -2221,7 +2676,7 @@
       "teilnehmer": 50,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1217.9,
-      "rang": 31
+      "rang": 39
     },
     {
       "disziplin": "GS",
@@ -2234,7 +2689,7 @@
       "teilnehmer": 69,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1216.9,
-      "rang": 32
+      "rang": 40
     },
     {
       "disziplin": "GS",
@@ -2247,7 +2702,7 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1216.6,
-      "rang": 33
+      "rang": 41
     },
     {
       "disziplin": "GS",
@@ -2260,7 +2715,7 @@
       "teilnehmer": 48,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1216.4,
-      "rang": 34
+      "rang": 42
     },
     {
       "disziplin": "GS",
@@ -2273,7 +2728,7 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1215.2,
-      "rang": 35
+      "rang": 43
     },
     {
       "disziplin": "GS",
@@ -2286,7 +2741,7 @@
       "teilnehmer": 31,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.9,
-      "rang": 36
+      "rang": 44
     },
     {
       "disziplin": "GS",
@@ -2299,7 +2754,7 @@
       "teilnehmer": 44,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.3,
-      "rang": 37
+      "rang": 45
     },
     {
       "disziplin": "GS",
@@ -2312,7 +2767,7 @@
       "teilnehmer": 24,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1213.0,
-      "rang": 38
+      "rang": 46
     },
     {
       "disziplin": "GS",
@@ -2325,7 +2780,7 @@
       "teilnehmer": 66,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1206.3,
-      "rang": 39
+      "rang": 47
     },
     {
       "disziplin": "GS",
@@ -2338,7 +2793,20 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1205.7,
-      "rang": 40
+      "rang": 48
+    },
+    {
+      "disziplin": "GS",
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer": 27,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1204.5,
+      "rang": 49
     },
     {
       "disziplin": "GS",
@@ -2351,7 +2819,7 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.1,
-      "rang": 41
+      "rang": 50
     },
     {
       "disziplin": "GS",
@@ -2364,7 +2832,7 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1203.9,
-      "rang": 42
+      "rang": 51
     },
     {
       "disziplin": "GS",
@@ -2377,7 +2845,7 @@
       "teilnehmer": 23,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1202.7,
-      "rang": 43
+      "rang": 52
     },
     {
       "disziplin": "GS",
@@ -2390,7 +2858,7 @@
       "teilnehmer": 22,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.4,
-      "rang": 44
+      "rang": 53
     },
     {
       "disziplin": "GS",
@@ -2403,7 +2871,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 45
+      "rang": 54
     },
     {
       "disziplin": "GS",
@@ -2416,7 +2884,7 @@
       "teilnehmer": 11,
       "teilnehmer_fuer_staerke": 11,
       "avg_elo": 1183.9,
-      "rang": 46
+      "rang": 55
     },
     {
       "disziplin": "XD",
@@ -2433,6 +2901,19 @@
     },
     {
       "disziplin": "XD",
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer": 60,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1298.2,
+      "rang": 2
+    },
+    {
+      "disziplin": "XD",
       "turnier_id": 16,
       "name": "European Youth Olympic Festival 2025",
       "jahr": 2025,
@@ -2442,7 +2923,7 @@
       "teilnehmer": 74,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1297.5,
-      "rang": 2
+      "rang": 3
     },
     {
       "disziplin": "XD",
@@ -2455,7 +2936,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1294.9,
-      "rang": 3
+      "rang": 4
     },
     {
       "disziplin": "XD",
@@ -2468,7 +2949,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1287.9,
-      "rang": 4
+      "rang": 5
     },
     {
       "disziplin": "XD",
@@ -2481,7 +2962,7 @@
       "teilnehmer": 62,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1286.7,
-      "rang": 5
+      "rang": 6
     },
     {
       "disziplin": "XD",
@@ -2494,7 +2975,7 @@
       "teilnehmer": 76,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1286.1,
-      "rang": 6
+      "rang": 7
     },
     {
       "disziplin": "XD",
@@ -2507,7 +2988,7 @@
       "teilnehmer": 118,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1285.3,
-      "rang": 7
+      "rang": 8
     },
     {
       "disziplin": "XD",
@@ -2520,7 +3001,20 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1284.7,
-      "rang": 8
+      "rang": 9
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer": 96,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1271.9,
+      "rang": 10
     },
     {
       "disziplin": "XD",
@@ -2533,7 +3027,7 @@
       "teilnehmer": 90,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1269.6,
-      "rang": 9
+      "rang": 11
     },
     {
       "disziplin": "XD",
@@ -2546,7 +3040,33 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1267.1,
-      "rang": 10
+      "rang": 12
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer": 66,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1264.3,
+      "rang": 13
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer": 78,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1260.3,
+      "rang": 14
     },
     {
       "disziplin": "XD",
@@ -2559,7 +3079,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1258.9,
-      "rang": 11
+      "rang": 15
     },
     {
       "disziplin": "XD",
@@ -2572,7 +3092,20 @@
       "teilnehmer": 78,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1257.3,
-      "rang": 12
+      "rang": 16
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 70,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1251.2,
+      "rang": 17
     },
     {
       "disziplin": "XD",
@@ -2585,7 +3118,7 @@
       "teilnehmer": 42,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1250.8,
-      "rang": 13
+      "rang": 18
     },
     {
       "disziplin": "XD",
@@ -2598,7 +3131,7 @@
       "teilnehmer": 64,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1244.4,
-      "rang": 14
+      "rang": 19
     },
     {
       "disziplin": "XD",
@@ -2611,7 +3144,7 @@
       "teilnehmer": 84,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1240.3,
-      "rang": 15
+      "rang": 20
     },
     {
       "disziplin": "XD",
@@ -2624,7 +3157,7 @@
       "teilnehmer": 74,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1239.9,
-      "rang": 16
+      "rang": 21
     },
     {
       "disziplin": "XD",
@@ -2637,7 +3170,7 @@
       "teilnehmer": 50,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1238.6,
-      "rang": 17
+      "rang": 22
     },
     {
       "disziplin": "XD",
@@ -2650,7 +3183,7 @@
       "teilnehmer": 86,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1238.3,
-      "rang": 18
+      "rang": 23
     },
     {
       "disziplin": "XD",
@@ -2663,7 +3196,20 @@
       "teilnehmer": 70,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1237.8,
-      "rang": 19
+      "rang": 24
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer": 76,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1237.4,
+      "rang": 25
     },
     {
       "disziplin": "XD",
@@ -2676,7 +3222,7 @@
       "teilnehmer": 82,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1235.5,
-      "rang": 20
+      "rang": 26
     },
     {
       "disziplin": "XD",
@@ -2689,7 +3235,7 @@
       "teilnehmer": 86,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.8,
-      "rang": 21
+      "rang": 27
     },
     {
       "disziplin": "XD",
@@ -2702,7 +3248,7 @@
       "teilnehmer": 74,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1233.0,
-      "rang": 22
+      "rang": 28
     },
     {
       "disziplin": "XD",
@@ -2715,7 +3261,20 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1229.8,
-      "rang": 23
+      "rang": 29
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer": 48,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1226.5,
+      "rang": 30
     },
     {
       "disziplin": "XD",
@@ -2728,7 +3287,7 @@
       "teilnehmer": 72,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1226.2,
-      "rang": 24
+      "rang": 31
     },
     {
       "disziplin": "XD",
@@ -2741,7 +3300,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1226.0,
-      "rang": 25
+      "rang": 32
     },
     {
       "disziplin": "XD",
@@ -2754,7 +3313,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1225.5,
-      "rang": 26
+      "rang": 33
     },
     {
       "disziplin": "XD",
@@ -2767,7 +3326,7 @@
       "teilnehmer": 66,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1224.4,
-      "rang": 27
+      "rang": 34
     },
     {
       "disziplin": "XD",
@@ -2780,7 +3339,7 @@
       "teilnehmer": 62,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1223.4,
-      "rang": 28
+      "rang": 35
     },
     {
       "disziplin": "XD",
@@ -2793,7 +3352,7 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.4,
-      "rang": 29
+      "rang": 36
     },
     {
       "disziplin": "XD",
@@ -2806,7 +3365,7 @@
       "teilnehmer": 58,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1222.2,
-      "rang": 30
+      "rang": 37
     },
     {
       "disziplin": "XD",
@@ -2819,7 +3378,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1221.9,
-      "rang": 31
+      "rang": 38
     },
     {
       "disziplin": "XD",
@@ -2832,7 +3391,7 @@
       "teilnehmer": 84,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1221.3,
-      "rang": 32
+      "rang": 39
     },
     {
       "disziplin": "XD",
@@ -2845,7 +3404,20 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1221.3,
-      "rang": 32
+      "rang": 39
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer": 22,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1220.1,
+      "rang": 40
     },
     {
       "disziplin": "XD",
@@ -2858,7 +3430,7 @@
       "teilnehmer": 68,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1220.0,
-      "rang": 33
+      "rang": 41
     },
     {
       "disziplin": "XD",
@@ -2871,7 +3443,7 @@
       "teilnehmer": 98,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1219.7,
-      "rang": 34
+      "rang": 42
     },
     {
       "disziplin": "XD",
@@ -2884,7 +3456,20 @@
       "teilnehmer": 34,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1219.6,
-      "rang": 35
+      "rang": 43
+    },
+    {
+      "disziplin": "XD",
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer": 36,
+      "teilnehmer_fuer_staerke": 16,
+      "avg_elo": 1216.7,
+      "rang": 44
     },
     {
       "disziplin": "XD",
@@ -2897,7 +3482,7 @@
       "teilnehmer": 88,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1212.3,
-      "rang": 36
+      "rang": 45
     },
     {
       "disziplin": "XD",
@@ -2910,7 +3495,7 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1211.6,
-      "rang": 37
+      "rang": 46
     },
     {
       "disziplin": "XD",
@@ -2923,7 +3508,7 @@
       "teilnehmer": 72,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1210.6,
-      "rang": 38
+      "rang": 47
     },
     {
       "disziplin": "XD",
@@ -2936,7 +3521,7 @@
       "teilnehmer": 76,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1210.2,
-      "rang": 39
+      "rang": 48
     },
     {
       "disziplin": "XD",
@@ -2949,7 +3534,7 @@
       "teilnehmer": 100,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1209.7,
-      "rang": 40
+      "rang": 49
     },
     {
       "disziplin": "XD",
@@ -2962,7 +3547,7 @@
       "teilnehmer": 36,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1207.6,
-      "rang": 41
+      "rang": 50
     },
     {
       "disziplin": "XD",
@@ -2975,7 +3560,7 @@
       "teilnehmer": 54,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1204.6,
-      "rang": 42
+      "rang": 51
     },
     {
       "disziplin": "XD",
@@ -2988,7 +3573,7 @@
       "teilnehmer": 40,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1202.0,
-      "rang": 43
+      "rang": 52
     },
     {
       "disziplin": "XD",
@@ -3001,7 +3586,7 @@
       "teilnehmer": 30,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.1,
-      "rang": 44
+      "rang": 53
     },
     {
       "disziplin": "XD",
@@ -3014,7 +3599,7 @@
       "teilnehmer": 96,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1200.0,
-      "rang": 45
+      "rang": 54
     },
     {
       "disziplin": "XD",
@@ -3027,7 +3612,7 @@
       "teilnehmer": 18,
       "teilnehmer_fuer_staerke": 16,
       "avg_elo": 1196.3,
-      "rang": 46
+      "rang": 55
     }
   ],
   "gesamt": [
@@ -3068,6 +3653,18 @@
       "rang": 3
     },
     {
+      "turnier_id": 54,
+      "name": "VICTOR Denmark Junior U17 2026",
+      "jahr": 2026,
+      "kw": 42,
+      "datum": "2026-10-15",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 224,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1274.6,
+      "rang": 4
+    },
+    {
       "turnier_id": 18,
       "name": "Serbian U17 International - NOVI SAD 2025",
       "jahr": 2025,
@@ -3077,7 +3674,7 @@
       "teilnehmer_gesamt": 350,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1272.3,
-      "rang": 4
+      "rang": 5
     },
     {
       "turnier_id": 11,
@@ -3089,7 +3686,7 @@
       "teilnehmer_gesamt": 346,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1271.4,
-      "rang": 5
+      "rang": 6
     },
     {
       "turnier_id": 42,
@@ -3101,7 +3698,7 @@
       "teilnehmer_gesamt": 243,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1268.6,
-      "rang": 6
+      "rang": 7
     },
     {
       "turnier_id": 32,
@@ -3113,7 +3710,7 @@
       "teilnehmer_gesamt": 297,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1265.9,
-      "rang": 7
+      "rang": 8
     },
     {
       "turnier_id": 8,
@@ -3125,7 +3722,7 @@
       "teilnehmer_gesamt": 339,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1265.2,
-      "rang": 8
+      "rang": 9
     },
     {
       "turnier_id": 22,
@@ -3137,7 +3734,19 @@
       "teilnehmer_gesamt": 352,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1260.8,
-      "rang": 9
+      "rang": 10
+    },
+    {
+      "turnier_id": 55,
+      "name": "YONEX German Ruhr U17 International 2026",
+      "jahr": 2026,
+      "kw": 41,
+      "datum": "2026-10-07",
+      "bec17type": "U17 IC",
+      "teilnehmer_gesamt": 247,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1255.5,
+      "rang": 11
     },
     {
       "turnier_id": 7,
@@ -3149,7 +3758,7 @@
       "teilnehmer_gesamt": 346,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1252.8,
-      "rang": 10
+      "rang": 12
     },
     {
       "turnier_id": 19,
@@ -3161,7 +3770,31 @@
       "teilnehmer_gesamt": 427,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1251.0,
-      "rang": 11
+      "rang": 13
+    },
+    {
+      "turnier_id": 51,
+      "name": "LI-NING Ljubljana U17 Cup 2026",
+      "jahr": 2026,
+      "kw": 45,
+      "datum": "2026-11-06",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 315,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1246.5,
+      "rang": 14
+    },
+    {
+      "turnier_id": 53,
+      "name": "Luxembourg U17 2026",
+      "jahr": 2026,
+      "kw": 43,
+      "datum": "2026-10-23",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 335,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1243.4,
+      "rang": 15
     },
     {
       "turnier_id": 30,
@@ -3173,7 +3806,7 @@
       "teilnehmer_gesamt": 293,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1242.8,
-      "rang": 12
+      "rang": 16
     },
     {
       "turnier_id": 20,
@@ -3185,7 +3818,19 @@
       "teilnehmer_gesamt": 303,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1241.6,
-      "rang": 13
+      "rang": 17
+    },
+    {
+      "turnier_id": 57,
+      "name": "10th LI-NING Zagreb U17 Open 2026",
+      "jahr": 2026,
+      "kw": 38,
+      "datum": "2026-09-18",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 295,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1240.4,
+      "rang": 18
     },
     {
       "turnier_id": 1,
@@ -3197,7 +3842,7 @@
       "teilnehmer_gesamt": 272,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1238.6,
-      "rang": 14
+      "rang": 19
     },
     {
       "turnier_id": 5,
@@ -3209,7 +3854,7 @@
       "teilnehmer_gesamt": 164,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1235.6,
-      "rang": 15
+      "rang": 20
     },
     {
       "turnier_id": 14,
@@ -3221,7 +3866,19 @@
       "teilnehmer_gesamt": 280,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1235.2,
-      "rang": 16
+      "rang": 21
+    },
+    {
+      "turnier_id": 50,
+      "name": "Swedish Youth Games 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 270,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1234.4,
+      "rang": 22
     },
     {
       "turnier_id": 31,
@@ -3233,7 +3890,7 @@
       "teilnehmer_gesamt": 318,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1233.9,
-      "rang": 17
+      "rang": 23
     },
     {
       "turnier_id": 25,
@@ -3245,7 +3902,7 @@
       "teilnehmer_gesamt": 352,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1233.9,
-      "rang": 17
+      "rang": 23
     },
     {
       "turnier_id": 2,
@@ -3257,7 +3914,7 @@
       "teilnehmer_gesamt": 294,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1232.6,
-      "rang": 18
+      "rang": 24
     },
     {
       "turnier_id": 38,
@@ -3269,7 +3926,7 @@
       "teilnehmer_gesamt": 325,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1230.2,
-      "rang": 19
+      "rang": 25
     },
     {
       "turnier_id": 24,
@@ -3281,7 +3938,7 @@
       "teilnehmer_gesamt": 348,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1229.5,
-      "rang": 20
+      "rang": 26
     },
     {
       "turnier_id": 13,
@@ -3293,7 +3950,7 @@
       "teilnehmer_gesamt": 300,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1229.2,
-      "rang": 21
+      "rang": 27
     },
     {
       "turnier_id": 12,
@@ -3305,7 +3962,7 @@
       "teilnehmer_gesamt": 205,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1229.0,
-      "rang": 22
+      "rang": 28
     },
     {
       "turnier_id": 36,
@@ -3317,7 +3974,7 @@
       "teilnehmer_gesamt": 336,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1227.5,
-      "rang": 23
+      "rang": 29
     },
     {
       "turnier_id": 23,
@@ -3329,7 +3986,19 @@
       "teilnehmer_gesamt": 344,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1225.2,
-      "rang": 24
+      "rang": 30
+    },
+    {
+      "turnier_id": 56,
+      "name": "Slovak Youth U17 International 2026",
+      "jahr": 2026,
+      "kw": 39,
+      "datum": "2026-09-25",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 229,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1224.8,
+      "rang": 31
     },
     {
       "turnier_id": 21,
@@ -3341,7 +4010,7 @@
       "teilnehmer_gesamt": 240,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1224.6,
-      "rang": 25
+      "rang": 32
     },
     {
       "turnier_id": 41,
@@ -3353,7 +4022,7 @@
       "teilnehmer_gesamt": 272,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1223.9,
-      "rang": 26
+      "rang": 33
     },
     {
       "turnier_id": 15,
@@ -3365,19 +4034,7 @@
       "teilnehmer_gesamt": 273,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1223.1,
-      "rang": 27
-    },
-    {
-      "turnier_id": 37,
-      "name": "YONEX Bozner Cup U17 International 2026",
-      "jahr": 2026,
-      "kw": 17,
-      "datum": "2026-04-24",
-      "bec17type": "U17 IC",
-      "teilnehmer_gesamt": 304,
-      "n_disziplinen": 5,
-      "avg_elo_gesamt": 1223.0,
-      "rang": 28
+      "rang": 34
     },
     {
       "turnier_id": 39,
@@ -3389,7 +4046,19 @@
       "teilnehmer_gesamt": 264,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1223.0,
-      "rang": 28
+      "rang": 35
+    },
+    {
+      "turnier_id": 37,
+      "name": "YONEX Bozner Cup U17 International 2026",
+      "jahr": 2026,
+      "kw": 17,
+      "datum": "2026-04-24",
+      "bec17type": "U17 IC",
+      "teilnehmer_gesamt": 304,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1223.0,
+      "rang": 35
     },
     {
       "turnier_id": 43,
@@ -3401,7 +4070,19 @@
       "teilnehmer_gesamt": 148,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1222.7,
-      "rang": 29
+      "rang": 36
+    },
+    {
+      "turnier_id": 49,
+      "name": "Spanish International U17 2026",
+      "jahr": 2026,
+      "kw": 46,
+      "datum": "2026-11-13",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 174,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1220.6,
+      "rang": 37
     },
     {
       "turnier_id": 40,
@@ -3413,7 +4094,7 @@
       "teilnehmer_gesamt": 286,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1219.6,
-      "rang": 30
+      "rang": 38
     },
     {
       "turnier_id": 48,
@@ -3425,7 +4106,7 @@
       "teilnehmer_gesamt": 353,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1217.7,
-      "rang": 31
+      "rang": 39
     },
     {
       "turnier_id": 47,
@@ -3437,7 +4118,7 @@
       "teilnehmer_gesamt": 91,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1216.5,
-      "rang": 32
+      "rang": 40
     },
     {
       "turnier_id": 34,
@@ -3449,7 +4130,7 @@
       "teilnehmer_gesamt": 296,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1214.0,
-      "rang": 33
+      "rang": 41
     },
     {
       "turnier_id": 44,
@@ -3461,7 +4142,7 @@
       "teilnehmer_gesamt": 184,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1213.2,
-      "rang": 34
+      "rang": 42
     },
     {
       "turnier_id": 33,
@@ -3473,7 +4154,7 @@
       "teilnehmer_gesamt": 272,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1213.2,
-      "rang": 34
+      "rang": 42
     },
     {
       "turnier_id": 6,
@@ -3485,7 +4166,7 @@
       "teilnehmer_gesamt": 207,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1212.4,
-      "rang": 35
+      "rang": 43
     },
     {
       "turnier_id": 35,
@@ -3497,7 +4178,7 @@
       "teilnehmer_gesamt": 129,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1211.9,
-      "rang": 36
+      "rang": 44
     },
     {
       "turnier_id": 26,
@@ -3509,7 +4190,7 @@
       "teilnehmer_gesamt": 365,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1211.7,
-      "rang": 37
+      "rang": 45
     },
     {
       "turnier_id": 28,
@@ -3521,7 +4202,19 @@
       "teilnehmer_gesamt": 308,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1210.1,
-      "rang": 38
+      "rang": 46
+    },
+    {
+      "turnier_id": 52,
+      "name": "Hellas U17 International 2026",
+      "jahr": 2026,
+      "kw": 44,
+      "datum": "2026-10-30",
+      "bec17type": "U17 IS",
+      "teilnehmer_gesamt": 161,
+      "n_disziplinen": 5,
+      "avg_elo_gesamt": 1209.8,
+      "rang": 47
     },
     {
       "turnier_id": 46,
@@ -3533,7 +4226,7 @@
       "teilnehmer_gesamt": 168,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1207.4,
-      "rang": 39
+      "rang": 48
     },
     {
       "turnier_id": 27,
@@ -3545,7 +4238,7 @@
       "teilnehmer_gesamt": 401,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1206.0,
-      "rang": 40
+      "rang": 49
     },
     {
       "turnier_id": 3,
@@ -3557,7 +4250,7 @@
       "teilnehmer_gesamt": 165,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1203.2,
-      "rang": 41
+      "rang": 50
     },
     {
       "turnier_id": 4,
@@ -3569,7 +4262,7 @@
       "teilnehmer_gesamt": 128,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1202.6,
-      "rang": 42
+      "rang": 51
     },
     {
       "turnier_id": 29,
@@ -3581,7 +4274,7 @@
       "teilnehmer_gesamt": 348,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1200.0,
-      "rang": 43
+      "rang": 52
     },
     {
       "turnier_id": 45,
@@ -3593,7 +4286,7 @@
       "teilnehmer_gesamt": 91,
       "n_disziplinen": 5,
       "avg_elo_gesamt": 1198.8,
-      "rang": 44
+      "rang": 53
     }
   ]
 }

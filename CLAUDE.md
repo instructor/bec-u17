@@ -84,8 +84,16 @@ identisch, Spieler-IDs unveraendert; dazu EYOF 2025 jetzt mit Entries/Platzierun
 2026 KW38-46 (1.527 Matches, 198 Spieler). U19 alle 9.458 Matches identisch (die 11 Kalender-Junior-Turniere
 ohne DBV-Eintrag wurden dafuer am 24.11. in die Master-DB nachgeladen,
 `C:\_BRAIN_MASTER_DATA\tools\run_junior_nachladen_20261124.ps1`), U19 Irish Open 2025 Mixed jetzt mit
-Entries/Platzierungen (+41); Egypt Junior 2025 weiter ohne Daten. **Auswertungen und Webseiten sind noch NICHT
-neu berechnet** (Stand der Seiten weiter 19./26.09.2026).
+Entries/Platzierungen (+41); Egypt Junior 2025 weiter ohne Daten.
+
+**Neuberechnung 2026-11-24** (Log `_RESULTS/neuberechnung_20261124.log`, Vergleich
+`tools/debug_neuberechnung_vergleich.py <datei unter data/>`): Elo-Turnierstaerke U17 alle 94 bisherigen Werte
+unveraendert + 9 neue Turniere, U19 byte-gleich, offizielle Turnierstaerke alle 92 bisherigen Werte unveraendert + 9
+neue + EYOF 2025 (offizielle BEC-Rangliste weiter Stand 19.09.2026, `fetch_official_ranking.py` nicht neu gelaufen).
+Seitentexte `index.html`/`turnierstaerke-nach-bec-u17-ranking.html` auf 57 Turniere (GP 10, IC 16, IS 31, bis
+15.11.2026) bzw. 56 mit Daten angepasst; das Paper bleibt fester Stand. **Falle**: `compute_elo.py` sortiert nach
+`(spieldatum, match_id)` -- `load_from_master.py` muss vorhandene Matches per Upsert behalten (ein erster Lauf mit
+Loeschen+Neuanlegen verschob die Elo-Werte um 0,1-0,6).
 
 ## Datenbasis
 
